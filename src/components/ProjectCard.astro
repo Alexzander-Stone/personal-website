@@ -12,7 +12,7 @@ interface Props {
 const { href, photoUrl, photoAlt, title, body, width, height } = Astro.props;
 ---
 
-<li class="link-card">
+<li class="link-card" id={href} >
 	<a href={href}>
 		<img src={photoUrl} alt={photoAlt} decoding="async" loading="eager" height={height} width={width}/>
 		<h2>
