@@ -1,13 +1,66 @@
 ---
-const bear_faces = ["ฅʕ'ᴥ'ʔฅ", "ʕ•ᴥ•ʔっ", "ฅʕ•ᴥ•ʔฅ", "ฅʕ•ᴥ•ʔ", "ʕ•ᴥ•ʔฅ", "ʕ ꈍᴥꈍʔ", "ʕꈍᴥꈍ ʔ", "ლʕ´☉ᴥ☉`ʔლ", "ʕっ￫ᴥ￩ʔっ", "ʕ•̀ω•́ʔ✧", "✧ʕ•̀ω•́ʔ", "✧ʕ•̀ω•́ʔ✧", "╮ʕ˚ᴥ˚ʔ╭", "ㅇㅅㅇ", "＼ʕ•ᴥ•ʔ／", "ʕノ☉ᴥ☉ʔノ", "ʕ ﾟ ● ﾟʔ", "ʕ♥ᴥ♥ʔ"]
+const bear_faces = [
+    "ฅʕ'ᴥ'ʔฅ",
+    "ʕ•ᴥ•ʔっ",
+    "ฅʕ•ᴥ•ʔฅ",
+    "ฅʕ•ᴥ•ʔ",
+    "ʕ•ᴥ•ʔฅ",
+    "ʕ ꈍᴥꈍʔ",
+    "ʕꈍᴥꈍ ʔ",
+    "ლʕ´☉ᴥ☉`ʔლ",
+    "ʕっ￫ᴥ￩ʔっ",
+    "ʕ•̀ω•́ʔ✧",
+    "✧ʕ•̀ω•́ʔ",
+    "✧ʕ•̀ω•́ʔ✧",
+    "╮ʕ˚ᴥ˚ʔ╭",
+    "ㅇㅅㅇ",
+    "＼ʕ•ᴥ•ʔ／",
+    "ʕノ☉ᴥ☉ʔノ",
+    "ʕ ﾟ ● ﾟʔ",
+    "ʕ♥ᴥ♥ʔ",
+];
+const wink_bear_faces = [
+    "ฅʕ-ᴥ'ʔฅ",
+    "ʕ-ᴥ•ʔっ",
+    "ฅʕ•ᴥ-ʔฅ",
+    "ฅʕ-ᴥ-ʔ",
+    "ʕ-ᴥ-ʔฅ",
+    "ʕ ꈍᴥꈍʔ",
+    "ʕꈍᴥꈍ ʔ",
+    "ლʕ´-ᴥ-`ʔლ",
+    "ʕっ•ᴥ•ʔっ",
+    "ʕ•̀ω-ʔ✧",
+    "✧ʕ-ω•́ʔ",
+    "✧ʕ•-ω-ʔ✧",
+    "╮ʕ-ᴥ-ʔ╭",
+    "-ㅅ-",
+    "＼ʕ•ᴥ-ʔ／",
+    "ʕノ-ᴥ-ʔノ",
+    "ʕ - ● -ʔ",
+    "ʕ-ᴥ-ʔ",
+];
 const semi_random_index = Date.now().valueOf() % bear_faces.length;
 const chosen_bear = bear_faces[semi_random_index];
+const wink_chosen_bear = wink_bear_faces[semi_random_index];
 ---
+
 <header>
-    <p class="heart">{chosen_bear}</p>
+    <p class="heart no-hover"><span>{chosen_bear}</span></p>
+    <p class="heart hover"><span>{wink_chosen_bear}</span></p>
     <h1 class="home"><a href="/">Alexzander Stone</a></h1>
 </header>
 <style>
+    .hover {
+        display: none;
+    }
+
+    header:hover .no-hover {
+        display: none;
+    }
+    header:hover .hover {
+        display: block;
+    }
+
     .heart {
         text-align: center;
         margin: 0;
