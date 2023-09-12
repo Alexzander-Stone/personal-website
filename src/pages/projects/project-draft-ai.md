@@ -20,7 +20,7 @@ image:
 tags: ["game theory", "python"]
 ---
 
-## The why
+### The why
 
 League of Legends, one of the most popular competitive [MOBA's](https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena), has spawned an entire industry dedicated to perfecting every aspect of the game. Teams of analysts and coaches worldwide tirelessly study and refine every facet of gameplay.
 
@@ -46,7 +46,7 @@ With a staggering 164 unique Champions available at the time of writing, plannin
 
 Even when a team is confident in predicting their opponent's choices, there's always the potential for an unexpected, non-meta pick—throwing a curveball into the mix. This can force the on-stage team to improvise a new draft strategy on the spot, potentially overlooking pitfalls in banning or selecting specific champions.
 
-## My solution
+### My solution
 
 To streamline the drafting process, both on-stage and off, I've developed a Drafting AI that serves as a reliable, real-time resource accessible to the team at any stage of the draft.
 
@@ -63,7 +63,7 @@ Then they ask the AI.
 The AI promptly provides responses within your specified timeframe, ensuring that the suggested drafts indeed lead to more optimal selections. With ongoing training, the AI's confidence in its results continues to grow.
 
 
-<!-- ## Derzan's Draft example
+<!-- ### Derzan's Draft example
 
 To easily express the understanding of what the AI is trying to solve, I've invented a simplier "game" of draft, called **Derzan's Draft**.
 
@@ -80,7 +80,7 @@ There are 3 themes: Poke, Engage, Disengage
 These roles have a rock-paper-scissors relationship where: Poke beats Disengage which beats Engage which beats Poke -->
 
 
-## Comparison to other drafting tools
+### Comparison to other drafting tools
 
 #### ![iTero: Drafting Tool](/projects/draft-ai/itero_draft.png)
 
@@ -100,7 +100,7 @@ Here's a few key features of the AI:
 
 
 
-## Tech and knowledge used
+### Tech and knowledge used
 
 1. **Game Theory**: Applied principles of Game Theory to develop strategic drafting recommendations.
 
@@ -112,7 +112,7 @@ Here's a few key features of the AI:
 
 *Due to the potential for commercialization, I will not be releasing the code to the public.*
 
-## What's next
+### What's next
 
 Having an amateur or professional team actively collaborate on this project would be a huge stepping stone. 
 

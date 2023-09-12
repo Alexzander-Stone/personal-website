@@ -21,7 +21,7 @@ const pubDate = frontmatter.pubDate.substring(0, 10);
             height={frontmatter.image.height.normal}
         />
         <p class="italics">Source: {frontmatter.image.source}</p>
-        <h1 class="title">{frontmatter.title}</h1>
+        <h2 class="title">{frontmatter.title}</h2>
         <p class="pubDate">{pubDate} : {frontmatter.tags.join(", ")}</p>
         <hr />
         <slot />
@@ -79,7 +79,11 @@ const pubDate = frontmatter.pubDate.substring(0, 10);
         font-weight: normal;
     }
 
-    h2 {
+    h2{
+        padding-top: 12px;
+    } 
+    
+    h3 {
         padding-top: 24px;
     }
 
