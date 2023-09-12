@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownProjectLayout.astro
 
-highlighted: true
+highlighted: false
 shortTitle: 'Doom in C++'
 title: 'My Third Blog Post'
 pubDate: 2022-07-01
