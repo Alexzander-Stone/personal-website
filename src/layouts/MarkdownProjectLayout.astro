@@ -22,7 +22,7 @@ const pubDate = frontmatter.pubDate.substring(0, 10);
         />
         <p class="italics">Source: {frontmatter.image.source}</p>
         <h1 class="title">{frontmatter.title}</h1>
-        <p class="pubDate">{pubDate}</p>
+        <p class="pubDate">{pubDate} : {frontmatter.tags.join(", ")}</p>
         <hr />
         <slot />
         <Footer />
