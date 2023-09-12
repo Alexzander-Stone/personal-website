@@ -1,0 +1,48 @@
+---
+const bear_faces = ["ฅʕ'ᴥ'ʔฅ", "ʕ•ᴥ•ʔっ", "ฅʕ•ᴥ•ʔฅ", "ฅʕ•ᴥ•ʔ", "ʕ•ᴥ•ʔฅ", "ʕ ꈍᴥꈍʔ", "ʕꈍᴥꈍ ʔ", "ლʕ´☉ᴥ☉`ʔლ", "ʕっ￫ᴥ￩ʔっ", "ʕ•̀ω•́ʔ✧", "✧ʕ•̀ω•́ʔ", "✧ʕ•̀ω•́ʔ✧", "╮ʕ˚ᴥ˚ʔ╭", "ㅇㅅㅇ", "＼ʕ•ᴥ•ʔ／", "ʕノ☉ᴥ☉ʔノ", "ʕ ﾟ ● ﾟʔ", "ʕ♥ᴥ♥ʔ"]
+const semi_random_index = Date.now().valueOf() % bear_faces.length;
+const chosen_bear = bear_faces[semi_random_index];
+---
+<header>
+    <p class="heart">{chosen_bear}</p>
+    <h1 class="home"><a href="/">Alexzander Stone</a></h1>
+</header>
+<style>
+    .heart {
+        text-align: center;
+        margin: 0;
+    }
+
+    .home a {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+
+        text-decoration: none;
+        color: white;
+    }
+
+    .astro-a {
+        position: absolute;
+        top: -32px;
+        left: 50%;
+        transform: translatex(-50%);
+        width: 220px;
+        height: auto;
+        z-index: -1;
+    }
+    h1 {
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        margin-bottom: 1em;
+    }
+    .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        background-position: 0%;
+    }
+</style>

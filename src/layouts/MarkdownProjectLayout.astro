@@ -1,0 +1,70 @@
+---
+import Layout from "./Layout.astro";
+import { type ProjectFrontmatter } from "../types";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { frontmatter }: { [key: string]: ProjectFrontmatter } = Astro.props;
+const pubDate = frontmatter.pubDate.substring(0, 10);
+---
+
+<Layout title={frontmatter.title}>
+    <main>
+        <Header />
+        <img
+            class="full-img"
+            src={frontmatter.image.url}
+            alt={frontmatter.image.alt}
+        />
+        <p class="italics">Source: {frontmatter.image.source}</p>
+        <h1 class="title">{frontmatter.title}</h1>
+        <p class="pubDate">{pubDate}</p>
+        <hr />
+        <slot />
+        <Footer />
+    </main>
+</Layout>
+<style is:global>
+    main {
+        margin: auto;
+        padding: 1rem;
+        width: 800px;
+        max-width: calc(100% - 2rem);
+        color: white;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .full-img {
+        width: 100%;
+    }
+    img {
+        width: 60%;
+    }
+
+    .title {
+        margin: 1rem 0 0 0;
+    }
+    .pubDate {
+        margin: 0 0 0 0;
+        font-style: italic;
+        font-size: small;
+    }
+
+    .italics {
+        text-align: center;
+        font-size: small;
+        font-style: italic;
+    }
+    h4 {
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        margin: 0 auto;
+        font-weight: normal;
+    }
+
+    h2 {
+        padding-top: 24px;
+    }
+</style>

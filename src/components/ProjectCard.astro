@@ -1,15 +1,17 @@
 ---
 interface Props {
 	title: string;
+	photoUrl: string;
 	body: string;
 	href: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, photoUrl, title, body } = Astro.props;
 ---
 
 <li class="link-card">
 	<a href={href}>
+		<img src={photoUrl} />
 		<h2>
 			{title}
 			<span>&rarr;</span>
@@ -20,6 +22,9 @@ const { href, title, body } = Astro.props;
 	</a>
 </li>
 <style>
+	img {
+		width: 100%;
+	}
 	.link-card {
 		list-style: none;
 		display: flex;
@@ -57,5 +62,10 @@ const { href, title, body } = Astro.props;
 	}
 	.link-card:is(:hover, :focus-within) h2 {
 		color: rgb(var(--accent-light));
+	}
+
+	p,
+	h2 {
+		cursor: pointer;
 	}
 </style>

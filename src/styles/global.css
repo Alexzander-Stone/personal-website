@@ -1,0 +1,52 @@
+html {
+  background-color: #f1f5f9;
+  font-family: sans-serif;
+  color: white;
+
+}
+html.dark {
+  background-color: #0d0950;
+  color: #fff;
+}
+
+.dark .nav-links a {
+  color: #fff;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100ch;
+  padding: 1rem;
+  line-height: 1.5;
+  
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
+}
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 1rem 0;
+  font-size: 2.5rem;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  cursor: default;
+}
+
+
+.a-no-dec {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+
+  text-decoration: none;
+}
