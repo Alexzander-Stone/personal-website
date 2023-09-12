@@ -20,6 +20,9 @@ const allProjects = await Astro.glob("../pages/projects/*.md");
 						title={project.frontmatter.shortTitle}
 						body={project.frontmatter.description}
 						photoUrl={project.frontmatter.image.url}
+						photoAlt={project.frontmatter.image.alt}
+						width={project.frontmatter.image.width.mini}
+						height={project.frontmatter.image.height.mini}
 						href={project.url ? project.url : ""}
 					/>
 				))
