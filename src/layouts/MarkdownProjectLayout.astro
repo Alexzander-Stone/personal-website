@@ -13,7 +13,7 @@ const pubDate = frontmatter.pubDate.substring(0, 10);
         <Header />
         <img
             class="full-img"
-            decoding="async" 
+            decoding="async"
             loading="eager"
             src={frontmatter.image.url}
             alt={frontmatter.image.alt}
@@ -37,6 +37,15 @@ const pubDate = frontmatter.pubDate.substring(0, 10);
         color: rgb(232, 230, 227);
         font-size: 20px;
         line-height: 1.6;
+    }
+    @media (max-width: 400px) {
+        main {
+            max-width: calc(100% - 1rem);
+        }
+    }
+
+    main a {
+        color: rgb(59, 59, 248);
     }
 
     .full-img {
@@ -72,5 +81,12 @@ const pubDate = frontmatter.pubDate.substring(0, 10);
 
     h2 {
         padding-top: 24px;
+    }
+
+    @media (max-width: 400px) {
+        p,
+        li {
+            font-size: 0.7rem;
+        }
     }
 </style>
