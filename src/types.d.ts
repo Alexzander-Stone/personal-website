@@ -9,6 +9,14 @@ export type ProjectFrontmatter = {
         url: string;
         source: string;
         alt: string;
+        width: {
+            mini: number;
+            normal: number
+        }
+        height: {
+            mini: number;
+            normal: number;
+        }
     }
     tags: string[];
 }

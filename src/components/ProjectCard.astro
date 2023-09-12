@@ -4,14 +4,16 @@ interface Props {
 	photoUrl: string;
 	body: string;
 	href: string;
+	width: number;
+	height: number;
 }
 
-const { href, photoUrl, title, body } = Astro.props;
+const { href, photoUrl, title, body, width, height } = Astro.props;
 ---
 
 <li class="link-card">
 	<a href={href}>
-		<img src={photoUrl}  decoding="async" loading="eager" />
+		<img src={photoUrl} decoding="sync" loading="eager" height={height} width={width}/>
 		<h2>
 			{title}
 			<span>&rarr;</span>

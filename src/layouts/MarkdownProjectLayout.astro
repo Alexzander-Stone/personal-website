@@ -13,6 +13,8 @@ const pubDate = frontmatter.pubDate.substring(0, 10);
         <Header />
         <img
             class="full-img"
+            decoding="sync" 
+            loading="eager"
             src={frontmatter.image.url}
             alt={frontmatter.image.alt}
         />

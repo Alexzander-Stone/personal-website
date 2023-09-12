@@ -1,15 +1,22 @@
 ---
 layout: ../../layouts/MarkdownProjectLayout.astro
 
-highlighted: false
+highlighted: true
 shortTitle: 'Doom in C++'
 title: 'My Third Blog Post'
 pubDate: 2022-07-01
 description: 'This is the first post of my new Astro blog.'
 author: 'Astro Learner'
 image:
-    url: 'https://docs.astro.build/assets/full-logo-light.png'
-    alt: 'The full Astro logo.'
+    url: '/projects/draft-ai/photo.jpg'
+    source: 'Riot Games'
+    alt: 'Riot Games: League Draft'
+    width:
+        mini: 319.25
+        normal: 200
+    height:
+        mini: 179.58
+        normal: 200
 tags: ["astro", "blogging", "learning in public"]
 ---
 # My First Blog Post

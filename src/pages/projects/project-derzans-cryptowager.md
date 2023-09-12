@@ -10,6 +10,12 @@ author: 'Astro Learner'
 image:
     url: 'https://docs.astro.build/assets/full-logo-light.png'
     alt: 'The full Astro logo.'
+    width:
+        mini: 20
+        normal: 200
+    height:
+        mini: 83.53
+        normal: 200
 tags: ["astro", "blogging", "learning in public"]
 ---
 # My First Blog Post

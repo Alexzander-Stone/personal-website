@@ -11,6 +11,12 @@ image:
     url: '/projects/draft-ai/photo.jpg'
     source: 'Riot Games'
     alt: 'Riot Games: League Draft'
+    width:
+        mini: 319.25
+        normal: 200
+    height:
+        mini: 179.58
+        normal: 200
 tags: ["game theory", "python"]
 ---
 
