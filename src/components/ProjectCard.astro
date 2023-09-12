@@ -13,7 +13,7 @@ const { href, photoUrl, title, body, width, height } = Astro.props;
 
 <li class="link-card">
 	<a href={href}>
-		<img src={photoUrl} decoding="sync" loading="eager" height={height} width={width}/>
+		<img src={photoUrl} decoding="async" loading="eager" height={height} width={width}/>
 		<h2>
 			{title}
 			<span>&rarr;</span>
@@ -45,7 +45,7 @@ const { href, photoUrl, title, body, width, height } = Astro.props;
 		line-height: 1.4;
 		padding: calc(1.5rem - 1px);
 		border-radius: 8px;
-		color: white;
+		color: rgb(232, 230, 227);
 		background-color: #23262d;
 		opacity: 0.8;
 	}
@@ -55,6 +55,7 @@ const { href, photoUrl, title, body, width, height } = Astro.props;
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	p {
+		color: rgb(194, 191, 188);
 		margin-top: 0.5rem;
 		margin-bottom: 0;
 	}

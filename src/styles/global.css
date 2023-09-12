@@ -1,7 +1,7 @@
 html {
   background-color: #f1f5f9;
   font-family: sans-serif;
-  color: white;
+  color: rgb(232, 230, 227);
 
 }
 html.dark {
@@ -39,6 +39,7 @@ h1 {
 }
 
 h1, h2, h3, h4, h5, h6, p {
+  color: rgb(232, 230, 227);
   cursor: default;
 }
 
