@@ -17,7 +17,7 @@ image:
     height:
         mini: 123.5
         normal: 296.53
-tags: ["ethereum", "solidity", "websocket", "node.js", "reactjs", "extension", "postgresql"]
+tags: ["ethereum", "solidity", "foundry", "websocket", "node.js", "reactjs", "extension", "postgresql"]
 ---
 
 ### The Why
