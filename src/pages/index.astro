@@ -4,6 +4,9 @@ import ThemeIcon from "../components/ThemeIcon.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Social from "../components/Social.astro";
+import { Image } from "astro:assets";
+import myImage from "../assets/images/a_s.jpg"; // Image is 1600x900
 
 const allProjects = await Astro.glob("../pages/projects/*.md");
 const highlightedProjects = allProjects.filter(
@@ -16,7 +19,9 @@ const highlightedProjects = allProjects.filter(
 		<Header />
 		<!-- <ThemeIcon /> -->
 		<div class="instructions">
-			<h2>Projects<a href="/projects">view more<span>&rarr;</span></a></h2>
+			<h2>
+				Projects<a href="/projects">view more<span>&rarr;</span></a>
+			</h2>
 		</div>
 		<ul role="list" class="link-card-grid">
 			{
@@ -34,6 +39,38 @@ const highlightedProjects = allProjects.filter(
 				))
 			}
 		</ul>
+		<div class="instructions">
+			<h2>Me</h2>
+		</div>
+
+		<div class="me">
+			<img
+				src="/a_s.jpg"
+				alt="Dat's me"
+				decoding="async"
+				loading="eager"
+			/>
+			<!-- <Image src={myImage} height="300" alt="Dat's me" /> -->
+			<p class="me-description">
+				I dig a lot of things.
+				<br />
+				 Web3, fullstack, game theory, competitive games, finding
+				exploits, working on side-projects, and more.
+				<br />
+				<br />
+				 Sometimes I'm in the US, sometimes I'm in Canada, and sometimes
+				I'm in South Korea.
+				<br />
+				<br />
+				 Nice to meet ya.
+				<br />
+				<br />
+				 Looking to work together on something cool? Reach out to me.
+				<br />
+				<Social />
+			</p>
+		</div>
+
 		<Footer />
 	</main>
 </Layout>
@@ -55,9 +92,22 @@ const highlightedProjects = allProjects.filter(
 	}
 	.instructions a {
 		color: rgb(157, 157, 157);
-		padding: 0 .5rem;
-		font-size: .8rem;
+		padding: 0 0.5rem;
+		font-size: 0.8rem;
 	}
+	.me {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+	.me img {
+		width: 100%;
+	}
+	.me .me-description {
+		margin: 0;
+	}
+
 	.link-card-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));

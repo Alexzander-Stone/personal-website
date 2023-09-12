@@ -11,7 +11,7 @@ const { href, photoUrl, title, body } = Astro.props;
 
 <li class="link-card">
 	<a href={href}>
-		<img src={photoUrl} />
+		<img src={photoUrl}  decoding="async" loading="eager" />
 		<h2>
 			{title}
 			<span>&rarr;</span>

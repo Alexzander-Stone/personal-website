@@ -14,9 +14,6 @@ image:
 tags: ["game theory", "python"]
 ---
 
-<!-- ![Riot Games: League Draft](/projects/draft-ai/photo.jpg)
-*Source: Riot Games* -->
-
 ## The why
 
 League of Legends, one of the most popular competitive [MOBA's](https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena), has spawned an entire industry dedicated to perfecting every aspect of the game. Teams of analysts and coaches worldwide tirelessly study and refine every facet of gameplay.
