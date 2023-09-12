@@ -1,16 +1,45 @@
 ---
-import Layout from '../layouts/Layout.astro';
-const allProjects = await Astro.glob('../pages/projects/*.md');
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Layout from "../layouts/Layout.astro";
+const allProjects = await Astro.glob("../pages/projects/*.md");
 ---
 
-<Layout title="Projects.">
+<Layout title="Projects">
 	<main>
-		<p>This is where I will project about my journey learning Astro.</p>
-		<ul>
-			{allProjects.map((project) => <li><a href={project.url}>{project.frontmatter.title}</a></li>)}
+		<Header />
+
+		<div class="instructions">
+			<h2>All Projects</h2>
+		</div>
+		<ul role="list" class="link-card-grid">
+			{
+				allProjects.map((project) => (
+					<ProjectCard
+						title={project.frontmatter.shortTitle}
+						body={project.frontmatter.description}
+						photoUrl={project.frontmatter.image.url}
+						href={project.url ? project.url : ""}
+					/>
+				))
+			}
 		</ul>
-		  </main>
+
+		<Footer />
+	</main>
 </Layout>
 
 <style>
+	.instructions {
+		padding: 0rem 1.5rem;
+		border-radius: 8px;
+	}
+
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
 </style>
