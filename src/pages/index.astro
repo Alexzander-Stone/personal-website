@@ -6,31 +6,8 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Social from "../components/Social.astro";
 
-let highlightedProjects = new Array(4);
-let fill_empty_i = 0;
-while (fill_empty_i <= highlightedProjects.length - 1) {
-	highlightedProjects[fill_empty_i] = {
-		frontmatter: {
-			shortTitle: "...",
-			description: "...",
-			image: {
-				url: "",
-				alt: "...",
-				width: {
-					mini: 319.25,
-				},
-				height: {
-					mini: 179.58,
-				},
-			},
-			url: "temp_" + fill_empty_i,
-		},
-	};
-
-	fill_empty_i++;
-}
 const allProjects = await Astro.glob("../pages/projects/*.md");
-highlightedProjects = allProjects.filter(
+const highlightedProjects = allProjects.filter(
 	(project) => project.frontmatter.highlighted,
 );
 ---
