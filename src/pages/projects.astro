@@ -21,9 +21,9 @@ const allProjects = await Astro.glob("../pages/projects/*.md");
 						body={project.frontmatter.description}
 						photoUrl={project.frontmatter.image.url}
 						photoAlt={project.frontmatter.image.alt}
+						href={project.url ? project.url : ""}
 						width={project.frontmatter.image.width.mini}
 						height={project.frontmatter.image.height.mini}
-						href={project.url ? project.url : ""}
 					/>
 				))
 			}
@@ -40,6 +40,7 @@ const allProjects = await Astro.glob("../pages/projects/*.md");
 	}
 
 	.link-card-grid {
+		min-height: 731.16px;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
 		gap: 2rem;
