@@ -3,14 +3,14 @@ import ArbitrageDemo from "../components/ArbitrageDemo";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Layout from "../layouts/Layout.astro";
-const allProjects = await Astro.glob("../pages/projects/*.md");
+
 ---
 
 <Layout title="Projects">
     <main>
         <Header />
         <div class="arbitrage-canvas">
-            <ArbitrageDemo client:only="react" />
+            <ArbitrageDemo client:idle />
         </div>
         <Footer />
     </main>
@@ -27,10 +27,5 @@ const allProjects = await Astro.glob("../pages/projects/*.md");
         grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
         gap: 2rem;
         padding: 0;
-    }
-
-    .arbitrage-canvas{
-        /* height: 300px; */
-        background-color: rgba(38, 45, 94, 0.588);
     }
 </style>
