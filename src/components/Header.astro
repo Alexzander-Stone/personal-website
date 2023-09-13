@@ -45,8 +45,8 @@ const wink_chosen_bear = wink_bear_faces[semi_random_index];
 ---
 
 <header>
-    <p class="heart no-hover"><span>{chosen_bear}</span></p>
-    <p class="heart hover"><span>{wink_chosen_bear}</span></p>
+    <a href="/bear" ><p class="heart no-hover"><span>{chosen_bear}</span></p></a>
+    <a href="/bear" ><p class="heart hover"><span>{wink_chosen_bear}</span></p></a>
     <h1 class="home"><a href="/">Alexzander Stone</a></h1>
 </header>
 <style>
@@ -64,6 +64,10 @@ const wink_chosen_bear = wink_bear_faces[semi_random_index];
     .heart {
         text-align: center;
         margin: 0;
+    }
+
+    a {
+        text-decoration: none;
     }
 
     .home a {
