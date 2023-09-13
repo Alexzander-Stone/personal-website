@@ -1,10 +1,11 @@
 ---
 layout: ../../layouts/MarkdownProjectLayout.astro
 
+disabled: true
 highlighted: false
-shortTitle: 'Doom in C++'
-title: '(Not Actual) Doom in C++, a Junior year project.'
-pubDate: 2023-09-07
+shortTitle: 'Unfiltered AI'
+title: 'Quick access to .'
+pubDate: 2023-09-08
 description: '(Not Actual) Doom in C++, a Junior year project.'
 author: 'Alex Stone'
 image:

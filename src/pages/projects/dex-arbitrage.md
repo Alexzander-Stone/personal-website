@@ -1,0 +1,125 @@
+---
+layout: ../../layouts/MarkdownProjectLayout.astro
+
+highlighted: true
+shortTitle: "DEX Arbitrage"
+title: "Finding (and completing) arbitrage opportunities within a 13~ sec time."
+pubDate: 2023-09-11
+description: "Finding (and completing) arbitrage opportunities within a 13~ sec time."
+author: 'Alex Stone'
+image:
+    url: '/projects/dex-arbitrage/dex.png'
+    source: "Alex Stone"
+    alt: "Ethereum DEX's (Uniswap, Sushiswap, Binance DEX)."
+    width:
+        mini: 319.25
+        normal: 766.5
+    height:
+        mini: 179.48
+        normal: 430.94
+tags: ["ethereum", "defi", "solidity", "hardhat", "python", "node.js", "microservices", "postgresql"]
+---
+
+### The Why
+
+On Ethereum, numerous decentralized exchanges (DEXs) are constantly emerging, with new tokens being added daily. Since each DEX operates independently, this results in price disparities. The same token pair can exhibit significantly different rates across various DEXs.
+
+As is characteristic of a free market, these rate differences eventually get corrected due to the profit potential in swapping tokens from lower-rate DEXs to higher-rate ones. This phenomenon is known as [arbitrage](https://en.wikipedia.org/wiki/Arbitrage), with one of its simplest applications being [triangular arbitrage](https://en.wikipedia.org/wiki/Triangular_arbitrage) within DEXs.
+
+
+#### ![OKX twitter](/projects/dex-arbitrage/arbitrage.PNG)
+
+#### *Source: OKX twitter*
+
+Assuming one can identify profitable rates that exceed the gas costs associated with the swaps on each platform, consistent profits can be realized.
+
+##### ![7tv: BOARDA emote - OHBENTLEY](/projects/dex-arbitrage/boarda.webp)
+
+#### *Source: 7tv: BOARDA emote - OHBENTLEY*
+
+Thus, the challenge can be distilled into three key components:
+
+1. Identifying the most profitable path of swaps based on the current state of the blockchain.
+2. Minimizing gas expenses.
+3. Submitting the TX for the chosen path of swaps within a ~13-second window.
+
+
+
+
+
+
+
+
+
+### My (partial) solution
+
+#### ![Vecteezy - 3d minimal Business Investments](/projects/dex-arbitrage/stopwatch.png)
+
+#### *Source: Vecteezy - moopick*
+
+In this discussion, I will focus on the first and third problems: determining the most profitable path within 13 seconds.
+
+(The second problem pertains to Solidity coding, which may not be as intriguing but remains crucial.)
+
+To increase the likelihood of finding a profitable path, we aim to have as many token pairings as possible, all while ensuring the efficiency of our algorithm. The 13-second timeframe encompasses not only our pathfinding algorithm but also:
+
+- Checking for token pair vulnerabilities.
+- Identifying an optimal principal amount.
+- Submitting the transaction.
+
+Regrettably, I won't delve into the details of my algorithm's implementation, as I intend to keep it closed-source. I suggest starting your research in the realm of [general pathfinding](https://en.wikipedia.org/wiki/Pathfinding).
+
+However, I will provide an interactive section below for you to witness my work in action!
+
+
+
+
+
+
+### Interactive Demo
+
+*Todo*
+
+
+
+
+
+
+
+
+
+
+
+### Tech and knowledge used
+
+#### ![ethereum.org: Ethereum](/projects/derzans-cryptowager/ethereum-logo-portrait-purple.svg)
+
+#### *Source: ethereum.org*
+
+
+- **Ethereum and DEXs:** Ethereum was selected as the blockchain of choice due to its high market capitalization of token pairs within DEXs.
+
+- **Solidity:** Enabling routes involving multiple DEXs with n swaps necessitated custom Solidity code. The code has been highly optimized for gas efficiency to enhance the probability of identifying profitable routes.
+
+- **Hardhat:** Hardhat was employed for testing the viability of routes, ensuring they were not merely deceptive.
+
+- **Node.js and PostgreSQL:** Node.js microservices and PostgreSQL triggers played a pivotal role in the project's infrastructure.
+
+- **Python:** Python, supplemented with C++ modules, was indispensable for mission-critical tasks, specifically for locating swaps within the 13-second window.
+
+
+
+
+
+
+
+
+
+### What's Next
+
+Two potentially profitable paths (haha) can be envisioned:
+
+1. The introduction of mempool considerations to capitalize on pool/pair rate changes swiftly.
+2. The utilization of this approach by a DEX aggregator.
+
+For now, I'll take some time to reflect further on these possibilities.

@@ -4,7 +4,7 @@ layout: ../../layouts/MarkdownProjectLayout.astro
 highlighted: true
 shortTitle: 'LoL Draft AI'
 title: 'League of Legends Flex-conscious Draft AI'
-pubDate: 2023-09-11
+pubDate: 2023-09-12
 description: 'Using Game Theory to recommend champion bans and picks.'
 author: 'Alex Stone'
 image:
@@ -52,13 +52,12 @@ To streamline the drafting process, both on-stage and off, I've developed a Draf
 
 This AI leverages a combination of Game Theory and heuristics derived from common analytical patterns to offer strategic ban and pick recommendations to both shadow teams. These recommendations are carefully crafted to tilt the game in favor of the participants.
 
-If the LoL team has questions like:
-
-What should your team's final pick be, considering the entire draft? 
-What's the opponent's most likely choice for their 3rd pick against you? 
-What's the opponent's probable first ban? 
-
-Then they ask the AI.
+> If the LoL team has questions like:
+> * What should your team's final pick be, considering the entire draft? 
+> * What's the opponent's most likely choice for their 3rd pick against you? 
+> * What's the opponent's probable first ban? 
+> 
+> Then they ask the AI.
 
 The AI promptly provides responses within your specified timeframe, ensuring that the suggested drafts indeed lead to more optimal selections. With ongoing training, the AI's confidence in its results continues to grow.
 
