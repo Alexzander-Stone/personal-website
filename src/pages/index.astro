@@ -5,7 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Social from "../components/Social.astro";
 
-const allProjects = await Astro.glob("../pages/projects/*.md");
+const allProjects = await Astro.glob("../pages/projects/*.md*");
 let highlightedProjects = allProjects.filter(
 	(project) => project.frontmatter.highlighted,
 );

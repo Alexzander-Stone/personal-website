@@ -18,7 +18,7 @@ type RouteResult = {
     number_of_swaps: number;
     swaps: string; //RouteSwap string, need to parse.
     initial: {
-        output: string;
+        output: number;
         input: string;
     }
 }

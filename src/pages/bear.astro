@@ -1,21 +1,7 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import ProjectCard from "../components/ProjectCard.astro";
 import Layout from "../layouts/Layout.astro";
-let allProjects = await Astro.glob("../pages/projects/*.md");
-
-allProjects = allProjects.sort((a, b) => {
-    const a_pub: string = a.frontmatter.pubDate;
-    const a_pub_num: number = parseInt(
-        a_pub.substring(0, 11).replaceAll("-", ""),
-    );
-    const b_pub: string = b.frontmatter.pubDate;
-    const b_pub_num: number = parseInt(
-        b_pub.substring(0, 11).replaceAll("-", ""),
-    );
-    return b_pub_num - a_pub_num;
-});
 ---
 
 <Layout title="Projects">
