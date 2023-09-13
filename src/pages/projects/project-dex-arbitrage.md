@@ -4,7 +4,7 @@ layout: ../../layouts/MarkdownProjectLayout.astro
 highlighted: true
 shortTitle: "DEX Arbitrage"
 title: "Finding (and completing) arbitrage opportunities within a 13~ sec time."
-pubDate: 2022-09-12
+pubDate: 2023-09-12
 description: "Finding (and completing) arbitrage opportunities within a 13~ sec time."
 author: 'Alex Stone'
 image:
@@ -107,4 +107,9 @@ But! I will provide an interactive section below for you to see my work in actio
 
 ### What's Next
 
-*Todo*
+There's two possible paths (haha) that I could forsee being profitable:
+
+1. Begin introducing the mempool as a concept, to effectively take advantage of pool/pair rate changes, ASAP.
+2. A DEX aggregator could possibly use this.
+
+For right now, I'll wait a bit and think more on the subject.

@@ -3,36 +3,61 @@ layout: ../../layouts/MarkdownProjectLayout.astro
 
 highlighted: false
 shortTitle: 'Doom in C++'
-title: 'My Third Blog Post'
-pubDate: 2022-07-01
-description: 'This is the first post of my new Astro blog.'
-author: 'Astro Learner'
+title: '(Not Actual) Doom in C++, a Junior year project.'
+pubDate: 2023-09-07
+description: '(Not Actual) Doom in C++, a Junior year project.'
+author: 'Alex Stone'
 image:
-    url: '/projects/draft-ai/photo.jpg'
-    source: 'Riot Games'
-    alt: 'Riot Games: League Draft'
+    url: '/projects/doom-cpp/main_menu.jpg'
+    source: 'DOOM'
+    alt: 'id Software: DOOM - main menu'
     width:
         mini: 319.25
-        normal: 200
+        normal: 766.5
     height:
-        mini: 179.58
-        normal: 200
-tags: ["astro", "blogging", "learning in public"]
+        mini: 182.94
+        normal: 439.23
+tags: ["c++", "rule of three", "game engine dev"]
 ---
-# My First Blog Post
 
-Published on: 2022-07-01
+### The Why
 
-Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
+#### ![Clemson University: Logo](/projects/doom-cpp/clemson.png)
 
-## What I've accomplished
+#### *Source: Clemson University*
 
-1. **Installing Astro**: First, I created a new Astro project and set up my online accounts.
 
-2. **Making Pages**: I then learned how to make pages by creating new `.astro` files and placing them in the `src/pages/` folder.
+Many years ago, while I was a Junior at Clemson University, I took one of my favorite classes by Dr. Malloy called **Data-Driven 2D Video Game Development**.
 
-3. **Making Blog Posts**: This is my first blog post! I now have Astro pages and Markdown posts!
+It was essentially a way to teach C++ concepts such as operator overloading, object-oriented programming, design patterns, the standard library, and debugging.
 
-## What's next
+More important for me, it was a class where, as long as you hit a few set goals defined by the professor, you could make any type of game engine and game!
 
-I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+I have fond memories staying up late during the night to work on this, so I decided to make a quick project post here.
+
+*(Plus, it's one of my few public projects hahahahah)*
+
+
+
+### My solution
+
+#### ![ethereum.org: Ethereum](/projects/doom-cpp/game.PNG)
+
+#### *Source: Alexzander Stone*
+
+[Here's a demo from the class.](https://www.youtube.com/watch?v=Az8Cz5rzXlE)
+
+And a [github link](https://github.com/Alexzander-Stone/Doom-Remade-C--4160) to the project.
+
+
+### Tech and knowledge used
+
+##### ![C++ Logo](/projects/doom-cpp/c++.svg)
+
+#### *Source: Wikipedia - C++ Logo*
+
+- **C++** !
+
+### What's Next
+
+Reminiscing.

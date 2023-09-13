@@ -4,7 +4,7 @@ layout: ../../layouts/MarkdownProjectLayout.astro
 highlighted: true
 shortTitle: "Derzan's CryptoWager"
 title: "Crypto Wagering Ethereum Dapp"
-pubDate: 2022-09-12
+pubDate: 2023-09-13
 description: "Facilitating crypto wagers based on live streamer's actions."
 author: 'Alex Stone'
 image:
