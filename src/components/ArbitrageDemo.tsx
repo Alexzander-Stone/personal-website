@@ -121,7 +121,7 @@ const ArbitrageDemo = () => {
 
                 const swaps_arr: RouteSwap[] = JSON.parse(data.swaps as string);
 
-                setOptimalOutput("~"+(10 ** data.initial.output).toFixed(3))
+                setOptimalOutput("~" + (10 ** data.initial.output).toFixed(3))
                 setOptimalPathElements(swaps_arr);
                 setOptimalPath('FOUND'); // Assuming the API responds with an array of names
 
@@ -145,48 +145,67 @@ const ArbitrageDemo = () => {
     const [elapsedTime, setElapsedTime] = useState("waiting");
 
     return (
-        <div>
-            <form id="rateForm" className="arbitrage-table">
-                <table >
-                    <thead>
-                        <tr>
-                            <th>DEX</th>
-                            <th>From Node</th>
-                            <th>To Node</th>
-                            <th>To Tokens received per 1 From Token</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dataRows">
-                        {
-                            edges.map((edge) => {
-                                return (
-                                    <tr id={edge.dex + "_" + edge.from + "_" + edge.to} key={edge.dex + "_" + edge.from + "_" + edge.to}>
-                                        <td>{edge.dex}</td>
-                                        <td>{edge.from}</td>
-                                        <td>{edge.to}</td>
-                                        <td >
-                                            <input
-                                                name={edge.dex + "_" + edge.from + "_" + edge.to + "rate_field"}
-                                                type="text"
-                                                value={edge.token_out}
-                                                onChange={(event) =>
-                                                    handleCellEdit({ dex: edge.dex, from: edge.from, to: edge.to, token_out: event.target.value || '1', rate: edge.rate })
-                                                }
-                                            />
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                        }
-                    </tbody>
-                </table>
-            </form>
-            <p><u>Total Pairs/Pools/Edges</u>: {edges.length}</p>
-            <p><i>Feel free to change any rates! The default will have all rates defined as '1', which leads to zero profitable outcomes.<br/>Each swap will incur a 0.01 eth cost fee.<br />The starting token is "1 eth".</i></p>
-            <button className="button" onClick={fetchOptimalPath}>Calculate Optimal Path</button>
-
-
+        <div className="island">
             <div className="output">
+
+                <div>
+                    <strong>Instructions</strong>:
+                    <ul>
+                        <li>
+                            Update rate (x To Tokens received per 1 From Token) to add arbitrage opportunities.
+                        </li>
+                        <li>
+                            The starting token is "1 eth".
+                        </li>
+                        <li>
+                            Each swap will incur a 0.01 eth cost fee.
+
+                        </li>
+                    </ul>
+                </div>
+
+                <hr />
+
+                <form id="rateForm" className="arbitrage-table">
+                    <table >
+                        <caption>Pair/Pool Table</caption>
+                        <thead>
+                            <tr>
+                                <th>DEX</th>
+                                <th>From Node</th>
+                                <th>To Node</th>
+                                <th>Rate</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataRows">
+                            {
+                                edges.map((edge) => {
+                                    return (
+                                        <tr id={edge.dex + "_" + edge.from + "_" + edge.to} key={edge.dex + "_" + edge.from + "_" + edge.to}>
+                                            <td>{edge.dex}</td>
+                                            <td>{edge.from}</td>
+                                            <td>{edge.to}</td>
+                                            <td >
+                                                <input
+                                                    name={edge.dex + "_" + edge.from + "_" + edge.to + "rate_field"}
+                                                    type="text"
+                                                    value={edge.token_out}
+                                                    onChange={(event) =>
+                                                        handleCellEdit({ dex: edge.dex, from: edge.from, to: edge.to, token_out: event.target.value || '1', rate: edge.rate })
+                                                    }
+                                                />
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </form>
+                <h4><u>Total Pairs/Pools/Edges</u>: {edges.length}</h4>
+
+                <button className="button" onClick={fetchOptimalPath}>Calculate Optimal Path</button>
+
                 <h6><strong>Start Time</strong>: {startTime} ---- <strong>End Time</strong>: {endTime}</h6>
                 <h6><strong>Total Elapsed Time (seconds)</strong>: {elapsedTime}</h6>
                 <h3><strong>Profitable Route</strong>: {optimalPath}</h3>

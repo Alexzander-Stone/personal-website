@@ -21,7 +21,7 @@ tags: ["ethereum", "defi", "solidity", "hardhat", "python", "node.js", "microser
 ---
 import ArbitrageDemo from '../../components/ArbitrageDemo.tsx';
 
-### The Why
+### The why
 
 On Ethereum, numerous decentralized exchanges (DEXs) are constantly emerging, with new tokens being added daily. Since each DEX operates independently, this results in price disparities. The same token pair can exhibit significantly different rates across various DEXs.
 
@@ -41,7 +41,7 @@ Assuming one can identify profitable rates that exceed the gas costs associated 
 Thus, the challenge can be distilled into three key components:
 
 1. Identifying the most profitable path of swaps based on the current state of the blockchain.
-2. Minimizing gas expenses.
+2. Minimizing costs (gas expenses, slippage).
 3. Submitting the TX for the chosen path of swaps within a ~13-second window.
 
 
@@ -64,6 +64,7 @@ In this discussion, I will focus on the first and third problems: determining th
 
 To increase the likelihood of finding a profitable path, we aim to have as many token pairings as possible, all while ensuring the efficiency of our algorithm. The 13-second timeframe encompasses not only our pathfinding algorithm but also:
 
+- Normalizing the pair data.
 - Checking for token pair vulnerabilities.
 - Identifying an optimal principal amount.
 - Submitting the transaction.
@@ -72,7 +73,9 @@ Regrettably, I won't delve into the details of my algorithm's implementation, as
 
 However, I will provide an interactive section below for you to witness my work in action!
 
-> The algorithm will consider paths of any length, and, more importantly, <u>isn't limited to a depth</u>.
+> The algorithm will consider paths of any length, and, more importantly, <u>isn't limited to a depth</u>. 
+
+> Additionally, it'll only consider one cycle at a time (eth -> !eth* -> eth). 
 
 
 

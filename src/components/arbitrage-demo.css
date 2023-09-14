@@ -1,5 +1,11 @@
+.island {
+    margin: 0 0 5rem 0;
+}
+
 .arbitrage-table {
+    margin: 0 auto;
     height: 300px;
+    width: fit-content;
     overflow-x: hidden;
     overflow-y: scroll;
     background-color: rgba(38, 45, 94, 0.588);
@@ -8,18 +14,22 @@
 .output {
     background-color: #22242b;
 
-    
+    padding: 1rem 0rem 2rem 1rem;
+
+
 }
+
 .output h6 {
-    margin: 0;       
-    font-weight: normal;
-}
-.output h3 {
-    margin: 0;       
+    margin: 0;
     font-weight: normal;
 }
 
-p { 
+.output h3 {
+    margin: 0;
+    font-weight: normal;
+}
+
+p {
     margin-top: .5rem;
 }
 
@@ -38,3 +48,28 @@ p {
 
 }
 
+td {
+    padding: 0 15px;
+}
+
+hr {
+    width: 70%;
+    border-color: black;
+}
+
+caption {
+    font-weight: bold;
+    padding: .5rem;
+    background-color: rgba(0, 0, 0, 0.761);
+    color: rgb(243, 243, 243);
+}
+
+h4 {
+    margin: .2rem;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
