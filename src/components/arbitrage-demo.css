@@ -5,10 +5,19 @@
 .arbitrage-table {
     margin: 0 auto;
     height: 300px;
+    max-width: 100%;
     width: fit-content;
-    overflow-x: hidden;
+    overflow-x: auto;
     overflow-y: scroll;
     background-color: rgba(38, 45, 94, 0.588);
+}
+
+@media (max-width: 500px) {
+    .arbitrage-table {
+        max-width: none;
+        width: 100%;
+    }
+    
 }
 
 .output {

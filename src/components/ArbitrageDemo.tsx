@@ -83,6 +83,35 @@ const ArbitrageDemo = () => {
         })
     }
 
+
+    const randomizeRates = () => {
+        function getRandomNumber(min: number, max: number, increment: number) {
+            const range = (max - min) / increment;
+            const randomIndex = Math.floor(Math.random() * range);
+            return (min + randomIndex * increment).toFixed(2);
+        }
+
+
+        setEdges((old_edges) => {
+            const deep_copy_edges: Edge[] = JSON.parse(JSON.stringify(old_edges));
+
+            // deep_copy_edges.forEach((edge, index)=>{
+            //     edge.token_out = getRandomNumber(0.8, 1.5, 0.01);
+            // })
+
+            let i = 0;
+            while (i <= 200) {
+
+                deep_copy_edges[i*10].token_out = getRandomNumber(0.8, 1.5, 0.01);
+
+                i++;
+            }
+
+            return deep_copy_edges;
+        })
+
+    }
+
     const fetchOptimalPath = async () => {
         // Determine rates. 
         edges.forEach((edge) => {
@@ -204,6 +233,7 @@ const ArbitrageDemo = () => {
                 </form>
                 <h4><u>Total Pairs/Pools/Edges</u>: {edges.length}</h4>
 
+                <button className="button" onClick={randomizeRates}>Randomize Rates</button>
                 <button className="button" onClick={fetchOptimalPath}>Calculate Optimal Path</button>
 
                 <h6><strong>Start Time</strong>: {startTime} ---- <strong>End Time</strong>: {endTime}</h6>
