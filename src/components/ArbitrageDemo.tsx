@@ -38,8 +38,8 @@ const ArbitrageDemo = () => {
         const uniqueEdges: Edge[] = [];
 
 
-        const dexOptions = ["sushiswap", "uniswapv2", "uniswapv3", "pancakeswap", "binance", "dydx"];
-        const tokenOptions = ["eth", "btc", "usdt", "weth", "wbtc", "busd", "ape", "dai", "shib", "usdc", "pepe", "link", "hex", "blur"];
+        const dexOptions = ["sushiswap", "uniswapv2", "uniswapv3", "pancakeswap", "binance", "dydx", "derzan_dex", "shiba_dexie", "rune", "hamster", "bear"];
+        const tokenOptions = ["eth", "btc", "usdt", "weth", "wbtc", "busd", "ape", "dai", "shib", "usdc", "pepe", "link", "hex", "blur", "crv", "bone", "qnt", "ens", "psyop", "rndr", "gohm", "rio", "shia"];
 
 
         for (const dex of dexOptions) {
@@ -182,7 +182,7 @@ const ArbitrageDemo = () => {
                 </table>
             </form>
             <p><u>Total Pairs/Pools/Edges</u>: {edges.length}</p>
-            <p><i>Feel free to change any rates! The default will have all rates defined as '1', which leads to zero profitable outcomes.<br />The starting token is "1 eth".</i></p>
+            <p><i>Feel free to change any rates! The default will have all rates defined as '1', which leads to zero profitable outcomes.<br/>Each swap will incur a 0.01 eth cost fee.<br />The starting token is "1 eth".</i></p>
             <button className="button" onClick={fetchOptimalPath}>Calculate Optimal Path</button>
 
 
