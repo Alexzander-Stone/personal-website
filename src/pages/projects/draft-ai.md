@@ -48,6 +48,10 @@ Even when a team is confident in predicting their opponent's choices, there's al
 
 ### My solution
 
+#### ![Derzan's Draft: CMD View - Draft Halfway Complete](/projects/draft-ai/draft_incomplete.PNG)
+
+#### *Source: Derzan's Draft: CMD View - Draft Halfway Complete*
+
 To streamline the drafting process, both on-stage and off, I've developed a Drafting AI that serves as a reliable, real-time resource accessible to the team at any stage of the draft.
 
 This AI leverages a combination of Game Theory and heuristics derived from common analytical patterns to offer strategic ban and pick recommendations to both shadow teams. These recommendations are carefully crafted to tilt the game in favor of the participants.
@@ -58,6 +62,11 @@ This AI leverages a combination of Game Theory and heuristics derived from commo
 > * What's the opponent's probable first ban? 
 > 
 > Then they ask the AI.
+
+#### ![Derzan's Draft: CMD View - Draft Finalized](/projects/draft-ai/draft_complete.PNG)
+
+#### *Source: Derzan's Draft: CMD View - Draft Finalized*
+
 
 The AI promptly provides responses within your specified timeframe, ensuring that the suggested drafts indeed lead to more optimal selections. With ongoing training, the AI's confidence in its results continues to grow.
 
@@ -101,6 +110,11 @@ Here's a few key features of the AI:
 
 ### Tech and knowledge used
 
+##### ![Python Logo](/projects/draft-ai/Python.svg)
+
+#### *Source: Python*
+
+
 1. **Game Theory**: Applied principles of Game Theory to develop strategic drafting recommendations.
 
 2. **Python**: Utilized Python as the primary programming language for AI development.
@@ -112,6 +126,12 @@ Here's a few key features of the AI:
 *Due to the potential for commercialization, I will not be releasing the code to the public.*
 
 ### What's next
+
+#### ![Python Logo](/projects/draft-ai/lemon_nod.gif)
+
+#### *Source: C9 - LemonNation nod*
+
+
 
 Having an amateur or professional team actively collaborate on this project would be a huge stepping stone. 
 
