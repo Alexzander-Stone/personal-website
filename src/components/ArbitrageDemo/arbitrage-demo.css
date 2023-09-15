@@ -1,0 +1,119 @@
+.island {
+    margin: 0 0 5rem 0;
+}
+
+
+.output {
+    background-color: #22242b;
+    padding: 1rem 0rem 2rem 1rem;
+}
+
+hr {
+    width: 70%;
+    border-color: black;
+}
+
+.arbitrage-table {
+    margin: 0 auto;
+    height: 300px;
+    max-width: 100%;
+    width: fit-content;
+    overflow-x: auto;
+    overflow-y: scroll;
+    background-color: rgba(38, 45, 94, 0.588);
+}
+
+@media (max-width: 500px) {
+    .arbitrage-table {
+        max-width: none;
+        width: 100%;
+    }
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    cursor: default;
+}
+
+caption {
+    font-weight: bold;
+    padding: .5rem;
+    background-color: rgba(0, 0, 0, 0.761);
+    color: rgb(243, 243, 243);
+}
+
+td {
+    padding: 0 15px;
+}
+
+
+h4 {
+    margin: .2rem;
+}
+
+.button {
+    margin: 1rem 0 0 .5rem;
+    padding: 1rem 2rem;
+    background-color: #434343;
+    color: rgb(243, 243, 243);
+    border: none;
+    border-radius: 7px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 300ms;
+}
+
+.button:hover {
+    background-color: #323232;
+}
+
+.output h6 {
+    font-weight: normal;
+    margin: 0;
+}
+
+.output h6:first-of-type {
+    margin: 2rem 0 0 0;
+}
+
+.output h3 {
+    margin: 0;
+    font-weight: normal;
+}
+
+p {
+    margin-top: .5rem;
+}
+
+.swap-routes {
+    height: 200px;
+    overflow: auto;
+    margin: 0 1rem 0 0;
+}
+
+/* -------- */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    border: 2px solid #ffffff60;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff60;
+}

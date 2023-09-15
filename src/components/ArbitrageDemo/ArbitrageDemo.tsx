@@ -9,7 +9,7 @@ type Edge = {
     rate: string;
 }
 
-// 0 swaps indicates no viable route found.
+// 0 swaps indicates no viable route Found.
 type RouteResult = {
     result: "failure"
 } |
@@ -22,7 +22,6 @@ type RouteResult = {
         input: string;
     }
 }
-
 type RouteSwap = {
     from: string;
     vertex: string;
@@ -33,8 +32,7 @@ type RouteSwap = {
 
 
 const ArbitrageDemo = () => {
-
-    const generateUniqueEdges = (count: number) => {
+    const generateUniqueEdges = () => {
         const uniqueEdges: Edge[] = [];
 
 
@@ -55,10 +53,6 @@ const ArbitrageDemo = () => {
                         token_out: "1",
                         rate: "0"
                     })
-
-                    // if (uniqueEdges.length === count) {
-                    //     return uniqueEdges;
-                    // }
                 }
             }
         }
@@ -69,20 +63,18 @@ const ArbitrageDemo = () => {
 
     const handleCellEdit = ({ dex, from, to, token_out, rate }: Edge) => {
         setEdges((old_edges) => {
-            const deep_copy_edges: Edge[] = JSON.parse(JSON.stringify(old_edges));
+            const deep_copy_edges: Edge[] = [...old_edges];
 
-            const change_index = deep_copy_edges.findIndex((edge: Edge) => {
+            const change_index = old_edges.findIndex((edge: Edge) => {
                 return edge.dex === dex && edge.from === from && edge.to === to;
             })
 
             if (change_index !== -1)
                 deep_copy_edges[change_index].token_out = token_out
 
-
             return deep_copy_edges;
         })
     }
-
 
     const randomizeRates = () => {
         function getRandomNumber(min: number, max: number, increment: number) {
@@ -93,7 +85,7 @@ const ArbitrageDemo = () => {
 
 
         setEdges((old_edges) => {
-            const deep_copy_edges: Edge[] = JSON.parse(JSON.stringify(old_edges));
+            const deep_copy_edges: Edge[] = [...old_edges];
 
             // deep_copy_edges.forEach((edge, index)=>{
             //     edge.token_out = getRandomNumber(0.8, 1.5, 0.01);
@@ -101,9 +93,7 @@ const ArbitrageDemo = () => {
 
             let i = 0;
             while (i <= 200) {
-
-                deep_copy_edges[i*10].token_out = getRandomNumber(0.8, 1.5, 0.01);
-
+                deep_copy_edges[i * 10].token_out = getRandomNumber(0.8, 1.5, 0.01);
                 i++;
             }
 
@@ -113,6 +103,7 @@ const ArbitrageDemo = () => {
     }
 
     const fetchOptimalPath = async () => {
+        setOptimalPath("Calculating...");
         // Determine rates. 
         edges.forEach((edge) => {
             edge.rate = Math.log10(parseFloat(edge.token_out)).toString();
@@ -144,7 +135,7 @@ const ArbitrageDemo = () => {
                     return;
                 }
                 if (data.number_of_swaps === 0) {
-                    setOptimalPath("No Optimal Routes found. Try changing the tokens received above.");
+                    setOptimalPath("No Optimal Routes Found. Try changing the tokens received above.");
                     return;
                 }
 
@@ -152,7 +143,7 @@ const ArbitrageDemo = () => {
 
                 setOptimalOutput("~" + (10 ** data.initial.output).toFixed(3))
                 setOptimalPathElements(swaps_arr);
-                setOptimalPath('FOUND'); // Assuming the API responds with an array of names
+                setOptimalPath('Found'); // Assuming the API responds with an array of names
 
             } else {
                 console.error("Error sending data to the API");
@@ -163,9 +154,9 @@ const ArbitrageDemo = () => {
     }
 
     const [edges, setEdges] = useState<Edge[]>(
-        generateUniqueEdges(300)
+        generateUniqueEdges()
     );
-    const [optimalPath, setOptimalPath] = useState("waiting for submission...");
+    const [optimalPath, setOptimalPath] = useState("Waiting for calculation...");
     const [optimalOutput, setOptimalOutput] = useState<string>("...");
     const [optimalPathElements, setOptimalPathElements] = useState<RouteSwap[]>([]);
 
@@ -176,7 +167,6 @@ const ArbitrageDemo = () => {
     return (
         <div className="island">
             <div className="output">
-
                 <div>
                     <strong>Instructions</strong>:
                     <ul>
@@ -188,13 +178,10 @@ const ArbitrageDemo = () => {
                         </li>
                         <li>
                             Each swap will incur a 0.01 eth cost fee.
-
                         </li>
                     </ul>
                 </div>
-
                 <hr />
-
                 <form id="rateForm" className="arbitrage-table">
                     <table >
                         <caption>Pair/Pool Table</caption>
@@ -239,16 +226,19 @@ const ArbitrageDemo = () => {
                 <h6><strong>Start Time</strong>: {startTime} ---- <strong>End Time</strong>: {endTime}</h6>
                 <h6><strong>Total Elapsed Time (seconds)</strong>: {elapsedTime}</h6>
                 <h3><strong>Profitable Route</strong>: {optimalPath}</h3>
-                {optimalPath === "FOUND"
+                {optimalPath === "Found"
                     ?
-                    <ul>
+                    <>
                         <p>Total Revenue: {optimalOutput} eth</p>
-                        {optimalPathElements.map((swap) => {
-                            return <li>{swap.from + " ----> " + swap.vertex + ", on " + swap.market_place_type + " DEX"}</li>;
-                        })}
-                    </ul>
+                        <ol className="swap-routes">
+                            {optimalPathElements.map((swap) => {
+                                return <li>{swap.from + " --[" + swap.market_place_type + "]--> " + swap.vertex}</li>;
+                            })}
+                        </ol>
+                    </>
                     :
-                    null}
+                    null
+                }
             </div>
         </div>
     );
