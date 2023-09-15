@@ -16,9 +16,9 @@
     .arbitrage-table {
         max-width: none;
         width: 100%;
-        
+
     }
-    
+
 
 
 }
@@ -32,8 +32,12 @@
 }
 
 .output h6 {
-    margin: 0;
     font-weight: normal;
+    margin: 0;
+}
+
+.output h6:first-of-type {
+    margin: 2rem 0 0 0;
 }
 
 .output h3 {
@@ -46,7 +50,7 @@ p {
 }
 
 .button {
-    margin: 0 0 2rem .5rem;
+    margin: 1rem 0 0 .5rem;
     padding: 1rem 2rem;
     color: rgb(243, 243, 243);
     font-weight: bold;
@@ -61,6 +65,7 @@ p {
     transition: color 300ms;
     cursor: pointer;
 }
+
 .button:hover {
     background-color: #323232;
 }
@@ -80,6 +85,7 @@ caption {
     background-color: rgba(0, 0, 0, 0.761);
     color: rgb(243, 243, 243);
 }
+
 
 h4 {
     margin: .2rem;
