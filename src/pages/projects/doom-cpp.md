@@ -12,10 +12,10 @@ image:
     source: 'DOOM'
     alt: 'id Software: DOOM - main menu'
     width:
-        mini: 319.25
+        mini: 308
         normal: 766.5
     height:
-        mini: 182.94
+        mini: 176.5
         normal: 439.23
 tags: ["c++", "rule of three", "game engine dev"]
 ---

@@ -12,10 +12,10 @@ image:
     source: "Derzan's CryptoWager"
     alt: "DCW - Derzan's CryptoWager Banner."
     width:
-        mini: 319.25
+        mini: 284.33
         normal: 766.5
     height:
-        mini: 123.5
+        mini: 110
         normal: 296.53
 tags: ["ethereum", "solidity", "foundry", "websocket", "node.js", "reactjs", "extension", "postgresql"]
 ---

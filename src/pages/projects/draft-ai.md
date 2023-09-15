@@ -12,10 +12,10 @@ image:
     source: 'Riot Games'
     alt: 'Riot Games: League Draft'
     width:
-        mini: 319.25
+        mini: 320
         normal: 766.5
     height:
-        mini: 179.58
+        mini: 180
         normal: 431.16
 tags: ["game theory", "python"]
 ---
