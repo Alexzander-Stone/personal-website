@@ -42,7 +42,7 @@ I have cherished memories of staying up late into the night to work on this proj
 
 ### My solution
 
-#### ![ethereum.org: Ethereum](/projects/doom-cpp/game.PNG)
+#### ![Alex Stone: Doom Recreated](/projects/doom-cpp/game.PNG)
 
 #### *Source: Alexzander Stone*
 
