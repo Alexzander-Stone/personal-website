@@ -1,0 +1,332 @@
+.draft-island {
+  margin: 0 0 5rem 0;
+}
+
+.draft-output {
+  background-color: #22242b;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+/* Start Section */
+.start-section {
+  text-align: center;
+}
+
+.start-section h3 {
+  margin-bottom: 0.5rem;
+}
+
+.start-section p {
+  color: #aaa;
+  margin-bottom: 1.5rem;
+}
+
+.side-select {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.side-select label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Phase Header */
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #444;
+}
+
+.phase-text {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.turn-text {
+  color: #88c0d0;
+}
+
+/* Teams Container */
+.teams-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .teams-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team {
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.blue-team {
+  background-color: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.red-team {
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.team h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+}
+
+.bans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  min-height: 2rem;
+}
+
+.bans .label {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.ban-chip {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+.picks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pick-slot {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.pick-slot .position {
+  color: #888;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+}
+
+.pick-slot .champion {
+  font-weight: 500;
+}
+
+/* Action Section */
+.action-section h4 {
+  margin: 0 0 1rem 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #181a1b;
+  color: #e8e6e3;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #88c0d0;
+}
+
+.champion-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.champion-btn {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #2d2d2d;
+  color: #e8e6e3;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s ease;
+}
+
+.champion-btn:hover {
+  background-color: #3d3d3d;
+  border-color: #666;
+}
+
+.champion-btn.selected {
+  background-color: #88c0d0;
+  border-color: #88c0d0;
+  color: #181a1b;
+}
+
+.more-text {
+  color: #888;
+  font-size: 0.85rem;
+  align-self: center;
+  padding: 0.5rem;
+}
+
+/* Position Select */
+.position-select {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.position-select span {
+  color: #888;
+}
+
+.position-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #2d2d2d;
+  color: #e8e6e3;
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: all 0.15s ease;
+}
+
+.position-btn:hover {
+  background-color: #3d3d3d;
+}
+
+.position-btn.selected {
+  background-color: #5e81ac;
+  border-color: #5e81ac;
+}
+
+/* Buttons */
+.draft-button {
+  padding: 1rem 2rem;
+  background-color: #434343;
+  color: rgb(243, 243, 243);
+  border: none;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.draft-button:hover:not(:disabled) {
+  background-color: #525252;
+}
+
+.draft-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.start-button {
+  background-color: #5e81ac;
+}
+
+.start-button:hover:not(:disabled) {
+  background-color: #6d8fb8;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #88c0d0;
+  color: #181a1b;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #9bd0de;
+}
+
+/* Waiting Section */
+.waiting-section {
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #444;
+  border-top-color: #88c0d0;
+  border-radius: 50%;
+  margin: 1rem auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Result Section */
+.result-section {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.result-section h3 {
+  margin-bottom: 1rem;
+  color: #a3be8c;
+}
+
+/* Error Message */
+.error-message {
+  background-color: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #ef4444;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+/* Scrollbar */
+.champion-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.champion-grid::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.champion-grid::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+.champion-grid::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
