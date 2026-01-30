@@ -1,6 +1,4 @@
 ---
-layout: ../../layouts/MarkdownProjectLayout.astro
-
 highlighted: false
 shortTitle: 'Doom in C++'
 title: '(Not Actual) Doom in C++, a Junior year project.'
