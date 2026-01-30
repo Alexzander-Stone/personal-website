@@ -19,6 +19,7 @@ image:
         normal: 431.16
 tags: ["game theory", "python"]
 ---
+import DraftAgainstAI from '../../components/DraftAgainstAI/DraftAgainstAI.tsx';
 
 ### The why
 
@@ -46,6 +47,14 @@ With a staggering 164 unique Champions available at the time of writing, plannin
 
 Even when a team is confident in predicting their opponent's choices, there's always the potential for an unexpected, non-meta pick—throwing a curveball into the mix. This can force the on-stage team to improvise a new draft strategy on the spot, potentially overlooking pitfalls in banning or selecting specific champions.
 
+### Try It Out
+
+Play a full 20-turn draft against the AI. Choose your side and experience the drafting phase firsthand.
+
+<DraftAgainstAI client:idle/>
+
+> The AI analyzes the draft state and responds within seconds.
+
 ### My solution
 
 #### ![Derzan's Draft: CMD View - Draft Halfway Complete](/projects/draft-ai/draft_incomplete.PNG)
@@ -54,7 +63,7 @@ Even when a team is confident in predicting their opponent's choices, there's al
 
 To streamline the drafting process, both on-stage and off, I've developed a Drafting AI that serves as a reliable, real-time resource accessible to the team at any stage of the draft.
 
-This AI leverages a combination of Game Theory and heuristics derived from common analytical patterns to offer strategic ban and pick recommendations to both shadow teams. These recommendations are carefully crafted to tilt the game in favor of the participants.
+This AI leverages a combination of Game Theory and proprietary heuristics derived from common analytical patterns to offer strategic ban and pick recommendations to both shadow teams. These recommendations are carefully crafted to tilt the game in favor of the participants.
 
 > If the LoL team has questions like:
 > * What should your team's final pick be, considering the entire draft? 
@@ -69,23 +78,6 @@ This AI leverages a combination of Game Theory and heuristics derived from commo
 
 
 The AI promptly provides responses within your specified timeframe, ensuring that the suggested drafts indeed lead to more optimal selections. With ongoing training, the AI's confidence in its results continues to grow.
-
-
-<!-- ### Derzan's Draft example
-
-To easily express the understanding of what the AI is trying to solve, I've invented a simplier "game" of draft, called **Derzan's Draft**.
-
-In this game, there are only 2 roles to consider for each team (bot, support).
-
-There are 10 champions in the game, each with their own strength.
-
-Each champion counters 1 other, and is countered by 1 other.
-
-A champion can possibly fill either one or both available roles.
-
-There are 3 themes: Poke, Engage, Disengage
-
-These roles have a rock-paper-scissors relationship where: Poke beats Disengage which beats Engage which beats Poke -->
 
 
 ### Comparison to other drafting tools
@@ -107,24 +99,6 @@ Here's a few key features of the AI:
 4. **Identifying Hidden Opportunities**: Derzan's Draft can uncover viable bans, picks, and team compositions that might have otherwise gone unnoticed by your analysts, providing an additional layer of strategy and insight to your drafting process.
 
 
-
-### Tech and knowledge used
-
-##### ![Python Logo](/projects/draft-ai/Python.svg)
-
-#### *Source: Python*
-
-
-1. **Game Theory**: Applied principles of Game Theory to develop strategic drafting recommendations.
-
-2. **Python**: Utilized Python as the primary programming language for AI development.
-
-3. **Heuristics**: Developed configurable heuristics based on analytical patterns to enhance drafting strategies.
-
-4. **API Integration**: AI can be queried through API endpoints.
-
-*Due to the potential for commercialization, I will not be releasing the code to the public.*
-
 ### What's next
 
 #### ![Python Logo](/projects/draft-ai/lemon_nod.gif)
@@ -137,4 +111,10 @@ Having an amateur or professional team actively collaborate on this project woul
 
 As would having a Drafting website, like [Drafting.gg](https://drafting.gg/) or [DraftLoL](https://draftlol.dawe.gg/), integrate the service as a bot opponent.
 
-Beyond that, although there are optimizations possible on the system, unless an individual expresses interest in supporting the project, there will be no modifications made to the system, in the near future.
+Planned features:
+
+* **Fearless Draft**: Support for Bo3/Bo5 series where picked/banned champions carry over between games
+* **Analyst Personalities**: Train the AI to draft like specific analysts or coaches
+* **Team-Specific Training**: Customize the AI to match your team's playstyle and preferences
+
+Interested in learning more? [Get in touch](mailto:alexzanderstone@gmail.com).
