@@ -1,6 +1,4 @@
 ---
-layout: ../../layouts/MarkdownProjectLayout.astro
-
 highlighted: true
 shortTitle: "DEX Arbitrage"
 title: "Finding (and completing) arbitrage opportunities within a 13~ sec time."
@@ -51,7 +49,6 @@ Thus, the challenge can be distilled into three key components:
 
 
 
-
 ### My (partial) solution
 
 #### ![Vecteezy - 3d minimal Business Investments](/projects/dex-arbitrage/stopwatch.png)
@@ -73,9 +70,9 @@ Regrettably, I won't delve into the details of my algorithm's implementation, as
 
 However, I will provide an interactive section below for you to witness my work in action!
 
-> The algorithm will consider paths of any length, and, more importantly, <u>isn't limited to a depth</u>. 
+> The algorithm will consider paths of any length, and, more importantly, <u>isn't limited to a depth</u>.
 
-> Additionally, it'll only consider one cycle at a time (eth -> !eth* -> eth). 
+> Additionally, it'll only consider one cycle at a time (eth -> !eth* -> eth).
 
 
 
@@ -85,7 +82,7 @@ However, I will provide an interactive section below for you to witness my work 
 
 <ArbitrageDemo client:idle/>
 
-> This is ran entirely on a tiny, weak cloud instance! 
+> This is ran entirely on a tiny, weak cloud instance!
 
 > *WARNING: This is not a production ready API, so please don't try to use it for alpha. There's zero notion of slippage, 'exploits', ..., ..., and more.*
 
@@ -111,7 +108,6 @@ However, I will provide an interactive section below for you to witness my work 
 - **Node.js and PostgreSQL:** Node.js microservices and PostgreSQL triggers played a pivotal role in the project's infrastructure.
 
 - **Python:** Python, supplemented with C++ modules, was indispensable for mission-critical tasks, specifically for locating swaps within the 13-second window.
-
 
 
 

@@ -1,6 +1,4 @@
 ---
-layout: ../../layouts/MarkdownProjectLayout.astro
-
 highlighted: true
 shortTitle: 'LoL Draft AI'
 title: 'League of Legends Flex-conscious Draft AI'

@@ -1,6 +1,4 @@
 ---
-layout: ../../layouts/MarkdownProjectLayout.astro
-
 highlighted: true
 shortTitle: "Derzan's CryptoWager"
 title: "Crypto Wagering Ethereum Dapp"

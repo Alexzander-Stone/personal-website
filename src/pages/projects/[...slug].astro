@@ -1,0 +1,112 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+const pubDate = project.data.pubDate.toISOString().substring(0, 10);
+---
+
+<Layout title={project.data.title}>
+    <main>
+        <Header />
+        <img
+            class="full-img"
+            decoding="async"
+            loading="eager"
+            src={project.data.image.url}
+            alt={project.data.image.alt}
+            width={project.data.image.width.normal}
+            height={project.data.image.height.normal}
+        />
+        <p class="italics">Source: {project.data.image.source}</p>
+        <h2 class="title">{project.data.title}</h2>
+        <p class="pubDate">{pubDate} : {project.data.tags.join(", ")}</p>
+        <hr />
+        <Content />
+        <Footer />
+    </main>
+</Layout>
+<style is:global>
+    main {
+        margin: auto;
+        padding: 1rem;
+        width: 800px;
+        max-width: calc(100% - 2rem);
+        color: rgb(232, 230, 227);
+        font-size: 20px;
+        line-height: 1.6;
+    }
+    @media (max-width: 400px) {
+        main {
+            max-width: calc(100% - 1rem);
+        }
+    }
+
+    main a {
+        color: rgb(113, 113, 237);
+    }
+
+    .full-img {
+        width: 100%;
+        height: 100%;
+    }
+    img {
+        width: 60%;
+    }
+
+    .title {
+        margin: 1rem 0 0 0;
+    }
+    .pubDate {
+        margin: 0 0 0 0;
+        font-style: italic;
+        font-size: small;
+    }
+
+    .italics {
+        text-align: center;
+        font-size: small;
+        font-style: italic;
+    }
+    h4 {
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        margin: 0 auto;
+        font-weight: normal;
+    }
+    h5 {
+        width: 40%;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        margin: 0 auto;
+        font-weight: normal;
+    }
+
+    h2{
+        padding-top: 12px;
+    }
+
+    h3 {
+        padding-top: 24px;
+    }
+
+    @media (max-width: 400px) {
+        p,
+        li {
+            font-size: 0.8rem;
+        }
+    }
+</style>

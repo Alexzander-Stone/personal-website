@@ -1,22 +1,19 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from "../layouts/Layout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Social from "../components/Social.astro";
 
-const allProjects = await Astro.glob("../pages/projects/*.md*");
+const allProjects = await getCollection('projects');
 let highlightedProjects = allProjects.filter(
-	(project) => project.frontmatter.highlighted,
+	(project) => project.data.highlighted,
 );
 
-highlightedProjects = highlightedProjects.sort((a, b)=> {
-	const a_pub: string = a.frontmatter.pubDate;
-	const a_pub_num: number = parseInt(a_pub.substring(0, 11).replaceAll("-", ''));
-	const b_pub: string = b.frontmatter.pubDate;
-	const b_pub_num: number = parseInt(b_pub.substring(0, 11).replaceAll("-", ''));
-	return b_pub_num - a_pub_num;
-})
+highlightedProjects = highlightedProjects.sort((a, b) => {
+	return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+});
 
 ---
 
@@ -30,21 +27,15 @@ highlightedProjects = highlightedProjects.sort((a, b)=> {
 		</div>
 		<ul role="list" class="link-card-grid">
 			{
-				highlightedProjects.map((highlighted_project) => (
+				highlightedProjects.map((project) => (
 					<ProjectCard
-						title={highlighted_project.frontmatter.shortTitle}
-						body={highlighted_project.frontmatter.description}
-						photoUrl={highlighted_project.frontmatter.image.url}
-						photoAlt={highlighted_project.frontmatter.image.alt}
-						href={
-							highlighted_project.url
-								? highlighted_project.url
-								: ""
-						}
-						width={highlighted_project.frontmatter.image.width.mini}
-						height={
-							highlighted_project.frontmatter.image.height.mini
-						}
+						title={project.data.shortTitle}
+						body={project.data.description}
+						photoUrl={project.data.image.url}
+						photoAlt={project.data.image.alt}
+						href={`/projects/${project.slug}`}
+						width={project.data.image.width.mini}
+						height={project.data.image.height.mini}
 					/>
 				))
 			}
