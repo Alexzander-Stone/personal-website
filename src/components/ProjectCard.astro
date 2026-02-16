@@ -1,76 +1,151 @@
 ---
 interface Props {
-	title: string;
-	photoUrl: string;
-	photoAlt: string;
-	body: string;
-	href: string;
-	width: number;
-	height: number;
+  title: string;
+  photoUrl: string;
+  photoAlt: string;
+  body: string;
+  href: string;
+  headingTag?: 'h2' | 'h3';
+  width?: number;
+  height?: number;
+  tags?: string[];
+  delayMs?: number;
 }
 
-const { href, photoUrl, photoAlt, title, body, width, height } = Astro.props;
+const { href, photoUrl, photoAlt, title, body, headingTag = 'h3', width, height, tags = [] } = Astro.props;
+const visibleTags = tags.slice(0, 4);
+const extraTags = tags.length - visibleTags.length;
 ---
 
-<li class="link-card" id={href} >
-	<a href={href}>
-		<img src={photoUrl} alt={photoAlt} decoding="async" loading="eager" height={height} width={width}/>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
-</li>
-<style>
-	img {
-		width: 100%;
-		max-height: 347px;
-	}
-	.link-card {
-		list-style: none;
-		display: flex;
-		padding: 1px;
-		background-color: #23262d;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-	}
-	.link-card > a {
-		width: 100%;
-		text-decoration: none;
-		line-height: 1.4;
-		padding: calc(1.5rem - 1px);
-		border-radius: 8px;
-		color: rgb(232, 230, 227);
-		background-color: #23262d;
-		opacity: 0.8;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-	p {
-		color: rgb(194, 191, 188);
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
-	}
+<li class="project-card">
+  <a href={href}>
+    <figure class="media">
+      <img
+        src={photoUrl}
+        alt={photoAlt}
+        loading="lazy"
+        decoding="async"
+        width={width}
+        height={height}
+      />
+    </figure>
 
-	p,
-	h2 {
-		cursor: pointer;
-	}
+    <div class="card-content">
+      {
+        headingTag === 'h2' ? (
+          <h2 class="card-title">
+            {title}
+            <span class="arrow" aria-hidden="true">→</span>
+          </h2>
+        ) : (
+          <h3 class="card-title">
+            {title}
+            <span class="arrow" aria-hidden="true">→</span>
+          </h3>
+        )
+      }
+
+      <p>{body}</p>
+
+      {visibleTags.length > 0 && (
+        <ul class="tags" role="list" aria-label="Project technologies">
+          {visibleTags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+          {extraTags > 0 && <li class="more">+{extraTags}</li>}
+        </ul>
+      )}
+    </div>
+  </a>
+</li>
+
+<style>
+  .project-card {
+    list-style: none;
+  }
+
+  .project-card > a {
+    display: grid;
+    gap: 0;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    transition: border-color 180ms ease;
+  }
+
+  .media {
+    margin: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 0.85rem 0.9rem;
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 1.06rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.45rem;
+  }
+
+  .arrow {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    font-size: 0.92rem;
+  }
+
+  .tags {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .tags li {
+    margin: 0;
+    font-size: 0.69rem;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    background: rgba(47, 132, 136, 0.13);
+    border: 1px solid rgba(47, 132, 136, 0.44);
+    border-radius: 4px;
+    padding: 0.14rem 0.42rem;
+  }
+
+  .more {
+    color: var(--text-muted);
+    background: transparent;
+    border-color: var(--border-subtle);
+  }
+
+  .project-card:hover > a,
+  .project-card:focus-within > a {
+    border-color: rgba(47, 132, 136, 0.68);
+  }
 </style>

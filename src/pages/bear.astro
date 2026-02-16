@@ -1,92 +1,67 @@
 ---
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import Layout from "../layouts/Layout.astro";
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Projects">
-    <main>
-        <Header />
+<Layout title="Bear | Alexzander Stone" description="You found the bear.">
+  <Header />
 
-        <pre
-            id="tiresult"
-            style="background-color: #ffffff00; color: #a88585; padding: 4px 5px; --fs: 11px;">                                                                                                    
-                                                                                                                               
-                                                                                                                               
-                                                                                        .......                                
-                                                      .:^^~~~~^^:.                  .:^~!!!!!!!~^:.                            
-                                                    :~!777777777!!^...:^^~~~~~~^^:.^!77!!!!!!!!!7!!^.                          
-                                                  .~!7!!!!!!!!!!!!7!!!777777!7777!!7!!!!!!!!!!!!!!!7!.                         
-                                                 :!7!!!!77?777!!!!!!!!!!!!!!!!!!!!!!!!!!!!7???77!!!!7!.                        
-                                                 ~7!!!!7?????7!!!!!!!!!!!!!!!!!!!!!!!!!!!!7?????7!!!!7^                        
-                                                .!!!!!!????7!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!7????7!!!!7~                        
-                                                .!!!!!!7??7!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!7??!!!!!7:                        
-                                                 :!!!!!!7!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!7!!!!!7~                         
-                                                  :!7!!!!!!!!!!!!!!!!777!!!!!!!!!!77!!!!!!!!!!!!!77!^                          
-                                                   .^!!!!!!!!!!!!!!!7JJ7!!!!!!!!!7JJ?!!!!!!!!!!!!~:.                           
-                                                      .~7!!!!!!!!!!!!77!!!!??7!!!!777!!!!!!!!!!7~                              
-                                                       :!!!!!!!!!!!!!!!!!7!7J7!7!!!!!!!!!!!!!!!!!                              
-                                                        ~7!!!!!!!!!!!!!!7777?777!!!!!!!!!!!!!!!7~                              
-                                                        .~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:                              
-                                                        :^!!!!!!!!!!!!!~~~~~~~~~~~~!!!!!!!!!!!!!~:.                            
-                                                      :!7!!!!!!!!!!777!~~~~~~~~~~~~!77!!!!!!!!!!77!:                           
-                                                     :!7!!!!!!!!!!!!777!~~~~~~~~~~!?7!!!!!!!!!!!!!!!.                          
-                                                     ^7!!!!!!!!!!!!!!!7?~^~~~~~~~~7?!!!!!!!!!!!!!!!7:                          
-                                                     :!!!!!!!!!!!!!!!7??!~~~~~~~!!7?77!!!!!!!!!!!!7!.                          
-                                                    :~!!!!!!!!!!!!!7777!!!!!~!!!!!!!777!!!!!!!!!!!~.                           
-                                                   ^!7!!!!!!!777777!!!!!!!!!!!!!!!!!!!!777777!!!!!~:.                          
-                                                  ~7!!!!!!!!!!!!77777!!!!!!!!!!!!!!!!777777!!!!!!!!7!:                         
-                                                 :7!!!!!!!7777!!!!!7?7!!!!!!!!!!!!!7777!!!!!7777!!!!7!:                        
-                                                 ~7!!!!!!7????7!!!!!!77!!!!!!!!!!!!?7!!!!!!7????7!!!!!!.                       
-                                                 ~7!!!!!7??????7!!!!!7?7!!!!!!!!!!7?7!!!!!7??????7!!!!7^                       
-                                                 :7!!!!!!??????7!!!!!7?7!!!!!!!!!!7?7!!!!!7??????!!!!!7^                       
-                                                  ~7!!!!!7?????7!!!!!77!!!!!!!!!!!!77!!!!!7?????7!!!!!!:                       
-                                                  .~!7!!!!7777!!!!!!!!!!77!!!!!!777!!!!!!!!!7777!!!!!!^                        
-                                                    :~!7!!!!!!!!!!!!!77!~~!!!!!~~^^!77!!!!!!!!!!!!77!:                         
-                                                      :^~!!77!!77!!!!~:.            :~!!77!!!7!!!!~:.                          
-                                                         .:^^~~~~^::.                 .:^^~~~~~^:.                             
-</pre>
+  <main class="bear-page">
+    <section class="bear-card glass-panel">
+      <p class="eyebrow">Hidden Page</p>
+      <h1>You found the bear.</h1>
+      <pre aria-label="ASCII bear art">
+ʕ•ᴥ•ʔ
+      </pre>
+      <p class="note">Thanks for exploring.</p>
+    </section>
 
-        <Footer />
-    </main>
+    <Footer />
+  </main>
 </Layout>
 
 <style>
-    .instructions {
-        padding: 0rem 1.5rem;
-        border-radius: 8px;
-    }
+  .bear-page {
+    min-height: calc(100vh - 8rem);
+    display: grid;
+    align-content: center;
+    gap: 2rem;
+  }
 
-    .link-card-grid {
-        min-height: 731.16px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-        gap: 2rem;
-        padding: 0;
-    }
+  .bear-card {
+    padding: 1.5rem;
+    display: grid;
+    gap: 0.8rem;
+    max-width: 700px;
+  }
 
-    pre {
-        font-size: 9px;
-        overflow: hidden;
-    }
-    @media (max-width: 750px) {
-        pre {
-            font-size: 7px;
-        }
-    }
-    @media (max-width: 500px) {
-        pre {
-            font-size: 4px;
-        }
-    }
-    @media (max-width: 330px) {
-        pre {
-            font-size: 3px;
-        }
-    }
-    @media (max-width: 250px) {
-        pre {
-            font-size: 2px;
-        }
-    }
+  .eyebrow {
+    margin: 0;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-family: var(--font-heading);
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  pre {
+    margin: 0;
+    width: fit-content;
+    background: rgba(34, 34, 58, 0.35);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    padding: 1rem 1.2rem;
+    color: var(--text-primary);
+  }
+
+  .note {
+    margin: 0;
+    color: var(--text-secondary);
+  }
 </style>

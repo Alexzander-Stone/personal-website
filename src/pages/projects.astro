@@ -1,55 +1,84 @@
 ---
 import { getCollection } from 'astro:content';
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import Layout from "../layouts/Layout.astro";
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Layout from '../layouts/Layout.astro';
 
 let allProjects = await getCollection('projects');
 
 allProjects = allProjects.sort((a, b) => {
-	return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+  return b.data.pubDate.getTime() - a.data.pubDate.getTime();
 });
+
+const projectCount = allProjects.length;
 ---
 
-<Layout title="Projects">
-	<main>
-		<Header />
+<Layout
+  title="Projects | Alexzander Stone"
+  description="Projects by Alexzander Stone"
+  tags={['projects', 'web3', 'software engineering', 'portfolio']}
+>
+  <Header />
 
-		<div class="instructions">
-			<h2>All Projects</h2>
-		</div>
-		<ul role="list" class="link-card-grid">
-			{
-				allProjects.map((project) => (
-					<ProjectCard
-						title={project.data.shortTitle}
-						body={project.data.description}
-						photoUrl={project.data.image.url}
-						photoAlt={project.data.image.alt}
-						href={`/projects/${project.slug}`}
-						width={project.data.image.width.mini}
-						height={project.data.image.height.mini}
-					/>
-				))
-			}
-		</ul>
+  <main>
+    <section class="heading">
+      <h1>Projects</h1>
+      <p>{projectCount} documented builds across product, systems, and experiments.</p>
+    </section>
 
-		<Footer />
-	</main>
+    <ul role="list" class="project-grid">
+      {
+        allProjects.map((project) => (
+          <ProjectCard
+            title={project.data.shortTitle}
+            body={project.data.description}
+            photoUrl={project.data.image.url}
+            photoAlt={project.data.image.alt}
+            href={`/projects/${project.slug}`}
+            headingTag="h2"
+            width={project.data.image.width.mini}
+            height={project.data.image.height.mini}
+            tags={project.data.tags}
+          />
+        ))
+      }
+    </ul>
+
+    <Footer />
+  </main>
 </Layout>
 
 <style>
-	.instructions {
-		padding: 0rem 1.5rem;
-		border-radius: 8px;
-	}
+  .heading {
+    margin-bottom: 1.2rem;
+    display: grid;
+    gap: 0.45rem;
+  }
 
-	.link-card-grid {
-		min-height: 731.16px;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
-		padding: 0;
-	}
+  .heading h1 {
+    margin: 0;
+    font-size: clamp(1.9rem, 4vw, 2.4rem);
+  }
+
+  .heading p {
+    margin: 0;
+    max-width: 70ch;
+    color: var(--text-secondary);
+  }
+
+  .project-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 980px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

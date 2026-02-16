@@ -6,6 +6,7 @@
   background-color: #22242b;
   padding: 1.5rem;
   border-radius: 8px;
+  color: #ece7df;
 }
 
 /* Start Section */
@@ -15,6 +16,7 @@
 
 .start-section h3 {
   margin-bottom: 0.5rem;
+  color: #f5f1ea;
 }
 
 .start-section p {
@@ -34,6 +36,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: #ddd4c8;
 }
 
 /* Phase Header */
@@ -152,7 +155,8 @@
 }
 
 .search-input:focus {
-  outline: none;
+  outline: 2px solid #88c0d0;
+  outline-offset: 2px;
   border-color: #88c0d0;
 }
 
@@ -253,6 +257,7 @@
 
 .start-button {
   background-color: #5e81ac;
+  color: #141414;
 }
 
 .start-button:hover:not(:disabled) {
