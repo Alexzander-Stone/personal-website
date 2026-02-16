@@ -1,53 +1,128 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
+import { profile } from '../data/profile';
+
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+import '@fontsource/jetbrains-mono';
 
 interface Props {
-	title: string;
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishedDate?: string | Date;
+  tags?: string[];
 }
 
-const { title } = Astro.props;
+const defaultDescription =
+  'Alexzander Stone -- software engineer focused on game theory, DeFi, and competitive gaming products.';
+
+const {
+  title,
+  description = defaultDescription,
+  ogImage = '/a_s.jpg',
+  ogType = 'website',
+  publishedDate,
+  tags = [],
+} = Astro.props;
+
+const canonicalUrl = Astro.url.href;
+const ogImageUrl = ogImage.startsWith('http')
+  ? ogImage
+  : new URL(ogImage, Astro.site ?? Astro.url).href;
+
+const parsedPublishedDate = publishedDate ? new Date(publishedDate) : null;
+const publishedTime =
+  parsedPublishedDate && !Number.isNaN(parsedPublishedDate.getTime())
+    ? parsedPublishedDate.toISOString()
+    : undefined;
+
+const siteUrl = Astro.site?.href ?? 'https://alexzander-stone.pages.dev/';
+const homeUrl = new URL('/', siteUrl).href;
+const isHomePage = Astro.url.pathname === '/';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: homeUrl,
+  email: `mailto:${profile.email}`,
+  jobTitle: 'Software Engineer',
+  sameAs: profile.sameAs,
+  knowsAbout: profile.knowsAbout,
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: profile.name,
+  url: homeUrl,
+  description: profile.description,
+};
+
+const projectSchema =
+  ogType === 'article'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        headline: title,
+        description,
+        image: ogImageUrl,
+        url: canonicalUrl,
+        datePublished: publishedTime,
+        keywords: tags,
+        author: {
+          '@type': 'Person',
+          name: profile.name,
+          url: homeUrl,
+        },
+      }
+    : null;
+
+const schemaGraph = [
+  ...(isHomePage ? [websiteSchema, personSchema] : []),
+  ...(projectSchema ? [projectSchema] : []),
+];
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Cool stuffs from Alex" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Alexzander Stone" />
+    <meta property="og:type" content={ogType} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <meta name="theme-color" content="#f7f1e4" />
+    {schemaGraph.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
+    )}
+
+    <ViewTransitions />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 44, 58, 234;
-		--accent-light: 88, 204, 250;
-		--accent-dark: 22, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 50%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #181a1b;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>

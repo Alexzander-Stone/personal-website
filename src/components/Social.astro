@@ -1,86 +1,109 @@
 ---
-
 ---
 
-<span class="social-grid">
-    <a
-        class="social"
-        href="mailto:alexwrstone@gmail.com?subject=Super Cool New Buddy from Your Website&body=Yo Alex, wanted to reach out. XOXO"
-        target="_blank"
-    >
-        <img
-            class="social-img"
-            src="/socials/gmail.png"
-            alt="gmail icon"
-            decoding="async"
-            loading="eager"
-            width="20"
-            height="15"
-        />AlexWRStone
-    </a>
-    <span class="social">
-        <img
-            class="social-img"
-            src="/socials/discord.png"
-            alt="gmail icon"
-            decoding="async"
-            loading="eager"
-            width="20"
-            height="20"
-        />Derzan
-    </span>
-    <a
-        class="social social-github"
-        href="https://github.com/alexzander-stone"
-        target="_blank"
-    >
-        <img
-            class="social-img"
-            src="/socials/github.svg"
-            alt="github icon"
-            decoding="async"
-            loading="eager"
-            width="20"
-            height="20"
-        />alexzander-stone
-    </a>
-    <span class="social">
-        <img
-            class="social-img"
-            src="/socials/telegram.png"
-            alt="gmail icon"
-            decoding="async"
-            loading="eager"
-            width="20"
-            height="20"
-        />Derzanski
-    </span>
-</span>
+<div class="social-grid" aria-label="Social profiles and handles">
+  <a
+    class="social-pill"
+    href="mailto:alexwrstone@gmail.com?subject=Project%20inquiry&body=Hey%20Alex%2C%20saw%20your%20site%20and%20wanted%20to%20reach%20out."
+    target="_blank"
+    rel="noreferrer"
+  >
+    <img
+      class="social-img"
+      src="/socials/gmail.png"
+      alt="Gmail icon"
+      decoding="async"
+      loading="lazy"
+      width="20"
+      height="15"
+    />
+    AlexWRStone
+  </a>
+
+  <span class="social-pill" aria-label="Discord handle">
+    <img
+      class="social-img"
+      src="/socials/discord-dark.svg"
+      alt="Discord icon"
+      decoding="async"
+      loading="lazy"
+      width="20"
+      height="20"
+    />
+    Derzan
+  </span>
+
+  <a
+    class="social-pill"
+    href="https://github.com/alexzander-stone"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <img
+      class="social-img"
+      src="/socials/github-dark.svg"
+      alt="GitHub icon"
+      decoding="async"
+      loading="lazy"
+      width="20"
+      height="20"
+    />
+    alexzander-stone
+  </a>
+
+  <a
+    class="social-pill"
+    href="https://t.me/derzanski"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <img
+      class="social-img"
+      src="/socials/telegram.png"
+      alt="Telegram icon"
+      decoding="async"
+      loading="lazy"
+      width="20"
+      height="20"
+    />
+    Derzanski
+  </a>
+</div>
+
 <style>
-    .social-grid {
-        margin: 1rem 0 0 0;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        grid-template-columns: repeat(auto-fit, minmax(12ch, 1fr));
-        gap: 10px;
-    }
-    .social {
-        border: 1px solid rgba(11, 11, 11, 0.347);
-        border-radius: 5px;
-        background-color: #22242b;
-        color: rgb(232, 230, 227);
-        text-decoration: none;
-        font-size: 1rem;
+  .social-grid {
+    margin: 1rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
 
-        padding: .2rem 1rem;
-        /* width: 100%; */
-        display: flex;
-        align-items: center;
-    }
+  .social-pill {
+    border: 1px solid var(--border-subtle);
+    border-radius: 7px;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: var(--font-heading);
+    padding: 0.35rem 0.78rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  }
 
-    .social-img {
-        width: 20px;
-        margin: 0 0.3rem 0 0.1rem;
-    }
+  .social-pill:hover,
+  .social-pill:focus-visible {
+    transform: translateY(-1px);
+    border-color: rgba(47, 132, 136, 0.62);
+    background: var(--bg-surface-hover);
+  }
+
+  .social-img {
+    width: 20px;
+    flex-shrink: 0;
+    height: 20px;
+    object-fit: contain;
+  }
 </style>
