@@ -11,7 +11,6 @@ export const profile = {
   description:
     'Software engineer focused on game theory, DeFi systems, and competitive gaming tools.',
   email: 'alexwrstone@gmail.com',
-  sameAs: ['https://github.com/alexzander-stone', 'https://t.me/derzanski'],
+  sameAs: ['https://github.com/alexzander-stone', 'https://t.me/SheepyWeb3', 'https://x.com/sheepyweb3'],
   knowsAbout: ['Web3', 'Game Theory', 'DeFi', 'Realtime Systems', 'Software Engineering'],
 } as const;
-

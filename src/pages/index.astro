@@ -41,15 +41,18 @@ highlightedProjects = highlightedProjects.sort((a, b) => {
 
   <main>
     <section class="profile" aria-label="Profile summary">
-      <img
-        class="profile-photo"
-        src="/a_s.jpg"
-        alt="Portrait of Alexzander Stone"
-        width="128"
-        height="128"
-        loading="eager"
-        decoding="async"
-      />
+      <div class="profile-media">
+        <img
+          class="profile-photo"
+          src="/a_s.jpg"
+          alt="Portrait of Alexzander Stone"
+          width="128"
+          height="128"
+          loading="eager"
+          decoding="async"
+        />
+        <span class="profile-divider" aria-hidden="true"></span>
+      </div>
 
       <div class="profile-content">
         <h1>{profile.name}</h1>
@@ -118,11 +121,26 @@ highlightedProjects = highlightedProjects.sort((a, b) => {
 
 <style>
   .profile {
+    --photo-size: 7.25rem;
     display: grid;
-    grid-template-columns: clamp(6.25rem, 16vw, 7.25rem) minmax(0, 1fr);
-    align-items: start;
+    grid-template-columns: var(--photo-size) minmax(0, 1fr);
+    align-items: stretch;
     column-gap: 1rem;
     margin-bottom: 2.2rem;
+  }
+
+  .profile-media {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100%;
+  }
+
+  .profile-divider {
+    width: 1px;
+    flex: 1;
+    margin: 0.7rem 0.16rem 0 auto;
+    background: var(--border-subtle);
   }
 
   .profile-content {
@@ -137,8 +155,8 @@ highlightedProjects = highlightedProjects.sort((a, b) => {
   }
 
   .profile-photo {
-    width: 7.25rem;
-    height: 7.25rem;
+    width: var(--photo-size);
+    height: var(--photo-size);
     object-fit: cover;
     border-radius: 6px;
     border: 1px solid var(--border-subtle);
@@ -282,13 +300,17 @@ highlightedProjects = highlightedProjects.sort((a, b) => {
 
   @media (max-width: 640px) {
     .profile {
+      --photo-size: 6.5rem;
       grid-template-columns: 1fr;
       row-gap: 0.8rem;
     }
 
-    .profile-photo {
-      width: 6.5rem;
-      height: 6.5rem;
+    .profile-media {
+      min-height: 0;
+    }
+
+    .profile-divider {
+      display: none;
     }
 
     .experience-line {
