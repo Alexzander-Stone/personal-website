@@ -9,6 +9,23 @@ import { profile } from '../data/profile';
 
 const allProjects = await getCollection('projects');
 let highlightedProjects = allProjects.filter((project) => project.data.highlighted);
+const experience = [
+  {
+    company: 'Aptos Labs',
+    title: 'Dev Rel → Full-Stack SWE (Move)',
+    dates: 'Mar 2024 - Present',
+  },
+  {
+    company: 'MEV Searching (EVM)',
+    title: 'Web3 Developer',
+    dates: 'Nov 2021 - Mar 2024',
+  },
+  {
+    company: 'Swampfox Technologies',
+    title: 'Software Developer',
+    dates: 'May 2019 - Nov 2021',
+  },
+];
 
 highlightedProjects = highlightedProjects.sort((a, b) => {
   return b.data.pubDate.getTime() - a.data.pubDate.getTime();
@@ -47,6 +64,28 @@ highlightedProjects = highlightedProjects.sort((a, b) => {
 
         <Social />
       </div>
+    </section>
+
+    <section id="experience" class="experience-section" aria-label="Work experience">
+      <div class="section-head">
+        <h2>Experience</h2>
+      </div>
+
+      <ul role="list" class="experience-list">
+        {
+          experience.map((item) => (
+            <li class="experience-item">
+              <p class="experience-line">
+                <span class="experience-company">{item.company}</span>
+                <span class="experience-separator" aria-hidden="true">•</span>
+                <span class="experience-title">{item.title}</span>
+                <span class="experience-separator" aria-hidden="true">•</span>
+                <span class="experience-dates">{item.dates}</span>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
     </section>
 
     <section id="selected-work" class="work-section">
@@ -148,6 +187,58 @@ highlightedProjects = highlightedProjects.sort((a, b) => {
     margin-bottom: 2.2rem;
   }
 
+  .experience-section {
+    display: grid;
+    gap: 0.8rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .experience-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .experience-item {
+    margin: 0;
+  }
+
+  .experience-line {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    column-gap: 0.45rem;
+    row-gap: 0.2rem;
+  }
+
+  .experience-company,
+  .experience-title,
+  .experience-separator,
+  .experience-dates {
+    margin: 0;
+  }
+
+  .experience-company {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .experience-title {
+    color: var(--text-secondary);
+  }
+
+  .experience-separator {
+    color: var(--text-muted);
+  }
+
+  .experience-dates {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+
   .section-head {
     display: flex;
     align-items: baseline;
@@ -198,6 +289,14 @@ highlightedProjects = highlightedProjects.sort((a, b) => {
     .profile-photo {
       width: 6.5rem;
       height: 6.5rem;
+    }
+
+    .experience-line {
+      column-gap: 0.35rem;
+    }
+
+    .experience-separator {
+      display: none;
     }
   }
 </style>
