@@ -64,13 +64,132 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
       </div>
     </article>
 
+    <aside class="project-progress" aria-label="Section navigation" hidden>
+      <p class="project-progress-title">On this page</p>
+      <ol id="project-progress-list" class="project-progress-list" role="list"></ol>
+    </aside>
+
     <Footer />
   </main>
 </Layout>
 
+<script is:inline>
+  (() => {
+    const page = document.querySelector('.project-page');
+    const prose = page?.querySelector('.prose');
+    const progress = page?.querySelector('.project-progress');
+    const list = page?.querySelector('#project-progress-list');
+
+    if (!page || !prose || !progress || !list) {
+      return;
+    }
+
+    const sourceHeadingPattern = /^source\s*:/i;
+    const headingCandidates = Array.from(prose.querySelectorAll('h1, h2, h3, h4, h5, h6'))
+      .map((heading) => {
+        const text = heading.textContent?.trim().replace(/\s+/g, ' ') ?? '';
+        const level = Number.parseInt(heading.tagName.slice(1), 10);
+
+        if (!text || sourceHeadingPattern.test(text) || Number.isNaN(level)) {
+          return null;
+        }
+
+        return { heading, text, level };
+      })
+      .filter(Boolean);
+
+    if (headingCandidates.length === 0) {
+      progress.setAttribute('hidden', '');
+      return;
+    }
+
+    const levels = [...new Set(headingCandidates.map(({ level }) => level))].sort((a, b) => a - b);
+    const sectionLevel = levels[0];
+    const subsectionLevel = levels.find((level) => level > sectionLevel);
+    const headings = headingCandidates.filter(
+      ({ level }) => level === sectionLevel || level === subsectionLevel
+    );
+
+    if (headings.length === 0) {
+      progress.setAttribute('hidden', '');
+      return;
+    }
+
+    const slugify = (value) =>
+      value
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-');
+
+    list.innerHTML = '';
+
+    headings.forEach(({ heading, text, level }, index) => {
+      if (!heading.id) {
+        heading.id = `${slugify(text) || 'section'}-${index + 1}`;
+      }
+
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `#${heading.id}`;
+      link.textContent = text;
+      link.title = text;
+      link.className = level === sectionLevel ? 'is-section' : 'is-subsection';
+      link.dataset.target = heading.id;
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+
+    progress.removeAttribute('hidden');
+
+    const links = Array.from(list.querySelectorAll('a'));
+    const setActive = (id) => {
+      links.forEach((link) => {
+        const isActive = link.dataset.target === id;
+        link.classList.toggle('is-active', isActive);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActive(visible[0].target.id);
+          return;
+        }
+
+        const above = entries
+          .filter((entry) => entry.boundingClientRect.top < 0)
+          .sort((a, b) => b.boundingClientRect.top - a.boundingClientRect.top);
+
+        if (above.length > 0) {
+          setActive(above[0].target.id);
+        }
+      },
+      {
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: [0, 1],
+      }
+    );
+
+    headings.forEach(({ heading }) => observer.observe(heading));
+
+    const fromHash = window.location.hash.slice(1);
+    if (fromHash) {
+      setActive(fromHash);
+    } else if (headings[0]) {
+      setActive(headings[0].heading.id);
+    }
+  })();
+</script>
+
 <style>
   .project-page {
     width: min(900px, calc(100% - 2rem));
+    position: relative;
   }
 
   .hero-media {
@@ -126,13 +245,135 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
     background: rgba(47, 132, 136, 0.14);
   }
 
+  .prose :is(h1, h2, h3, h4, h5, h6) {
+    scroll-margin-top: 6rem;
+  }
+
+  .project-progress {
+    position: fixed;
+    top: 7.2rem;
+    left: calc(50% + 470px);
+    width: 220px;
+    background: rgba(255, 248, 237, 0.86);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+    padding: 0.72rem 0.72rem 0.76rem;
+    z-index: 2;
+    backdrop-filter: blur(2px);
+  }
+
+  .project-progress-title {
+    margin: 0 0 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .project-progress-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.18rem;
+    position: relative;
+  }
+
+  .project-progress-list::before {
+    content: '';
+    position: absolute;
+    left: 0.72rem;
+    top: 0.45rem;
+    bottom: 0.45rem;
+    width: 1px;
+    background: rgba(126, 104, 79, 0.36);
+  }
+
+  :global(.project-progress-list li) {
+    margin: 0;
+    position: relative;
+  }
+
+  :global(.project-progress-list a) {
+    position: relative;
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.74rem;
+    line-height: 1.28;
+    text-decoration: none;
+    padding: 0.24rem 0.22rem 0.24rem 1.45rem;
+    border-radius: 6px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  :global(.project-progress-list a::before) {
+    content: '';
+    position: absolute;
+    left: 0.56rem;
+    top: 0.62rem;
+    width: 0.34rem;
+    height: 0.34rem;
+    border-radius: 999px;
+    background: var(--bg-deep);
+    border: 1px solid rgba(126, 104, 79, 0.5);
+  }
+
+  :global(.project-progress-list a.is-subsection) {
+    padding-left: 2rem;
+    font-size: 0.71rem;
+    color: var(--text-muted);
+  }
+
+  :global(.project-progress-list a.is-subsection::before) {
+    left: 1.2rem;
+    top: 0.65rem;
+    width: 0.26rem;
+    height: 0.26rem;
+  }
+
+  :global(.project-progress-list a.is-subsection::after) {
+    content: '';
+    position: absolute;
+    left: 0.72rem;
+    top: 0.77rem;
+    width: 0.53rem;
+    height: 1px;
+    background: rgba(126, 104, 79, 0.42);
+  }
+
+  :global(.project-progress-list a:hover) {
+    background: var(--bg-surface-hover);
+  }
+
+  :global(.project-progress-list a.is-active) {
+    color: var(--text-primary);
+    background: rgba(47, 132, 136, 0.13);
+  }
+
+  :global(.project-progress-list a.is-active::before) {
+    background: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+  }
+
   @media (max-width: 760px) {
     .project-page {
       width: min(900px, calc(100% - 1.4rem));
     }
 
+    .prose :is(h1, h2, h3, h4, h5, h6) {
+      scroll-margin-top: 5.3rem;
+    }
+
     .hero-media {
       margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 1320px) {
+    .project-progress {
+      display: none;
     }
   }
 </style>
