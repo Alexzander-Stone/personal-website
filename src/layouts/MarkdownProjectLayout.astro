@@ -53,13 +53,108 @@ const pubDate = Number.isNaN(parsedDate.getTime())
       </div>
     </article>
 
+    <aside class="project-progress" aria-label="Section progression" hidden>
+      <p class="project-progress-title">Progress</p>
+      <ol id="project-progress-list" class="project-progress-list" role="list"></ol>
+    </aside>
+
     <Footer />
   </main>
 </Layout>
 
+<script is:inline>
+  (() => {
+    const page = document.querySelector('.project-page');
+    const prose = page?.querySelector('.prose');
+    const progress = page?.querySelector('.project-progress');
+    const list = page?.querySelector('#project-progress-list');
+
+    if (!page || !prose || !progress || !list) {
+      return;
+    }
+
+    const headings = Array.from(prose.querySelectorAll('h2, h3'));
+    if (headings.length === 0) {
+      progress.setAttribute('hidden', '');
+      return;
+    }
+
+    const slugify = (value) =>
+      value
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-');
+
+    list.innerHTML = '';
+
+    headings.forEach((heading, index) => {
+      const text = heading.textContent?.trim() || `Section ${index + 1}`;
+      if (!heading.id) {
+        heading.id = `${slugify(text) || 'section'}-${index + 1}`;
+      }
+
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = `#${heading.id}`;
+      link.textContent = text;
+      link.title = text;
+      link.className = heading.tagName === 'H3' ? 'is-subsection' : 'is-section';
+      link.dataset.target = heading.id;
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+
+    progress.removeAttribute('hidden');
+
+    const links = Array.from(list.querySelectorAll('a'));
+    const setActive = (id) => {
+      links.forEach((link) => {
+        const isActive = link.dataset.target === id;
+        link.classList.toggle('is-active', isActive);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActive(visible[0].target.id);
+          return;
+        }
+
+        const above = entries
+          .filter((entry) => entry.boundingClientRect.top < 0)
+          .sort((a, b) => b.boundingClientRect.top - a.boundingClientRect.top);
+
+        if (above.length > 0) {
+          setActive(above[0].target.id);
+        }
+      },
+      {
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: [0, 1],
+      }
+    );
+
+    headings.forEach((heading) => observer.observe(heading));
+
+    const fromHash = window.location.hash.slice(1);
+    if (fromHash) {
+      setActive(fromHash);
+    } else if (headings[0]) {
+      setActive(headings[0].id);
+    }
+  })();
+</script>
+
 <style>
   .project-page {
     width: min(900px, calc(100% - 2rem));
+    position: relative;
   }
 
   .hero-media {
@@ -115,6 +210,104 @@ const pubDate = Number.isNaN(parsedDate.getTime())
     background: rgba(47, 132, 136, 0.14);
   }
 
+  .project-progress {
+    position: fixed;
+    top: 7.2rem;
+    left: calc(50% + 470px);
+    width: 220px;
+    background: rgba(255, 248, 237, 0.86);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+    padding: 0.72rem 0.72rem 0.76rem;
+    z-index: 2;
+    backdrop-filter: blur(2px);
+  }
+
+  .project-progress-title {
+    margin: 0 0 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .project-progress-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.24rem;
+    position: relative;
+  }
+
+  .project-progress-list::before {
+    content: '';
+    position: absolute;
+    left: 0.32rem;
+    top: 0.2rem;
+    bottom: 0.2rem;
+    width: 1px;
+    background: rgba(126, 104, 79, 0.36);
+  }
+
+  .project-progress-list li {
+    margin: 0;
+    position: relative;
+  }
+
+  .project-progress-list a {
+    position: relative;
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.74rem;
+    line-height: 1.28;
+    text-decoration: none;
+    padding: 0.2rem 0.2rem 0.2rem 1.05rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .project-progress-list a::before {
+    content: '';
+    position: absolute;
+    left: 0.16rem;
+    top: 0.52rem;
+    width: 0.34rem;
+    height: 0.34rem;
+    border-radius: 999px;
+    background: var(--bg-deep);
+    border: 1px solid rgba(126, 104, 79, 0.5);
+  }
+
+  .project-progress-list a.is-subsection {
+    padding-left: 1.42rem;
+    font-size: 0.71rem;
+    color: var(--text-muted);
+  }
+
+  .project-progress-list a.is-subsection::before {
+    left: 0.55rem;
+    width: 0.26rem;
+    height: 0.26rem;
+  }
+
+  .project-progress-list a:hover {
+    background: var(--bg-surface-hover);
+  }
+
+  .project-progress-list a.is-active {
+    color: var(--text-primary);
+    background: rgba(47, 132, 136, 0.13);
+  }
+
+  .project-progress-list a.is-active::before {
+    background: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+  }
+
   @media (max-width: 760px) {
     .project-page {
       width: min(900px, calc(100% - 1.4rem));
@@ -122,6 +315,12 @@ const pubDate = Number.isNaN(parsedDate.getTime())
 
     .hero-media {
       margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 1320px) {
+    .project-progress {
+      display: none;
     }
   }
 </style>
