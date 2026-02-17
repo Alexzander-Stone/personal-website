@@ -1,0 +1,15 @@
+[
+  {"fiscalYear": 2013, "deficitGdpPct": -4.1, "administration": "obama2"},
+  {"fiscalYear": 2014, "deficitGdpPct": -2.8, "administration": "obama2"},
+  {"fiscalYear": 2015, "deficitGdpPct": -2.4, "administration": "obama2"},
+  {"fiscalYear": 2016, "deficitGdpPct": -3.1, "administration": "obama2"},
+  {"fiscalYear": 2017, "deficitGdpPct": -3.4, "administration": "trump1"},
+  {"fiscalYear": 2018, "deficitGdpPct": -3.8, "administration": "trump1"},
+  {"fiscalYear": 2019, "deficitGdpPct": -4.6, "administration": "trump1"},
+  {"fiscalYear": 2020, "deficitGdpPct": -14.7, "administration": "trump1"},
+  {"fiscalYear": 2021, "deficitGdpPct": -12.1, "administration": "biden"},
+  {"fiscalYear": 2022, "deficitGdpPct": -5.4, "administration": "biden"},
+  {"fiscalYear": 2023, "deficitGdpPct": -6.2, "administration": "biden"},
+  {"fiscalYear": 2024, "deficitGdpPct": -6.2, "administration": "biden"},
+  {"fiscalYear": 2025, "deficitGdpPct": -6.2, "administration": "trump2", "isEstimate": true}
+]

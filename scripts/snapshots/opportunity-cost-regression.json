@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "generatedAt": "2026-02-17T07:22:42.816Z",
+  "asOfDate": "2026-02-13",
+  "anchorDates": {
+    "nasdaq": "2025-01-21",
+    "sp500": "2025-01-21",
+    "kospi": "2025-01-20",
+    "ftse": "2025-01-20",
+    "nikkei": "2025-01-20",
+    "dax": "2025-01-20"
+  },
+  "excessConfigs": [
+    {
+      "usIndex": "nasdaq",
+      "peerBenchmark": "custom-basket",
+      "date": "2026-02-13",
+      "value": -36.3756,
+      "sign": "negative"
+    },
+    {
+      "usIndex": "nasdaq",
+      "peerBenchmark": "msci-ex-us",
+      "date": "2026-02-13",
+      "value": -26.6401,
+      "sign": "negative"
+    },
+    {
+      "usIndex": "sp500",
+      "peerBenchmark": "custom-basket",
+      "date": "2026-02-13",
+      "value": -37.488,
+      "sign": "negative"
+    },
+    {
+      "usIndex": "sp500",
+      "peerBenchmark": "msci-ex-us",
+      "date": "2026-02-13",
+      "value": -27.7525,
+      "sign": "negative"
+    }
+  ],
+  "baselineOptionOrder": [
+    "historical",
+    "median-presidential-term",
+    "global-peers-historical",
+    "obama2-term",
+    "trump1-term",
+    "biden-term",
+    "10yr-average"
+  ],
+  "baselineOpportunityCostPct": [
+    {
+      "baseline": "historical",
+      "opportunityCostPct": -2.6244,
+      "sign": "negative"
+    },
+    {
+      "baseline": "median-presidential-term",
+      "opportunityCostPct": 1.9292,
+      "sign": "positive"
+    },
+    {
+      "baseline": "global-peers-historical",
+      "opportunityCostPct": -7.5982,
+      "sign": "negative"
+    },
+    {
+      "baseline": "obama2-term",
+      "opportunityCostPct": 1.9292,
+      "sign": "positive"
+    },
+    {
+      "baseline": "trump1-term",
+      "opportunityCostPct": 9.8424,
+      "sign": "positive"
+    },
+    {
+      "baseline": "biden-term",
+      "opportunityCostPct": -3.0142,
+      "sign": "negative"
+    },
+    {
+      "baseline": "10yr-average",
+      "opportunityCostPct": 2.1653,
+      "sign": "positive"
+    }
+  ],
+  "baselineRankingByPct": [
+    "trump1-term",
+    "10yr-average",
+    "median-presidential-term",
+    "obama2-term",
+    "historical",
+    "biden-term",
+    "global-peers-historical"
+  ]
+}
