@@ -8,6 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "oc:regression": "node scripts/opportunity-cost-regression-check.mjs",
+    "oc:regression:update": "node scripts/opportunity-cost-regression-check.mjs --update",
     "a11y:check": "node scripts/a11y-check.mjs",
     "a11y:ci": "npm run build && npm run a11y:check"
   },
@@ -21,12 +23,14 @@
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",
     "astro": "^5.17.1",
+    "lightweight-charts": "^5.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.1",
     "@playwright/test": "^1.58.2",
-    "simple-icons": "^16.9.0"
+    "simple-icons": "^16.9.0",
+    "yahoo-finance2": "^3.13.0"
   }
 }

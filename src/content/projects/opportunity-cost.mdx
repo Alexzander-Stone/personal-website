@@ -1,0 +1,155 @@
+---
+highlighted: true
+shortTitle: 'Opportunity Cost'
+title: 'Market Opportunity Cost Visualization'
+pubDate: 2026-02-17
+description: 'Observed US excess return vs global peers across administrations, with supplementary projection views.'
+author: 'Alex Stone'
+image:
+    url: '/projects/opportunity-cost/hero.jpeg'
+    source: 'Unattributed stock image'
+    alt: 'Opportunity cost chart comparing actual and projected market performance.'
+    width:
+        mini: 320
+        normal: 1080
+    height:
+        mini: 320
+        normal: 1080
+tags: ['markets', 'data visualization', 'economics', 'policy', 'event study']
+---
+import OpportunityCost from '../../components/OpportunityCost/OpportunityCost.tsx';
+
+Politicians and pundits routinely point to stock prices as proof their administration is working ([Pam Bondi, House Judiciary hearing, Feb. 11, 2026](https://www.linkedin.com/posts/cnbc_watch-pam-bondi-hearing-ag-touts-record-activity-7427398541725085696-ZY0d); [President Trump remarks on Dow 30,000, Nov. 24, 2020](https://trumpwhitehouse.archives.gov/briefings-statements/remarks-president-trump-economy-112420-2/); [Biden campaign post on record highs, Dec. 15, 2023](https://www.cnbc.com/2023/12/15/biden-flaunts-stock-market-record-highs-mocks-trump-for-predicting-collapse.html)). This project takes that claim at face value: **if market returns are the metric, let's measure properly.** The primary chart compares a selected US index (NASDAQ or S&P 500) against global peers (KOSPI, FTSE 100, Nikkei 225, DAX) using the same alignment rule for every administration.
+
+The first chart below shows a straightforward pattern: the US stock market has risen in every recent administration window to date. Since markets trend upward over time, the more informative question is how US returns compared with what global peers delivered over the same window. That is what the excess return analysis measures.
+
+Interpretation shortcut: chart 1 asks "did the US index go up?" chart 2 asks "did the US index beat global peers?" Those are not the same question.
+
+Read this as a measurement tool, not a causal claim. It shows what happened to US investors relative to global peers during each administration window.
+
+<OpportunityCost client:idle />
+
+### Common objections
+
+- **"This predicts the market."** It does not. The primary analysis is observed relative performance.
+- **"Global shocks break comparison."** Relative performance is designed to remove much of the shared global-shock component.
+- **"This cherry-picks administrations."** The same event-study formula is applied across Obama 2, Trump 1, Biden, and Trump 2.
+- **"Presidents don't control markets."** Agreed. This is a period-based outcome comparison, not policy attribution.
+
+### Methodology
+
+**Approach:** Event-study excess return / relative performance measurement. The US index (NASDAQ or S&P 500) is compared against international benchmarks on aligned trading days. This implementation follows standard event-study style excess-return construction ([Kothari & Warner, 2007](https://www.bu.edu/econ/files/2011/01/KothariWarner2.pdf)) and the broader tradition of comparing market outcomes across administrations ([Santa-Clara & Valkanov, 2003](https://onlinelibrary.wiley.com/doi/abs/10.1111/1540-6261.00590)).
+
+Conceptual note: DiD and synthetic-control literature informs the framing ([Angrist & Pischke, 2009](https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics); [Abadie et al., 2010](https://www.tandfonline.com/doi/abs/10.1198/jasa.2009.ap08746)), but this project does **not** claim a formal DiD or synthetic-control implementation.
+Why not formal in this version: with only four administration windows and no explicit donor-weight optimization / parallel-trends testing, a strict DiD or SCM claim would overstate identification.
+
+**Data source:** Daily **adjusted close** prices from Yahoo Finance: NASDAQ Composite (^IXIC), S&P 500 (^GSPC), KOSPI (^KS11), FTSE 100 (^FTSE), Nikkei 225 (^N225), DAX Kursindex (^GDAXIP), and VXUS (Vanguard Total International Stock ETF).
+
+**Scope note:** The analysis window starts in January 2013 by design (Obama 2 onward). That start date is a scope choice for this project, not a data availability constraint.
+
+Fiscal context uses FRED series FYFSGDA188S (Federal deficit/surplus as % of GDP) plus a CBO FY2025 estimate. Policy marker metadata is compiled from CBO scores, Congress.gov records, and major tariff action trackers.
+
+#### Excess Return Chart (Primary Analysis)
+
+Primary metric: US index return minus peer-benchmark return, aligned by trading day.
+
+`excess_return(d) = [US(d)/US(inaug) - 1] - avg[index(d)/index(inaug) - 1]`
+
+- Each administration is aligned by **trading day** (`D0`, `D1`, `D2`, ...) instead of calendar date.
+- Above zero: selected US index outperformed the selected peer benchmark.
+- Below zero: selected US index underperformed the selected peer benchmark.
+
+#### Peer Benchmark Options (Custom Basket vs VXUS)
+
+Benchmark selector options:
+
+- **Custom basket (equal-weight):** KOSPI, FTSE 100, Nikkei 225, DAX.
+- **MSCI World ex-US proxy (VXUS):** cap-weighted international benchmark proxy (Vanguard Total International Stock ETF).
+- Equal weighting prevents one large market from dominating the custom basket line.
+
+#### Robustness Snapshot (Descriptive)
+
+The page includes a robustness panel that summarizes:
+
+- Current-administration excess return sign across all 4 index/benchmark pairs (NASDAQ/S&P 500 x custom basket/VXUS).
+- Opportunity-cost sign across all supplementary baselines for the currently selected index/benchmark pair.
+- It is a directional stability check, not a formal significance test.
+
+#### Opportunity Cost Definition
+
+In this project, **opportunity cost** is the gap between observed US index level and a supplementary counterfactual baseline:
+
+- `opportunity_cost = projected_baseline - actual_us_index`
+- `opportunity_cost_pct = opportunity_cost / projected_baseline`
+
+This is a comparative accounting metric, not a policy-causation estimate.
+
+#### Supplementary Projection Chart
+
+Projection baseline options (supplementary only):
+
+- **Historical average (default):** 10.5% annualized long-run benchmark.
+- **Median presidential term (n=3):** median CAGR of Obama 2nd, Trump 1st, and Biden terms.
+- **Global peers historical average (since 2013):** compounds the selected peer benchmark's long-run daily growth rate.
+- **Obama 2nd term rate**
+- **Trump 1st term rate**
+- **Biden term rate**
+- **10-year trend:** Jan 2015 to Jan 2025.
+
+Each line compounds a daily growth rate estimated from its baseline window.
+
+- Confidence bands use geometric Brownian motion cones ([Sigman, 2006](https://www.columbia.edu/~ks20/FE-Notes/4700-07-Notes-GBM.pdf)): `upper(n) = projected(n) * e^(+sigma*sqrt(n))`.
+- 1 sigma is ~68% model-implied coverage; 2 sigma is ~95%.
+- The global peers line is observed-only and rescaled to the selected US index's Jan 2025 anchor (no projection).
+
+#### Fiscal Context Chart (Deficit / GDP)
+
+Deficit context is provided as a non-causal comparison layer.
+
+- Source: FRED `FYFSGDA188S` plus a CBO FY2025 estimate.
+- Fiscal years run October-September.
+- Straddle years (for example FY2017, FY2021) are assigned to the president in office for most of that fiscal year.
+- FY2025 is shown as a CBO estimate. Final fiscal-year data is typically published around October 2026.
+
+#### Policy Event Markers
+
+The charts include optional markers for major policy actions.
+
+- Signed legislation with CBO 10-year fiscal impact greater than $200B.
+- Tariff actions affecting more than $50B in trade volume or more than 10% of imports.
+
+Markers show enactment timing and summary only; they do **not** assert causal impact on market moves. Fiscal-impact numbers are estimates, not final accounting totals.
+
+### Caveats
+
+- Correlation is not causation. Markets respond to many factors beyond any administration.
+- Projections extrapolate trend assumptions; they are not forecasts.
+- International indices face different local conditions (monetary policy, demographics, sector composition).
+- Adjusted-close series reduce dividend-related bias, but cross-market comparability remains imperfect.
+- DAX uses the price-only Kursindex (`^GDAXIP`) for consistency with the chosen DAX benchmark series.
+- VXUS is an ETF proxy and includes fund-level structure effects relative to pure index series.
+
+### Methodology Changelog
+
+**2026-02-17 (v1 hardening pass)**
+
+- Added US index toggle (NASDAQ / S&P 500) for primary comparison.
+- Switched market series to adjusted close and added S&P 500 dataset.
+- Replaced asymmetric Biden-only supplementary baselines with symmetric per-term options.
+- Added directional robustness panel (index/benchmark matrix + baseline sensitivity signs).
+- Added explicit read-guide framing and tighter descriptive/non-causal language.
+- Deferred formal DiD/SCM implementation; kept methodology scoped to descriptive event-study results.
+
+### References
+
+1. Kothari, S.P. & Warner, J.B. (2007). "Econometrics of Event Studies." *Handbook of Corporate Finance*, vol. 1. [PDF](https://www.bu.edu/econ/files/2011/01/KothariWarner2.pdf)
+2. Santa-Clara, P. & Valkanov, R. (2003). "The Presidential Puzzle." *Journal of Finance*, 58(5), 1841-1872. [Paper](https://onlinelibrary.wiley.com/doi/abs/10.1111/1540-6261.00590)
+3. Abadie, A., Diamond, A. & Hainmueller, J. (2010). "Synthetic Control Methods for Comparative Case Studies." *JASA*, 105(490), 493-505. [Paper](https://www.tandfonline.com/doi/abs/10.1198/jasa.2009.ap08746)
+4. Angrist, J.D. & Pischke, J.-S. (2009). *Mostly Harmless Econometrics*. Princeton. [Book](https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics)
+5. Sigman, K. (2006). "Geometric Brownian Motion." Columbia. [PDF](https://www.columbia.edu/~ks20/FE-Notes/4700-07-Notes-GBM.pdf)
+6. Federal Reserve Bank of St. Louis (FRED). "Federal Surplus or Deficit as Percent of Gross Domestic Product (FYFSGDA188S)." [Series](https://fred.stlouisfed.org/series/FYFSGDA188S)
+7. Congressional Budget Office (CBO). Cost estimates for major legislation and budget effects. [Browse](https://www.cbo.gov/publication)
+
+### Contribute
+
+This is [open source](https://github.com/Alexzander-Stone/personal-website). Projection logic lives in [`useMarketData.ts`](https://github.com/Alexzander-Stone/personal-website/blob/main/src/components/OpportunityCost/useMarketData.ts). To propose a methodology change, open a PR with a new projection function, its mathematical basis, and which weakness it addresses.

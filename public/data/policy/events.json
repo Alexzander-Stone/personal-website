@@ -1,0 +1,122 @@
+[
+  {
+    "date": "2013-01-02",
+    "label": "American Taxpayer Relief Act",
+    "description": "Made Bush-era tax cuts permanent for incomes below $400K.",
+    "administration": "obama2",
+    "type": "legislation",
+    "fiscalImpact": "+$3.97T vs current law / -$737B vs current policy"
+  },
+  {
+    "date": "2017-12-22",
+    "label": "Tax Cuts and Jobs Act",
+    "description": "Corporate rate cut from 35% to 21% with broad individual tax changes.",
+    "administration": "trump1",
+    "type": "legislation",
+    "fiscalImpact": "+$1.46T deficit (CBO 10yr)"
+  },
+  {
+    "date": "2018-07-06",
+    "label": "Section 301 tariffs begin",
+    "description": "25% tariff tranche on $34B of Chinese imports; later expanded.",
+    "administration": "trump1",
+    "type": "tariff",
+    "fiscalImpact": "Trade action escalated toward ~$370B coverage by Sep 2019"
+  },
+  {
+    "date": "2020-03-27",
+    "label": "CARES Act",
+    "description": "$2.2T COVID relief package including checks and PPP.",
+    "administration": "trump1",
+    "type": "legislation",
+    "fiscalImpact": "+$1.7T deficit (CBO 10yr)"
+  },
+  {
+    "date": "2020-12-27",
+    "label": "Consolidated Approps 2021",
+    "description": "$900B COVID relief follow-on with additional direct payments.",
+    "administration": "trump1",
+    "type": "legislation",
+    "fiscalImpact": "+$868B deficit (CBO 10yr)"
+  },
+  {
+    "date": "2021-03-11",
+    "label": "American Rescue Plan",
+    "description": "$1.9T COVID stimulus including $1,400 checks.",
+    "administration": "biden",
+    "type": "legislation",
+    "fiscalImpact": "+$1.9T deficit (CBO 10yr)"
+  },
+  {
+    "date": "2021-11-15",
+    "label": "Infrastructure Investment and Jobs Act",
+    "description": "$550B in new infrastructure spending authority.",
+    "administration": "biden",
+    "type": "legislation",
+    "fiscalImpact": "+$256B deficit (CBO 10yr)"
+  },
+  {
+    "date": "2022-08-16",
+    "label": "Inflation Reduction Act",
+    "description": "Climate and healthcare package with deficit reduction components.",
+    "administration": "biden",
+    "type": "legislation",
+    "fiscalImpact": "-$238B net deficit (CBO 10yr)"
+  },
+  {
+    "date": "2023-06-03",
+    "label": "Fiscal Responsibility Act",
+    "description": "Debt ceiling deal with spending caps and COVID fund rescissions.",
+    "administration": "biden",
+    "type": "legislation",
+    "fiscalImpact": "-$1.5T projected savings (10yr)"
+  },
+  {
+    "date": "2025-02-04",
+    "label": "China fentanyl tariffs",
+    "description": "Additional tariffs on Chinese imports under IEEPA authority.",
+    "administration": "trump2",
+    "type": "tariff",
+    "fiscalImpact": "20% tariff action on Chinese imports"
+  },
+  {
+    "date": "2025-03-04",
+    "label": "Canada/Mexico tariff action",
+    "description": "25% tariff action on Canada and Mexico goods with retaliation.",
+    "administration": "trump2",
+    "type": "tariff",
+    "fiscalImpact": "25% tariff action under IEEPA"
+  },
+  {
+    "date": "2025-04-02",
+    "label": "Liberation Day tariffs",
+    "description": "10% baseline tariff with higher country-specific rates.",
+    "administration": "trump2",
+    "type": "tariff",
+    "fiscalImpact": "Broad tariff action across most imports"
+  },
+  {
+    "date": "2025-04-09",
+    "label": "China tariff escalation",
+    "description": "China-related tariff stack escalated to 145% total rate.",
+    "administration": "trump2",
+    "type": "tariff",
+    "fiscalImpact": "Escalation to 145% combined tariff rate"
+  },
+  {
+    "date": "2025-05-12",
+    "label": "US-China tariff reduction window",
+    "description": "Geneva talks framework reduced rates during a 90-day window.",
+    "administration": "trump2",
+    "type": "executive",
+    "fiscalImpact": "Temporary reduction to 10% baseline"
+  },
+  {
+    "date": "2025-07-04",
+    "label": "One Big Beautiful Bill Act",
+    "description": "Tax and spending package including TCJA extension, energy and border provisions, and discretionary funding changes.",
+    "administration": "trump2",
+    "type": "legislation",
+    "fiscalImpact": "Deficit increase under both current-law and current-policy baselines (CBO 10yr estimates)"
+  }
+]

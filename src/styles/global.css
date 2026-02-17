@@ -122,6 +122,31 @@ pre {
   overflow-x: auto;
 }
 
+.prose pre.astro-code {
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+.prose pre.astro-code code {
+  background: transparent;
+  border: 0;
+  color: inherit;
+}
+
+.prose pre.astro-code .line,
+.prose pre.astro-code span {
+  color: inherit !important;
+}
+
+.prose :not(pre) > code {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 0.08rem 0.35rem;
+}
+
 .section-title {
   display: inline-flex;
   align-items: center;
