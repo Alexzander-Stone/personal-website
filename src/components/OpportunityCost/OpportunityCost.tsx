@@ -102,6 +102,24 @@ export default function OpportunityCost() {
         usIndex={usIndex}
       />
 
+      <section className="oc-read-guide" aria-label="How chart 1 differs from chart 2">
+        <h4>How Chart 1 Differs From Chart 2</h4>
+        <ul className="oc-chart-meta-list">
+          <li>
+            Chart 1 (above): raw cumulative {usIndexLabel} return by administration.
+            <code> ((US_t / US_start) - 1) * 100</code>
+          </li>
+          <li>
+            Chart 2 (below): excess return versus global peers.
+            <code> US return - peer return</code>
+          </li>
+          <li>
+            Example: if {usIndexLabel} is +20% and peers are +25%, chart 1 shows +20% while chart 2 shows -5%.
+          </li>
+          <li>So a positive line in chart 1 can still be negative in chart 2 if the US index rose less than peers.</li>
+        </ul>
+      </section>
+
       <ExcessReturnChart
         series={excessReturns}
         periods={administrationPeriods}
