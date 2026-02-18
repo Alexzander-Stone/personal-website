@@ -64,6 +64,12 @@ const pubDate = Number.isNaN(parsedDate.getTime())
 
 <script is:inline>
   (() => {
+    const setupProjectProgress = () => {
+      if (typeof window.__projectProgressCleanup === 'function') {
+        window.__projectProgressCleanup();
+        window.__projectProgressCleanup = null;
+      }
+
     const page = document.querySelector('.project-page');
     const prose = page?.querySelector('.prose');
     const progress = page?.querySelector('.project-progress');
@@ -73,6 +79,8 @@ const pubDate = Number.isNaN(parsedDate.getTime())
       return;
     }
 
+    const projectTitleHeading = page.querySelector('.article-head h1');
+    const projectTitleText = projectTitleHeading?.textContent?.trim().replace(/\s+/g, ' ') ?? '';
     const sourceHeadingPattern = /^source\s*:/i;
     const headingCandidates = Array.from(prose.querySelectorAll('h1, h2, h3, h4, h5, h6'))
       .map((heading) => {
@@ -87,17 +95,24 @@ const pubDate = Number.isNaN(parsedDate.getTime())
       })
       .filter(Boolean);
 
-    if (headingCandidates.length === 0) {
+    if (headingCandidates.length === 0 && !projectTitleText) {
       progress.setAttribute('hidden', '');
       return;
     }
 
     const levels = [...new Set(headingCandidates.map(({ level }) => level))].sort((a, b) => a - b);
-    const sectionLevel = levels[0];
+    const sectionLevel = levels[0] ?? 1;
     const subsectionLevel = levels.find((level) => level > sectionLevel);
-    const headings = headingCandidates.filter(
+    const contentHeadings = headingCandidates.filter(
       ({ level }) => level === sectionLevel || level === subsectionLevel
     );
+    const headings = [];
+
+    if (projectTitleHeading && projectTitleText) {
+      headings.push({ heading: projectTitleHeading, text: projectTitleText, level: sectionLevel });
+    }
+
+    headings.push(...contentHeadings);
 
     if (headings.length === 0) {
       progress.setAttribute('hidden', '');
@@ -132,6 +147,13 @@ const pubDate = Number.isNaN(parsedDate.getTime())
     progress.removeAttribute('hidden');
 
     const links = Array.from(list.querySelectorAll('a'));
+    const headingElements = headings.map(({ heading }) => heading);
+    const headingById = new Map(headingElements.map((heading) => [heading.id, heading]));
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let clickLock = false;
+    let clickLockTimeout = 0;
+    let scrollRafId = 0;
+
     const setActive = (id) => {
       links.forEach((link) => {
         const isActive = link.dataset.target === id;
@@ -139,39 +161,119 @@ const pubDate = Number.isNaN(parsedDate.getTime())
       });
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    const triggerHeadingFlash = (heading) => {
+      if (prefersReducedMotion.matches) {
+        return;
+      }
 
-        if (visible.length > 0) {
-          setActive(visible[0].target.id);
+      heading.classList.remove('heading-flash');
+      void heading.offsetWidth;
+      heading.classList.add('heading-flash');
+      heading.addEventListener(
+        'animationend',
+        () => {
+          heading.classList.remove('heading-flash');
+        },
+        { once: true }
+      );
+    };
+
+    const getActiveHeadingId = () => {
+      const thresholdY = window.innerHeight * 0.4;
+      let activeId = null;
+
+      headingElements.forEach((heading) => {
+        if (heading.getBoundingClientRect().top <= thresholdY) {
+          activeId = heading.id;
+        }
+      });
+
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 8) {
+        return headingElements[headingElements.length - 1]?.id ?? activeId;
+      }
+
+      return activeId ?? headingElements[0]?.id;
+    };
+
+    const updateActiveFromScroll = () => {
+      scrollRafId = 0;
+
+      if (clickLock) {
+        return;
+      }
+
+      const nextId = getActiveHeadingId();
+      if (nextId) {
+        setActive(nextId);
+      }
+    };
+
+    const scheduleActiveUpdate = () => {
+      if (scrollRafId) {
+        return;
+      }
+
+      scrollRafId = window.requestAnimationFrame(updateActiveFromScroll);
+    };
+
+    links.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const targetId = link.dataset.target;
+        const targetHeading = targetId ? headingById.get(targetId) : null;
+
+        if (!targetId || !targetHeading) {
           return;
         }
 
-        const above = entries
-          .filter((entry) => entry.boundingClientRect.top < 0)
-          .sort((a, b) => b.boundingClientRect.top - a.boundingClientRect.top);
+        event.preventDefault();
+        setActive(targetId);
 
-        if (above.length > 0) {
-          setActive(above[0].target.id);
+        if (!prefersReducedMotion.matches) {
+          clickLock = true;
+          window.clearTimeout(clickLockTimeout);
+          clickLockTimeout = window.setTimeout(() => {
+            clickLock = false;
+            scheduleActiveUpdate();
+          }, 1000);
         }
-      },
-      {
-        rootMargin: '-20% 0px -70% 0px',
-        threshold: [0, 1],
-      }
-    );
 
-    headings.forEach(({ heading }) => observer.observe(heading));
+        targetHeading.scrollIntoView({
+          behavior: prefersReducedMotion.matches ? 'auto' : 'smooth',
+          block: 'start',
+        });
+        history.replaceState(null, '', `#${targetId}`);
+        triggerHeadingFlash(targetHeading);
+      });
+    });
+
+    window.addEventListener('scroll', scheduleActiveUpdate, { passive: true });
+    window.addEventListener('resize', scheduleActiveUpdate);
+    window.__projectProgressCleanup = () => {
+      window.removeEventListener('scroll', scheduleActiveUpdate);
+      window.removeEventListener('resize', scheduleActiveUpdate);
+      window.clearTimeout(clickLockTimeout);
+      if (scrollRafId) {
+        window.cancelAnimationFrame(scrollRafId);
+        scrollRafId = 0;
+      }
+    };
 
     const fromHash = window.location.hash.slice(1);
-    if (fromHash) {
+    if (fromHash && headingById.has(fromHash)) {
       setActive(fromHash);
     } else if (headings[0]) {
       setActive(headings[0].heading.id);
     }
+
+    scheduleActiveUpdate();
+    };
+
+    if (!window.__projectProgressPageLoadBound) {
+      window.__projectProgressPageLoadBound = true;
+      document.addEventListener('astro:page-load', setupProjectProgress);
+    }
+
+    setupProjectProgress();
   })();
 </script>
 
@@ -243,8 +345,32 @@ const pubDate = Number.isNaN(parsedDate.getTime())
     background: var(--tag-bg);
   }
 
-  .prose :is(h1, h2, h3, h4, h5, h6) {
+  @keyframes heading-flash {
+    0% {
+      background-color: rgba(47, 132, 136, 0.18);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+
+  :global(.prose h1),
+  :global(.prose h2),
+  :global(.prose h3),
+  :global(.prose h4),
+  :global(.prose h5),
+  :global(.prose h6) {
     scroll-margin-top: 6rem;
+  }
+
+  :global(.prose h1.heading-flash),
+  :global(.prose h2.heading-flash),
+  :global(.prose h3.heading-flash),
+  :global(.prose h4.heading-flash),
+  :global(.prose h5.heading-flash),
+  :global(.prose h6.heading-flash) {
+    border-radius: 4px;
+    animation: heading-flash 900ms var(--ease-out-expo) forwards;
   }
 
   .project-progress {
@@ -360,7 +486,12 @@ const pubDate = Number.isNaN(parsedDate.getTime())
       width: min(900px, calc(100% - 1.4rem));
     }
 
-    .prose :is(h1, h2, h3, h4, h5, h6) {
+    :global(.prose h1),
+    :global(.prose h2),
+    :global(.prose h3),
+    :global(.prose h4),
+    :global(.prose h5),
+    :global(.prose h6) {
       scroll-margin-top: 5.3rem;
     }
 
