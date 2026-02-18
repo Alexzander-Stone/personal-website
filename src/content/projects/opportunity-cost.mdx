@@ -1,9 +1,9 @@
 ---
 highlighted: true
 shortTitle: 'Opportunity Cost'
-title: 'Market Opportunity Cost Visualization'
+title: 'US Stock Returns vs Global Peers, by Administration'
 pubDate: 2026-02-17
-description: 'Observed US excess return vs global peers across administrations, with supplementary projection views.'
+description: 'How did the US stock market perform relative to global peers under each recent administration? An interactive comparison using the same methodology for every president.'
 author: 'Alex Stone'
 image:
     url: '/projects/opportunity-cost/hero.jpeg'
@@ -19,29 +19,40 @@ tags: ['markets', 'data visualization', 'economics', 'policy', 'event study']
 ---
 import OpportunityCost from '../../components/OpportunityCost/OpportunityCost.tsx';
 
-Politicians and pundits routinely point to stock prices as proof their administration is working ([Pam Bondi, House Judiciary hearing, Feb. 11, 2026](https://www.linkedin.com/posts/cnbc_watch-pam-bondi-hearing-ag-touts-record-activity-7427398541725085696-ZY0d); [President Trump remarks on Dow 30,000, Nov. 24, 2020](https://trumpwhitehouse.archives.gov/briefings-statements/remarks-president-trump-economy-112420-2/); [Biden campaign post on record highs, Dec. 15, 2023](https://www.cnbc.com/2023/12/15/biden-flaunts-stock-market-record-highs-mocks-trump-for-predicting-collapse.html)). This project takes that claim at face value: **if market returns are the metric, let's measure properly.** The primary chart compares a selected US index (NASDAQ or S&P 500) against global peers (KOSPI, FTSE 100, Nikkei 225, DAX) using the same alignment rule for every administration.
+Politicians from both parties use stock charts as evidence that their administration is "working" ([Pam Bondi, House Judiciary hearing, Feb. 11, 2026](https://www.linkedin.com/posts/cnbc_watch-pam-bondi-hearing-ag-touts-record-activity-7427398541725085696-ZY0d); [President Trump remarks on Dow 30,000, Nov. 24, 2020](https://trumpwhitehouse.archives.gov/briefings-statements/remarks-president-trump-economy-112420-2/); [Biden campaign post on record highs, Dec. 15, 2023](https://www.cnbc.com/2023/12/15/biden-flaunts-stock-market-record-highs-mocks-trump-for-predicting-collapse.html)). If that's the claim, this page measures it directly: US returns versus global peers, on aligned trading days, with one method applied to every administration.
 
-The first chart below shows a straightforward pattern: the US stock market has risen in every recent administration window to date. Since markets trend upward over time, the more informative question is how US returns compared with what global peers delivered over the same window. That is what the excess return analysis measures.
-
-Interpretation shortcut: chart 1 asks "did the US index go up?" chart 2 asks "did the US index beat global peers?" Those are not the same question.
-
-Read this as a measurement tool, not a causal claim. It shows what happened to US investors relative to global peers during each administration window.
+The key question is not "did US stocks go up?" They usually do. The useful question is whether they beat the rest of the world over the same window.
 
 <OpportunityCost client:load />
 
-### Common objections
+### What this analysis does and doesn't show
 
-- **"This predicts the market."** It does not. The primary analysis is observed relative performance.
-- **"Global shocks break comparison."** Relative performance is designed to remove much of the shared global-shock component.
-- **"This cherry-picks administrations."** The same event-study formula is applied across Obama 2, Trump 1, Biden, and Trump 2.
-- **"Presidents don't control markets."** Agreed. This is a period-based outcome comparison, not policy attribution.
+**It compares US stocks against global peers, not against zero.** Raw gains happened in every recent administration window. The excess return chart asks the harder question: did the US beat peers over the same dates?
+
+**US outperformance partly reflects sector composition.** The US is tech-heavy (NASDAQ ~50% tech; S&P 500 ~30%), while peer markets have different sector weights. So part of any gap is structural market mix, not administration-specific effects. Switching NASDAQ versus S&P 500 tests whether the sign survives that composition shift.
+
+**All indices are measured in local currencies.** NASDAQ/S&P are USD; KOSPI is KRW; FTSE is GBP; and so on. Exchange-rate moves are therefore embedded in the comparison. A stronger dollar can mechanically change relative results versus a common-currency setup. The VXUS toggle (USD-denominated) is a partial cross-check.
+
+**It partially controls for shared global shocks.** If global markets fall or rise together, that shared move appears in both lines. Subtracting peers from US helps isolate relative performance.
+
+**It uses the same formula for every administration.** Obama 2, Trump 1, Biden, and Trump 2 all use the same alignment rule, the same peer benchmark options, and the same excess-return math.
+
+**Early readings are noisy.** In the first weeks, small daily moves can create big-looking excess returns that later fade. Same-day alignment helps, but short windows are unstable. Longer windows are more informative.
+
+**It tests its own robustness.** The panel checks whether the sign (outperform/underperform) holds across NASDAQ vs S&P 500 and custom basket vs VXUS. If the sign flips, treat the result as unstable.
+
+**The custom basket is equal-weighted by design.** KOSPI, FTSE, Nikkei, and DAX each get 25%, regardless of market cap. That avoids one large market dominating the benchmark. It is a choice, not a universal default; VXUS gives a cap-weighted alternative.
+
+**It does not predict markets.** The projection chart is a trend extrapolation ("what if prior growth continued"), not a forecast.
+
+**It does not attribute outcomes to policy.** The Federal Reserve sets monetary policy independently of the White House, and rates are a major equity driver. Global capital flows, sector rotation, dollar strength, supply chains, and sentiment also move prices outside presidential control. Even fiscal policy transmits with lags. This is an outcome comparison across administration windows, not a causal attribution model.
 
 ### Methodology
 
 **Approach:** Event-study excess return / relative performance measurement. The US index (NASDAQ or S&P 500) is compared against international benchmarks on aligned trading days. This implementation follows standard event-study style excess-return construction ([Kothari & Warner, 2007](https://www.bu.edu/econ/files/2011/01/KothariWarner2.pdf)) and the broader tradition of comparing market outcomes across administrations ([Santa-Clara & Valkanov, 2003](https://onlinelibrary.wiley.com/doi/abs/10.1111/1540-6261.00590)).
 
 Conceptual note: DiD and synthetic-control literature informs the framing ([Angrist & Pischke, 2009](https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics); [Abadie et al., 2010](https://www.tandfonline.com/doi/abs/10.1198/jasa.2009.ap08746)), but this project does **not** claim a formal DiD or synthetic-control implementation.
-Why not formal in this version: with only four administration windows and no explicit donor-weight optimization / parallel-trends testing, a strict DiD or SCM claim would overstate identification.
+Why not formal here: there are only four administration windows, and this version does not run donor-weight optimization or formal parallel-trends tests.
 
 **Data source:** Daily **adjusted close** prices from Yahoo Finance: NASDAQ Composite (^IXIC), S&P 500 (^GSPC), KOSPI (^KS11), FTSE 100 (^FTSE), Nikkei 225 (^N225), DAX Kursindex (^GDAXIP), and VXUS (Vanguard Total International Stock ETF).
 
@@ -131,6 +142,13 @@ Markers show enactment timing and summary only; they do **not** assert causal im
 
 ### Methodology Changelog
 
+**2026-02-18 (v2 narrative pass)**
+
+- Reordered visualization flow to lead with excess return, then raw returns.
+- Added a plain-English top-line verdict for current administration performance vs peers.
+- Moved projection/deficit/international views into a collapsed "Explore the data" tier.
+- Replaced the standalone objections section with "What this analysis does and doesn't show."
+
 **2026-02-17 (v1 hardening pass)**
 
 - Added US index toggle (NASDAQ / S&P 500) for primary comparison.
@@ -148,7 +166,7 @@ Markers show enactment timing and summary only; they do **not** assert causal im
 4. Angrist, J.D. & Pischke, J.-S. (2009). *Mostly Harmless Econometrics*. Princeton. [Book](https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics)
 5. Sigman, K. (2006). "Geometric Brownian Motion." Columbia. [PDF](https://www.columbia.edu/~ks20/FE-Notes/4700-07-Notes-GBM.pdf)
 6. Federal Reserve Bank of St. Louis (FRED). "Federal Surplus or Deficit as Percent of Gross Domestic Product (FYFSGDA188S)." [Series](https://fred.stlouisfed.org/series/FYFSGDA188S)
-7. Congressional Budget Office (CBO). Cost estimates for major legislation and budget effects. [Browse](https://www.cbo.gov/publication)
+7. Congressional Budget Office (CBO). Cost estimates for major legislation and budget effects. [Browse](https://www.cbo.gov/publications/cost-estimates)
 
 ### Contribute
 
