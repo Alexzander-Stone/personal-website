@@ -19,7 +19,7 @@ tags: ['markets', 'data visualization', 'economics', 'policy', 'event study']
 ---
 import OpportunityCost from '../../components/OpportunityCost/OpportunityCost.tsx';
 
-Politicians from both parties use stock charts as evidence that their administration is "working" ([Pam Bondi, House Judiciary hearing, Feb. 11, 2026](https://www.linkedin.com/posts/cnbc_watch-pam-bondi-hearing-ag-touts-record-activity-7427398541725085696-ZY0d); [President Trump remarks on Dow 30,000, Nov. 24, 2020](https://trumpwhitehouse.archives.gov/briefings-statements/remarks-president-trump-economy-112420-2/); [Biden campaign post on record highs, Dec. 15, 2023](https://www.cnbc.com/2023/12/15/biden-flaunts-stock-market-record-highs-mocks-trump-for-predicting-collapse.html)). If that's the claim, this page measures it directly: US returns versus global peers, on aligned trading days, with one method applied to every administration.
+Politicians from both parties use stock charts as evidence that their administration is "working" ([Pam Bondi, House Judiciary hearing, Feb. 11, 2026](https://www.cnbc.com/2026/02/11/trump-pam-bondi-hearing-stock-epstein-judiciary-dow.html); [President Trump remarks on Dow 30,000, Nov. 24, 2020](https://trumpwhitehouse.archives.gov/briefings-statements/remarks-president-trump-economy-112420-2/); [Biden campaign post on record highs, Dec. 15, 2023](https://www.cnbc.com/2023/12/15/biden-flaunts-stock-market-record-highs-mocks-trump-for-predicting-collapse.html)). If that's the claim, this page measures it directly: US returns versus global peers, on aligned trading days, with one method applied to every administration.
 
 The key question is not "did US stocks go up?" They usually do. The useful question is whether they beat the rest of the world over the same window.
 
@@ -29,7 +29,9 @@ The key question is not "did US stocks go up?" They usually do. The useful quest
 
 **It compares US stocks against global peers, not against zero.** Raw gains happened in every recent administration window. The excess return chart asks the harder question: did the US beat peers over the same dates?
 
-**US outperformance partly reflects sector composition.** The US is tech-heavy (NASDAQ ~50% tech; S&P 500 ~30%), while peer markets have different sector weights. So part of any gap is structural market mix, not administration-specific effects. Switching NASDAQ versus S&P 500 tests whether the sign survives that composition shift.
+**US outperformance partly reflects sector composition.** The US is tech-heavy (NASDAQ ~50% tech; S&P 500 ~30%), while peer markets have different sector weights. So part of any gap is structural market mix, not administration-specific effects. Switching among NASDAQ, S&P 500, and Dow Jones tests whether the sign survives that composition shift.
+
+**The Dow Jones is a narrow, price-weighted index.** It contains only 30 blue-chip stocks, weighted by share price rather than market capitalization. This makes it more sensitive to individual stock moves and less representative of the broad US market than the S&P 500 (~500 stocks) or NASDAQ Composite (~3,000 stocks). The S&P 500 and NASDAQ toggles provide broader-market cross-checks.
 
 **All indices are measured in local currencies.** NASDAQ/S&P are USD; KOSPI is KRW; FTSE is GBP; and so on. Exchange-rate moves are therefore embedded in the comparison. A stronger dollar can mechanically change relative results versus a common-currency setup. The VXUS toggle (USD-denominated) is a partial cross-check.
 
@@ -39,7 +41,7 @@ The key question is not "did US stocks go up?" They usually do. The useful quest
 
 **Early readings are noisy.** In the first weeks, small daily moves can create big-looking excess returns that later fade. Same-day alignment helps, but short windows are unstable. Longer windows are more informative.
 
-**It tests its own robustness.** The panel checks whether the sign (outperform/underperform) holds across NASDAQ vs S&P 500 and custom basket vs VXUS. If the sign flips, treat the result as unstable.
+**It tests its own robustness.** The panel checks whether the sign (outperform/underperform) holds across all three US indices (NASDAQ, S&P 500, Dow Jones) and both benchmarks (custom basket, VXUS). If the sign flips, treat the result as unstable.
 
 **The custom basket is equal-weighted by design.** KOSPI, FTSE, Nikkei, and DAX each get 25%, regardless of market cap. That avoids one large market dominating the benchmark. It is a choice, not a universal default; VXUS gives a cap-weighted alternative.
 
@@ -49,12 +51,12 @@ The key question is not "did US stocks go up?" They usually do. The useful quest
 
 ### Methodology
 
-**Approach:** Event-study excess return / relative performance measurement. The US index (NASDAQ or S&P 500) is compared against international benchmarks on aligned trading days. This implementation follows standard event-study style excess-return construction ([Kothari & Warner, 2007](https://www.bu.edu/econ/files/2011/01/KothariWarner2.pdf)) and the broader tradition of comparing market outcomes across administrations ([Santa-Clara & Valkanov, 2003](https://onlinelibrary.wiley.com/doi/abs/10.1111/1540-6261.00590)).
+**Approach:** Event-study excess return / relative performance measurement. The US index (NASDAQ, S&P 500, or Dow Jones) is compared against international benchmarks on aligned trading days. This implementation follows standard event-study style excess-return construction ([Kothari & Warner, 2007](https://www.bu.edu/econ/files/2011/01/KothariWarner2.pdf)) and the broader tradition of comparing market outcomes across administrations ([Santa-Clara & Valkanov, 2003](https://onlinelibrary.wiley.com/doi/abs/10.1111/1540-6261.00590)).
 
 Conceptual note: DiD and synthetic-control literature informs the framing ([Angrist & Pischke, 2009](https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics); [Abadie et al., 2010](https://www.tandfonline.com/doi/abs/10.1198/jasa.2009.ap08746)), but this project does **not** claim a formal DiD or synthetic-control implementation.
 Why not formal here: there are only four administration windows, and this version does not run donor-weight optimization or formal parallel-trends tests.
 
-**Data source:** Daily **adjusted close** prices from Yahoo Finance: NASDAQ Composite (^IXIC), S&P 500 (^GSPC), KOSPI (^KS11), FTSE 100 (^FTSE), Nikkei 225 (^N225), DAX Kursindex (^GDAXIP), and VXUS (Vanguard Total International Stock ETF).
+**Data source:** Daily **adjusted close** prices from Yahoo Finance: NASDAQ Composite (^IXIC), S&P 500 (^GSPC), Dow Jones Industrial Average (^DJI), KOSPI (^KS11), FTSE 100 (^FTSE), Nikkei 225 (^N225), DAX Kursindex (^GDAXIP), and VXUS (Vanguard Total International Stock ETF).
 
 **Scope note:** The analysis window starts in January 2013 by design (Obama 2 onward). That start date is a scope choice for this project, not a data availability constraint.
 
@@ -82,7 +84,7 @@ Benchmark selector options:
 
 The page includes a robustness panel that summarizes:
 
-- Current-administration excess return sign across all 4 index/benchmark pairs (NASDAQ/S&P 500 x custom basket/VXUS).
+- Current-administration excess return sign across all 6 index/benchmark pairs (NASDAQ/S&P 500/Dow Jones x custom basket/VXUS).
 - Opportunity-cost sign across all supplementary baselines for the currently selected index/benchmark pair.
 - It is a directional stability check, not a formal significance test.
 
@@ -99,8 +101,8 @@ This is a comparative accounting metric, not a policy-causation estimate.
 
 Projection baseline options (supplementary only):
 
-- **Historical average (default):** 10.5% annualized long-run benchmark.
-- **Median presidential term (n=3):** median CAGR of Obama 2nd, Trump 1st, and Biden terms.
+- **Historical average (default):** 10.5% annualized, a commonly cited long-run US equity figure (historically closer to S&P 500 returns). Applied uniformly to whichever US index is selected as a rough baseline, not a precise forecast for that specific index.
+- **Middle presidential term:** the middle growth rate among the three prior completed terms (Obama 2nd, Trump 1st, Biden). This is a descriptive summary, not a statistically powered estimate.
 - **Global peers historical average (since 2013):** compounds the selected peer benchmark's long-run daily growth rate.
 - **Obama 2nd term rate**
 - **Trump 1st term rate**
@@ -141,6 +143,12 @@ Markers show enactment timing and summary only; they do **not** assert causal im
 - VXUS is an ETF proxy and includes fund-level structure effects relative to pure index series.
 
 ### Methodology Changelog
+
+**2026-02-18 (v3 index expansion)**
+
+- Added Dow Jones Industrial Average (^DJI) as a third US index toggle alongside NASDAQ and S&P 500.
+- Expanded robustness matrix coverage from 4 to 6 index/benchmark combinations.
+- Added Dow Jones anchor/latest-date pills and international chart line support.
 
 **2026-02-18 (v2 narrative pass)**
 

@@ -16,8 +16,8 @@ const HISTORICAL_ANNUAL_RETURN = 0.105;
 const TRADING_DAYS_PER_YEAR = 252;
 
 const PEER_KEYS = ['kospi', 'ftse', 'nikkei', 'dax'];
-const INDEX_KEYS = ['nasdaq', 'sp500', 'kospi', 'ftse', 'nikkei', 'dax'];
-const US_INDEX_KEYS = ['nasdaq', 'sp500'];
+const INDEX_KEYS = ['nasdaq', 'sp500', 'djia', 'kospi', 'ftse', 'nikkei', 'dax'];
+const US_INDEX_KEYS = ['nasdaq', 'sp500', 'djia'];
 const PEER_BENCHMARKS = ['custom-basket', 'msci-ex-us'];
 const BASELINE_KEYS = [
   'historical',
@@ -322,6 +322,7 @@ async function buildSnapshot() {
   const market = {
     nasdaq: await readMarketSeries('nasdaq.json'),
     sp500: await readMarketSeries('sp500.json'),
+    djia: await readMarketSeries('djia.json'),
     kospi: await readMarketSeries('kospi.json'),
     ftse: await readMarketSeries('ftse.json'),
     nikkei: await readMarketSeries('nikkei.json'),

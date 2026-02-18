@@ -28,6 +28,7 @@ type LegendState = {
 const indexLabel: Record<IndexKey, string> = {
   nasdaq: 'NASDAQ',
   sp500: 'S&P 500',
+  djia: 'Dow Jones',
   kospi: 'KOSPI',
   ftse: 'FTSE 100',
   nikkei: 'Nikkei 225',
@@ -37,13 +38,14 @@ const indexLabel: Record<IndexKey, string> = {
 const indexColor: Record<IndexKey, string> = {
   nasdaq: '#ef4444',
   sp500: '#3b82f6',
+  djia: '#f59e0b',
   kospi: '#10b981',
-  ftse: '#f59e0b',
+  ftse: '#06b6d4',
   nikkei: '#ec4899',
   dax: '#8b5cf6',
 };
 
-const orderedKeys: IndexKey[] = ['nasdaq', 'sp500', 'kospi', 'ftse', 'nikkei', 'dax'];
+const orderedKeys: IndexKey[] = ['nasdaq', 'sp500', 'djia', 'kospi', 'ftse', 'nikkei', 'dax'];
 const COMPACT_POLICY_BREAKPOINT = 760;
 const NARROW_POLICY_BREAKPOINT = 520;
 const COMPACT_POLICY_SPACING_DAYS = 28;
@@ -106,6 +108,7 @@ export default function InternationalChart({
   const [visibility, setVisibility] = useState<Record<IndexKey, boolean>>({
     nasdaq: true,
     sp500: true,
+    djia: true,
     kospi: true,
     ftse: true,
     nikkei: true,
@@ -126,6 +129,7 @@ export default function InternationalChart({
         {
           nasdaq: [],
           sp500: [],
+          djia: [],
           kospi: [],
           ftse: [],
           nikkei: [],
@@ -244,6 +248,7 @@ export default function InternationalChart({
         {
           nasdaq: null,
           sp500: null,
+          djia: null,
           kospi: null,
           ftse: null,
           nikkei: null,

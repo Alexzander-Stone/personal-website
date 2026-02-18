@@ -12,6 +12,7 @@ const yahooFinance = new YahooFinance({
 const INDEX_CONFIG = [
   { symbol: '^IXIC', fileName: 'nasdaq.json' },
   { symbol: '^GSPC', fileName: 'sp500.json' },
+  { symbol: '^DJI', fileName: 'djia.json' },
   { symbol: '^KS11', fileName: 'kospi.json' },
   { symbol: '^FTSE', fileName: 'ftse.json' },
   { symbol: '^N225', fileName: 'nikkei.json' },

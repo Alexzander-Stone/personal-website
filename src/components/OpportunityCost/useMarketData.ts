@@ -35,11 +35,11 @@ const TEN_YEAR_START_DATE = '2015-01-20';
 const HISTORICAL_PEERS_START_DATE = '2013-01-20';
 const HISTORICAL_ANNUAL_RETURN = 0.105;
 const TRADING_DAYS_PER_YEAR = 252;
-const US_INDEX_KEYS: UsIndexKey[] = ['nasdaq', 'sp500'];
+const US_INDEX_KEYS: UsIndexKey[] = ['nasdaq', 'sp500', 'djia'];
 const PEER_BENCHMARK_KEYS: PeerBenchmark[] = ['custom-basket', 'msci-ex-us'];
 const PEER_KEYS = ['kospi', 'ftse', 'nikkei', 'dax'] as const;
 type PeerKey = (typeof PEER_KEYS)[number];
-const CORE_INDEX_KEYS: IndexKey[] = ['nasdaq', 'sp500', 'kospi', 'ftse', 'nikkei', 'dax'];
+const CORE_INDEX_KEYS: IndexKey[] = ['nasdaq', 'sp500', 'djia', 'kospi', 'ftse', 'nikkei', 'dax'];
 const MARKET_INDEX_KEYS: MarketIndexKey[] = [...CORE_INDEX_KEYS, 'vxus'];
 const DEFICIT_DATA_URL = '/data/deficit/deficit-gdp.json';
 const POLICY_EVENTS_URL = '/data/policy/events.json';
@@ -47,6 +47,7 @@ const POLICY_EVENTS_URL = '/data/policy/events.json';
 const DATA_URLS: Record<MarketIndexKey, string> = {
   nasdaq: '/data/market/nasdaq.json',
   sp500: '/data/market/sp500.json',
+  djia: '/data/market/djia.json',
   kospi: '/data/market/kospi.json',
   ftse: '/data/market/ftse.json',
   nikkei: '/data/market/nikkei.json',
@@ -803,6 +804,7 @@ function computeDerivedData(
     {
       nasdaq: CURRENT_ADMIN_START_DATE,
       sp500: CURRENT_ADMIN_START_DATE,
+      djia: CURRENT_ADMIN_START_DATE,
       kospi: CURRENT_ADMIN_START_DATE,
       ftse: CURRENT_ADMIN_START_DATE,
       nikkei: CURRENT_ADMIN_START_DATE,
@@ -819,6 +821,7 @@ function computeDerivedData(
     {
       nasdaq: [],
       sp500: [],
+      djia: [],
       kospi: [],
       ftse: [],
       nikkei: [],
@@ -877,6 +880,7 @@ function computeDerivedData(
     {
       nasdaq: CURRENT_ADMIN_START_DATE,
       sp500: CURRENT_ADMIN_START_DATE,
+      djia: CURRENT_ADMIN_START_DATE,
       kospi: CURRENT_ADMIN_START_DATE,
       ftse: CURRENT_ADMIN_START_DATE,
       nikkei: CURRENT_ADMIN_START_DATE,
@@ -1051,6 +1055,7 @@ export default function useMarketData(
           {
             nasdaq: [],
             sp500: [],
+            djia: [],
             kospi: [],
             ftse: [],
             nikkei: [],

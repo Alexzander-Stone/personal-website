@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import DeficitChart from './DeficitChart';
 import ExcessReturnChart from './ExcessReturnChart';
 import InternationalChart from './InternationalChart';
@@ -13,6 +13,7 @@ import './opportunity-cost.css';
 const US_INDEX_LABELS: Record<UsIndexKey, string> = {
   nasdaq: 'NASDAQ',
   sp500: 'S&P 500',
+  djia: 'Dow Jones',
 };
 
 const percentFormatter = new Intl.NumberFormat('en-US', {
@@ -33,8 +34,9 @@ export default function OpportunityCost() {
   const [viewMode, setViewMode] = useState<ViewMode>('full');
   const [baseline, setBaseline] = useState<ProjectionBaseline>('historical');
   const [peerBenchmark, setPeerBenchmark] = useState<PeerBenchmark>('custom-basket');
-  const [usIndex, setUsIndex] = useState<UsIndexKey>('nasdaq');
+  const [usIndex, setUsIndex] = useState<UsIndexKey>('djia');
   const [showPolicyEvents, setShowPolicyEvents] = useState(true);
+  const exploreRef = useRef<HTMLDetailsElement | null>(null);
 
   const {
     loading,
@@ -117,6 +119,16 @@ export default function OpportunityCost() {
         ? 'negative'
         : 'flat';
 
+  const openExploreSection = () => {
+    const details = exploreRef.current;
+    if (!details) {
+      return;
+    }
+
+    details.open = true;
+    details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <section className="oc-root">
       <section className={`oc-verdict oc-verdict-${verdictTone}`} aria-label="Current administration verdict">
@@ -134,6 +146,9 @@ export default function OpportunityCost() {
           The US is currently {excessDirection} peers by {formatPercentPoints(summaryStats.currentAdminExcessReturn)}.
         </p>
         <p className="oc-verdict-meta">As of {summaryStats.currentAdminExcessDate}.</p>
+        <button type="button" className="oc-jump-button" onClick={openExploreSection}>
+          Want more data and controls? Open the Explore section.
+        </button>
       </section>
 
       <section className="oc-tier-block" aria-label="The core argument">
@@ -166,7 +181,7 @@ export default function OpportunityCost() {
         <RobustnessSummary robustnessSummary={robustnessSummary} usIndex={usIndex} peerBenchmark={peerBenchmark} />
       </section>
 
-      <details className="oc-explore">
+      <details ref={exploreRef} className="oc-explore">
         <summary>
           <span className="oc-explore-title">Explore the data</span>
           <span className="oc-explore-meta">
@@ -188,6 +203,7 @@ export default function OpportunityCost() {
                 >
                   <option value="nasdaq">NASDAQ Composite (^IXIC)</option>
                   <option value="sp500">S&amp;P 500 (^GSPC)</option>
+                  <option value="djia">Dow Jones Industrial Average (^DJI)</option>
                 </select>
                 <span className="oc-inline-note">
                   Switch index to test robustness against sector concentration effects.
@@ -306,6 +322,9 @@ export default function OpportunityCost() {
                 <span className="oc-footnote-pill" title={`NASDAQ ${baselineDates.nasdaq}`}>
                   NASDAQ {baselineDates.nasdaq}
                 </span>
+                <span className="oc-footnote-pill" title={`Dow Jones ${baselineDates.djia}`}>
+                  Dow Jones {baselineDates.djia}
+                </span>
                 <span className="oc-footnote-pill" title={`KOSPI ${baselineDates.kospi}`}>
                   KOSPI {baselineDates.kospi}
                 </span>
@@ -329,6 +348,9 @@ export default function OpportunityCost() {
                 </span>
                 <span className="oc-footnote-pill" title={`NASDAQ ${lastDataDates.nasdaq}`}>
                   NASDAQ {lastDataDates.nasdaq}
+                </span>
+                <span className="oc-footnote-pill" title={`Dow Jones ${lastDataDates.djia}`}>
+                  Dow Jones {lastDataDates.djia}
                 </span>
                 <span className="oc-footnote-pill" title={`KOSPI ${lastDataDates.kospi}`}>
                   KOSPI {lastDataDates.kospi}

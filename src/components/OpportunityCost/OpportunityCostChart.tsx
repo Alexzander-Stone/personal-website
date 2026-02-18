@@ -50,8 +50,6 @@ type SeriesRefs = {
 };
 
 const valueFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
   maximumFractionDigits: 0,
 });
 
@@ -63,6 +61,7 @@ const COMPACT_POLICY_MAX_MARKERS_REGULAR = 7;
 const US_INDEX_LABELS: Record<UsIndexKey, string> = {
   nasdaq: 'NASDAQ',
   sp500: 'S&P 500',
+  djia: 'Dow Jones',
 };
 
 function toUnixDay(date: string): number {

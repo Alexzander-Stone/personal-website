@@ -41,15 +41,14 @@ const percentFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 1,
 });
 
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+const valueFormatter = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 0,
 });
 
 const US_INDEX_LABELS: Record<UsIndexKey, string> = {
   nasdaq: 'NASDAQ',
   sp500: 'S&P 500',
+  djia: 'Dow Jones',
 };
 
 function getDayFromTime(time: Time): number {
@@ -336,7 +335,7 @@ export default function ExcessReturnChart({ series, periods, adminStartUsIndex, 
           <div className="oc-chart-meta-tags" aria-label={`Starting ${usIndexLabel} values by administration`}>
             {ADMIN_KEYS.map((key) => (
               <span key={key} className="oc-chart-meta-pill">
-                <strong>{periods[key].label}</strong> {currencyFormatter.format(adminStartUsIndex[key].value)} (
+                <strong>{periods[key].label}</strong> {valueFormatter.format(adminStartUsIndex[key].value)} (
                 {adminStartUsIndex[key].date})
               </span>
             ))}
