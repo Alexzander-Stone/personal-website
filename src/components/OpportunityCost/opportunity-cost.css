@@ -61,6 +61,24 @@
   font-size: var(--oc-text-xs);
 }
 
+.oc-jump-button {
+  margin-top: 0.3rem;
+  width: fit-content;
+  border: 1px solid rgba(59, 130, 246, 0.55);
+  background: rgba(59, 130, 246, 0.14);
+  color: #dbeafe;
+  border-radius: 999px;
+  padding: 0.32rem 0.62rem;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.oc-jump-button:hover {
+  border-color: rgba(96, 165, 250, 0.8);
+  background: rgba(59, 130, 246, 0.24);
+}
+
 .oc-tier-block {
   display: grid;
   gap: 0.72rem;
@@ -520,6 +538,7 @@
 .oc-robustness-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   gap: 0.7rem;
 }
 

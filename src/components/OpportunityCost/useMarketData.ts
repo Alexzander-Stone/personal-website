@@ -35,11 +35,11 @@ const TEN_YEAR_START_DATE = '2015-01-20';
 const HISTORICAL_PEERS_START_DATE = '2013-01-20';
 const HISTORICAL_ANNUAL_RETURN = 0.105;
 const TRADING_DAYS_PER_YEAR = 252;
-const US_INDEX_KEYS: UsIndexKey[] = ['nasdaq', 'sp500'];
+const US_INDEX_KEYS: UsIndexKey[] = ['nasdaq', 'sp500', 'djia'];
 const PEER_BENCHMARK_KEYS: PeerBenchmark[] = ['custom-basket', 'msci-ex-us'];
 const PEER_KEYS = ['kospi', 'ftse', 'nikkei', 'dax'] as const;
 type PeerKey = (typeof PEER_KEYS)[number];
-const CORE_INDEX_KEYS: IndexKey[] = ['nasdaq', 'sp500', 'kospi', 'ftse', 'nikkei', 'dax'];
+const CORE_INDEX_KEYS: IndexKey[] = ['nasdaq', 'sp500', 'djia', 'kospi', 'ftse', 'nikkei', 'dax'];
 const MARKET_INDEX_KEYS: MarketIndexKey[] = [...CORE_INDEX_KEYS, 'vxus'];
 const DEFICIT_DATA_URL = '/data/deficit/deficit-gdp.json';
 const POLICY_EVENTS_URL = '/data/policy/events.json';
@@ -48,6 +48,7 @@ const DATA_LOAD_TIMEOUT_MS = 15000;
 const DATA_URLS: Record<MarketIndexKey, string> = {
   nasdaq: '/data/market/nasdaq.json',
   sp500: '/data/market/sp500.json',
+  djia: '/data/market/djia.json',
   kospi: '/data/market/kospi.json',
   ftse: '/data/market/ftse.json',
   nikkei: '/data/market/nikkei.json',
@@ -202,16 +203,21 @@ function buildCompoundedSeries(dates: string[], startValue: number, dailyRate: n
   }));
 }
 
-function buildConfidenceBands(projected: ChartPoint[], dailyStdDev: number): ConfidenceBands {
-  return projected.reduce<ConfidenceBands>(
-    (acc, point, index) => {
-      const oneSigmaDrift = dailyStdDev * Math.sqrt(index);
-      const twoSigmaDrift = oneSigmaDrift * 2;
+function buildConfidenceBands(
+  dates: string[],
+  startValue: number,
+  dailyLogRate: number,
+  dailyStdDev: number
+): ConfidenceBands {
+  return dates.reduce<ConfidenceBands>(
+    (acc, date, index) => {
+      const drift = (dailyLogRate - (dailyStdDev * dailyStdDev) / 2) * index;
+      const diffusion = dailyStdDev * Math.sqrt(index);
 
-      acc.oneSigma.upper.push({ time: point.time, value: point.value * Math.exp(oneSigmaDrift) });
-      acc.oneSigma.lower.push({ time: point.time, value: point.value * Math.exp(-oneSigmaDrift) });
-      acc.twoSigma.upper.push({ time: point.time, value: point.value * Math.exp(twoSigmaDrift) });
-      acc.twoSigma.lower.push({ time: point.time, value: point.value * Math.exp(-twoSigmaDrift) });
+      acc.oneSigma.upper.push({ time: date, value: startValue * Math.exp(drift + diffusion) });
+      acc.oneSigma.lower.push({ time: date, value: startValue * Math.exp(drift - diffusion) });
+      acc.twoSigma.upper.push({ time: date, value: startValue * Math.exp(drift + 2 * diffusion) });
+      acc.twoSigma.lower.push({ time: date, value: startValue * Math.exp(drift - 2 * diffusion) });
 
       return acc;
     },
@@ -423,8 +429,9 @@ function computeProjection(
   }
 
   const projected = buildCompoundedSeries(projectionDates, projectionAnchor.close, dailyGrowthRate);
+  const dailyLogRate = Math.log(1 + dailyGrowthRate);
   const dailyStdDev = computeLogReturnStdDev(baselineWindow);
-  const confidenceBands = buildConfidenceBands(projected, dailyStdDev);
+  const confidenceBands = buildConfidenceBands(projectionDates, projectionAnchor.close, dailyLogRate, dailyStdDev);
 
   return {
     baseline,
@@ -804,6 +811,7 @@ function computeDerivedData(
     {
       nasdaq: CURRENT_ADMIN_START_DATE,
       sp500: CURRENT_ADMIN_START_DATE,
+      djia: CURRENT_ADMIN_START_DATE,
       kospi: CURRENT_ADMIN_START_DATE,
       ftse: CURRENT_ADMIN_START_DATE,
       nikkei: CURRENT_ADMIN_START_DATE,
@@ -820,6 +828,7 @@ function computeDerivedData(
     {
       nasdaq: [],
       sp500: [],
+      djia: [],
       kospi: [],
       ftse: [],
       nikkei: [],
@@ -860,10 +869,9 @@ function computeDerivedData(
     throw new Error('Unable to compute current administration excess return.');
   }
 
-  const annualizedBase = 1 + latestCurrentAdminExcessPoint.value / 100;
   const annualized =
-    latestCurrentAdminExcessPoint.day > 0 && annualizedBase > 0
-      ? (Math.pow(annualizedBase, TRADING_DAYS_PER_YEAR / latestCurrentAdminExcessPoint.day) - 1) * 100
+    latestCurrentAdminExcessPoint.day > 0
+      ? (latestCurrentAdminExcessPoint.value / latestCurrentAdminExcessPoint.day) * TRADING_DAYS_PER_YEAR
       : 0;
 
   const lastDataDates = CORE_INDEX_KEYS.reduce<Record<IndexKey, string>>(
@@ -878,6 +886,7 @@ function computeDerivedData(
     {
       nasdaq: CURRENT_ADMIN_START_DATE,
       sp500: CURRENT_ADMIN_START_DATE,
+      djia: CURRENT_ADMIN_START_DATE,
       kospi: CURRENT_ADMIN_START_DATE,
       ftse: CURRENT_ADMIN_START_DATE,
       nikkei: CURRENT_ADMIN_START_DATE,
@@ -1056,6 +1065,7 @@ export default function useMarketData(
           {
             nasdaq: [],
             sp500: [],
+            djia: [],
             kospi: [],
             ftse: [],
             nikkei: [],

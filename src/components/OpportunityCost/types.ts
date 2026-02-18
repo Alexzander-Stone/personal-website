@@ -1,6 +1,6 @@
 import type { UTCTimestamp } from 'lightweight-charts';
 
-export type UsIndexKey = 'nasdaq' | 'sp500';
+export type UsIndexKey = 'nasdaq' | 'sp500' | 'djia';
 export type IndexKey = UsIndexKey | 'kospi' | 'ftse' | 'nikkei' | 'dax';
 export type MarketIndexKey = IndexKey | 'vxus';
 export type AdministrationKey = 'obama2' | 'trump1' | 'biden' | 'trump2';

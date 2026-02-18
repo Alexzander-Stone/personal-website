@@ -9,6 +9,7 @@ type Props = {
 const US_INDEX_LABELS: Record<UsIndexKey, string> = {
   nasdaq: 'NASDAQ',
   sp500: 'S&P 500',
+  djia: 'Dow Jones',
 };
 
 const PEER_BENCHMARK_LABELS: Record<PeerBenchmark, string> = {
