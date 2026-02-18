@@ -43,6 +43,7 @@ const CORE_INDEX_KEYS: IndexKey[] = ['nasdaq', 'sp500', 'djia', 'kospi', 'ftse',
 const MARKET_INDEX_KEYS: MarketIndexKey[] = [...CORE_INDEX_KEYS, 'vxus'];
 const DEFICIT_DATA_URL = '/data/deficit/deficit-gdp.json';
 const POLICY_EVENTS_URL = '/data/policy/events.json';
+const DATA_LOAD_TIMEOUT_MS = 15000;
 
 const DATA_URLS: Record<MarketIndexKey, string> = {
   nasdaq: '/data/market/nasdaq.json',
@@ -1017,6 +1018,10 @@ export default function useMarketData(
 
   useEffect(() => {
     const controller = new AbortController();
+    let isActive = true;
+    const timeoutId = window.setTimeout(() => {
+      controller.abort();
+    }, DATA_LOAD_TIMEOUT_MS);
 
     async function load() {
       setLoading(true);
@@ -1072,27 +1077,40 @@ export default function useMarketData(
         const deficitJson = (await deficitResponse.json()) as DeficitDataPoint[];
         const policyJson = (await policyResponse.json()) as PolicyEvent[];
 
+        if (!isActive) {
+          return;
+        }
+
         setRawData(nextData);
         setRawDeficitData(normalizeDeficitData(deficitJson));
         setRawPolicyEvents(normalizePolicyEvents(policyJson));
       } catch (loadError) {
-        if (!controller.signal.aborted) {
-          const message =
-            loadError instanceof Error
-              ? loadError.message
-              : 'Unknown error while loading market and policy data.';
-          setError(message);
+        if (!isActive) {
+          return;
         }
+
+        const isAbortError = loadError instanceof DOMException && loadError.name === 'AbortError';
+        const message = isAbortError
+          ? `Market data request timed out after ${Math.round(DATA_LOAD_TIMEOUT_MS / 1000)}s.`
+          : loadError instanceof Error
+            ? loadError.message
+            : 'Unknown error while loading market and policy data.';
+
+        setError(message);
       } finally {
-        if (!controller.signal.aborted) {
+        if (isActive) {
           setLoading(false);
         }
+
+        window.clearTimeout(timeoutId);
       }
     }
 
     load();
 
     return () => {
+      isActive = false;
+      window.clearTimeout(timeoutId);
       controller.abort();
     };
   }, []);
