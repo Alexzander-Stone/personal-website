@@ -4,7 +4,10 @@ const year = new Date().getFullYear();
 
 <footer>
   <div class="footer-inner">
-    <p class="identity">Alexzander Stone</p>
+    <div class="identity-block">
+      <p class="identity">Alexzander Stone</p>
+      <p class="tagline">Building products where incentives and UX meet.</p>
+    </div>
 
     <div class="social-icons" aria-label="Social links">
       <a href="mailto:alexwrstone@gmail.com" target="_blank" rel="noreferrer" aria-label="Email Alex">
@@ -36,8 +39,16 @@ const year = new Date().getFullYear();
 <style>
   footer {
     margin-top: 4rem;
-    padding-top: 1.35rem;
-    border-top: 1px solid var(--border-subtle);
+    padding: 0 0 1.4rem;
+  }
+
+  footer::before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin-bottom: 1.35rem;
+    background: linear-gradient(to right, var(--accent-warm), transparent 72%);
   }
 
   .footer-inner {
@@ -52,11 +63,22 @@ const year = new Date().getFullYear();
     margin: 0;
   }
 
+  .identity-block {
+    display: grid;
+    gap: 0.08rem;
+  }
+
   .identity {
     color: var(--text-primary);
     font-family: var(--font-heading);
     font-size: 0.98rem;
     letter-spacing: 0.02em;
+  }
+
+  .tagline {
+    color: var(--text-secondary);
+    font-size: 0.84rem;
+    font-style: italic;
   }
 
   .social-icons {
