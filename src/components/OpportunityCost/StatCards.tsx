@@ -60,11 +60,11 @@ export default function StatCards({ summaryStats, asOfDate, usIndexLabel }: Prop
           Opportunity Cost
         </p>
         <p className="oc-stat-value" style={{ color: opportunityCostColor }}>
-          {valueFormatter.format(summaryStats.opportunityCost)}
+          {valueFormatter.format(summaryStats.opportunityCost)} pts
         </p>
         <p className="oc-stat-meta">
           {percentFormatter.format(Math.abs(summaryStats.opportunityCostPct))}% {opportunityCostDirection} baseline
-          (gap / projected); peers gap {valueFormatter.format(summaryStats.globalGap)} vs{' '}
+          (gap / projected); peers gap {valueFormatter.format(summaryStats.globalGap)} pts vs{' '}
           {summaryStats.globalPeersLabel.toLowerCase()}
         </p>
       </article>

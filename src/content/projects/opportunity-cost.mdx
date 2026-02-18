@@ -29,6 +29,8 @@ The key question is not "did US stocks go up?" They usually do. The useful quest
 
 **It compares US stocks against global peers, not against zero.** Raw gains happened in every recent administration window. The excess return chart asks the harder question: did the US beat peers over the same dates?
 
+**Raw gains can mask relative underperformance.** A market can hit record highs while still trailing peers over the same window. "Stocks are up" and "stocks are underperforming the rest of the world" can both be true simultaneously. The excess return chart captures this distinction.
+
 **US outperformance partly reflects sector composition.** The US is tech-heavy (NASDAQ ~50% tech; S&P 500 ~30%), while peer markets have different sector weights. So part of any gap is structural market mix, not administration-specific effects. Switching among NASDAQ, S&P 500, and Dow Jones tests whether the sign survives that composition shift.
 
 **The Dow Jones is a narrow, price-weighted index.** It contains only 30 blue-chip stocks, weighted by share price rather than market capitalization. This makes it more sensitive to individual stock moves and less representative of the broad US market than the S&P 500 (~500 stocks) or NASDAQ Composite (~3,000 stocks). The S&P 500 and NASDAQ toggles provide broader-market cross-checks.
@@ -111,7 +113,7 @@ Projection baseline options (supplementary only):
 
 Each line compounds a daily growth rate estimated from its baseline window.
 
-- Confidence bands use geometric Brownian motion cones ([Sigman, 2006](https://www.columbia.edu/~ks20/FE-Notes/4700-07-Notes-GBM.pdf)): `upper(n) = projected(n) * e^(+sigma*sqrt(n))`.
+- Confidence bands use geometric Brownian motion quantiles ([Sigman, 2006](https://www.columbia.edu/~ks20/FE-Notes/4700-07-Notes-GBM.pdf)): `band(n) = S0 * exp((mu - sigma^2/2)*n +/- k*sigma*sqrt(n))` where `k=1` (~68%) or `k=2` (~95%).
 - 1 sigma is ~68% model-implied coverage; 2 sigma is ~95%.
 - The global peers line is observed-only and rescaled to the selected US index's Jan 2025 anchor (no projection).
 
@@ -138,7 +140,7 @@ Markers show enactment timing and summary only; they do **not** assert causal im
 - Correlation is not causation. Markets respond to many factors beyond any administration.
 - Projections extrapolate trend assumptions; they are not forecasts.
 - International indices face different local conditions (monetary policy, demographics, sector composition).
-- Adjusted-close series reduce dividend-related bias, but cross-market comparability remains imperfect.
+- Adjusted-close series reduce dividend-related bias for individual indices, but treatment varies: Yahoo Finance's adjusted close for US indices (S&P 500, NASDAQ) incorporates dividend reinvestment, while price-return indices like the DAX Kursindex and Nikkei 225 do not. This gives the US side an estimated ~1-2% annualized tailwind in the comparison. VXUS (a total-return ETF) partially offsets this as a cross-check.
 - DAX uses the price-only Kursindex (`^GDAXIP`) for consistency with the chosen DAX benchmark series.
 - VXUS is an ETF proxy and includes fund-level structure effects relative to pure index series.
 

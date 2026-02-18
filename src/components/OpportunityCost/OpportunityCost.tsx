@@ -134,18 +134,24 @@ export default function OpportunityCost() {
       <section className={`oc-verdict oc-verdict-${verdictTone}`} aria-label="Current administration verdict">
         <p className="oc-verdict-kicker">Current snapshot</p>
         <h3 className="oc-verdict-headline">
-          Day {summaryStats.currentAdminExcessDay} of current admin: US excess return is{' '}
-          {formatSignedPercent(summaryStats.currentAdminExcessReturn)} vs peers.
+          Day {summaryStats.currentAdminExcessDay} of current admin: US stocks are{' '}
+          {summaryStats.currentAdminExcessReturn >= 0 ? 'beating' : 'trailing'} global peers by{' '}
+          {percentFormatter.format(Math.abs(summaryStats.currentAdminExcessReturn))} points.
         </h3>
         <p className="oc-verdict-body">
           The {usIndexLabel} has returned {formatSignedPercent(usReturnSinceInauguration)} since{' '}
-          {currentAdminAnchor.date}. {summaryStats.globalPeersLabel} returned{' '}
+          {currentAdminAnchor.date}. {summaryStats.globalPeersLabel} moved{' '}
           {formatSignedPercent(peersReturnSinceInauguration)} over the same window.
         </p>
         <p className="oc-verdict-body">
           The US is currently {excessDirection} peers by {formatPercentPoints(summaryStats.currentAdminExcessReturn)}.
         </p>
         <p className="oc-verdict-meta">As of {summaryStats.currentAdminExcessDate}.</p>
+        {summaryStats.currentAdminExcessDay < 60 && (
+          <p className="oc-verdict-meta" style={{ fontStyle: 'italic' }}>
+            Early window - treat with caution. Short periods amplify noise.
+          </p>
+        )}
         <button type="button" className="oc-jump-button" onClick={openExploreSection}>
           Want more data and controls? Open the Explore section.
         </button>

@@ -444,7 +444,7 @@ export default function OpportunityCostChart({
     legend && typeof legend.actual === 'number' && typeof legend.projected === 'number'
       ? legend.projected - legend.actual
       : null;
-  const formatCurrency = (value: number | null) => (typeof value === 'number' ? valueFormatter.format(value) : '—');
+  const formatValue = (value: number | null) => (typeof value === 'number' ? valueFormatter.format(value) : '—');
   const oneSigmaRange =
     legend && typeof legend.oneSigmaLower === 'number' && typeof legend.oneSigmaUpper === 'number'
       ? `${valueFormatter.format(legend.oneSigmaLower)} to ${valueFormatter.format(legend.oneSigmaUpper)}`
@@ -470,26 +470,26 @@ export default function OpportunityCostChart({
           <div className="oc-hover-subgrid">
             <div className="oc-hover-metric">
               <span className="oc-hover-metric-label">Actual</span>
-              <span className="oc-hover-metric-value" title={`Actual ${formatCurrency(legend?.actual ?? null)}`}>
-                {formatCurrency(legend?.actual ?? null)}
+              <span className="oc-hover-metric-value" title={`Actual ${formatValue(legend?.actual ?? null)}`}>
+                {formatValue(legend?.actual ?? null)}
               </span>
             </div>
             <div className="oc-hover-metric">
               <span className="oc-hover-metric-label">Baseline</span>
-              <span className="oc-hover-metric-value" title={`Baseline ${formatCurrency(legend?.projected ?? null)}`}>
-                {formatCurrency(legend?.projected ?? null)}
+              <span className="oc-hover-metric-value" title={`Baseline ${formatValue(legend?.projected ?? null)}`}>
+                {formatValue(legend?.projected ?? null)}
               </span>
             </div>
             <div className="oc-hover-metric">
               <span className="oc-hover-metric-label">Peers</span>
-              <span className="oc-hover-metric-value" title={`Peers ${formatCurrency(legend?.globalPeers ?? null)}`}>
-                {formatCurrency(legend?.globalPeers ?? null)}
+              <span className="oc-hover-metric-value" title={`Peers ${formatValue(legend?.globalPeers ?? null)}`}>
+                {formatValue(legend?.globalPeers ?? null)}
               </span>
             </div>
             <div className="oc-hover-metric">
               <span className="oc-hover-metric-label">Gap</span>
-              <span className="oc-hover-metric-value" title={`Gap ${formatCurrency(gap)}`}>
-                {formatCurrency(gap)}
+              <span className="oc-hover-metric-value" title={`Gap ${formatValue(gap)}`}>
+                {formatValue(gap)}
               </span>
             </div>
           </div>
