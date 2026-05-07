@@ -40,6 +40,7 @@ const projectCount = allProjects.length;
             width={project.data.image.width.mini}
             height={project.data.image.height.mini}
             tags={project.data.tags}
+            pubDate={project.data.pubDate}
           />
         ))
       }
@@ -51,19 +52,19 @@ const projectCount = allProjects.length;
 
 <style>
   .heading {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     display: grid;
-    gap: 0.45rem;
+    gap: 0.35rem;
   }
 
   .heading h1 {
     margin: 0;
-    font-size: clamp(1.9rem, 4vw, 2.4rem);
+    font-size: clamp(2rem, 4vw, 2.55rem);
   }
 
   .heading p {
     margin: 0;
-    max-width: 70ch;
+    max-width: 68ch;
     color: var(--text-secondary);
   }
 
@@ -72,13 +73,6 @@ const projectCount = allProjects.length;
     padding: 0;
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-  }
-
-  @media (max-width: 980px) {
-    .project-grid {
-      grid-template-columns: 1fr;
-    }
+    gap: 0;
   }
 </style>

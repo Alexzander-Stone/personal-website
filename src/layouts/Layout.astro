@@ -3,8 +3,6 @@ import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 import { profile } from '../data/profile';
 
-import '@fontsource-variable/space-grotesk';
-import '@fontsource-variable/inter';
 import '@fontsource/jetbrains-mono';
 
 interface Props {
@@ -115,7 +113,7 @@ const schemaGraph = [
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
-    <meta name="theme-color" content="#f7f1e4" />
+    <meta name="theme-color" content="#f8f7f3" />
     {schemaGraph.length > 0 && (
       <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
     )}

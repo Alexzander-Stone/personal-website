@@ -9,16 +9,37 @@ interface Props {
   width?: number;
   height?: number;
   tags?: string[];
+  pubDate?: string | Date;
   delayMs?: number;
 }
 
-const { href, photoUrl, photoAlt, title, body, headingTag = 'h3', width, height, tags = [] } = Astro.props;
-const visibleTags = tags.slice(0, 4);
+const {
+  href,
+  photoUrl,
+  photoAlt,
+  title,
+  body,
+  headingTag = 'h3',
+  width,
+  height,
+  tags = [],
+  pubDate,
+} = Astro.props;
+const visibleTags = tags.slice(0, 5);
 const extraTags = tags.length - visibleTags.length;
+const parsedDate = pubDate ? new Date(pubDate) : null;
+const formattedDate =
+  parsedDate && !Number.isNaN(parsedDate.getTime())
+    ? parsedDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : undefined;
 ---
 
 <li class="project-card">
-  <a href={href}>
+  <a class="project-link" href={href}>
     <figure class="media">
       <img
         src={photoUrl}
@@ -31,19 +52,16 @@ const extraTags = tags.length - visibleTags.length;
     </figure>
 
     <div class="card-content">
-      {
-        headingTag === 'h2' ? (
-          <h2 class="card-title">
-            {title}
-            <span class="arrow" aria-hidden="true">→</span>
-          </h2>
-        ) : (
-          <h3 class="card-title">
-            {title}
-            <span class="arrow" aria-hidden="true">→</span>
-          </h3>
-        )
-      }
+      <div class="title-row">
+        {
+          headingTag === 'h2' ? (
+            <h2 class="card-title">{title}</h2>
+          ) : (
+            <h3 class="card-title">{title}</h3>
+          )
+        }
+        {formattedDate && <p class="date">{formattedDate}</p>}
+      </div>
 
       <p>{body}</p>
 
@@ -64,65 +82,77 @@ const extraTags = tags.length - visibleTags.length;
     list-style: none;
   }
 
-  .project-card > a {
+  .project-link {
     display: grid;
-    gap: 0;
-    text-decoration: none;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem 0;
     color: inherit;
-    border-radius: 8px;
-    overflow: hidden;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    transition:
-      transform 280ms var(--ease-out-expo),
-      box-shadow 280ms var(--ease-out-expo),
-      border-color 180ms ease;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .project-link:hover .card-title,
+  .project-link:focus-visible .card-title {
+    color: var(--accent-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
   }
 
   .media {
-    margin: 0;
-    aspect-ratio: 16 / 9;
+    margin: 0.2rem 0 0;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
     background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
   }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 300ms var(--ease-out-expo);
   }
 
   .card-content {
-    padding: 1rem;
+    min-width: 0;
     display: grid;
-    gap: 0.55rem;
+    gap: 0.35rem;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .card-title {
     margin: 0;
-    font-size: 1.06rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.45rem;
+    font-size: 1.08rem;
+    line-height: 1.25;
   }
 
-  .arrow {
+  .date {
+    margin: 0;
+    flex-shrink: 0;
     color: var(--text-muted);
-    font-size: 0.95rem;
-    transition: transform 260ms var(--ease-out-expo);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    line-height: 1.3;
+    white-space: nowrap;
   }
 
   p {
     margin: 0;
     color: var(--text-secondary);
-    line-height: 1.5;
-    font-size: 0.92rem;
+    line-height: 1.48;
+    font-size: 0.95rem;
   }
 
   .tags {
-    margin: 0;
+    margin: 0.1rem 0 0;
     padding: 0;
     list-style: none;
     display: flex;
@@ -132,10 +162,9 @@ const extraTags = tags.length - visibleTags.length;
 
   .tags li {
     margin: 0;
+    color: var(--text-muted);
+    font-family: var(--font-ui);
     font-size: var(--tag-font-size);
-    color: var(--text-primary);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
     background: var(--tag-bg);
     border: 1px solid var(--tag-border);
     border-radius: var(--tag-radius);
@@ -144,24 +173,21 @@ const extraTags = tags.length - visibleTags.length;
 
   .more {
     color: var(--text-muted);
-    background: transparent;
-    border-color: var(--border-subtle);
   }
 
-  .project-card:hover > a,
-  .project-card:focus-within > a {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-soft);
-    border-color: rgba(47, 132, 136, 0.68);
-  }
+  @media (max-width: 640px) {
+    .project-link {
+      grid-template-columns: 5.75rem minmax(0, 1fr);
+      gap: 0.8rem;
+    }
 
-  .project-card:hover img,
-  .project-card:focus-within img {
-    transform: scale(1.03);
-  }
+    .title-row {
+      display: grid;
+      gap: 0.1rem;
+    }
 
-  .project-card:hover .arrow,
-  .project-card:focus-within .arrow {
-    transform: translateX(3px);
+    .date {
+      white-space: normal;
+    }
   }
 </style>

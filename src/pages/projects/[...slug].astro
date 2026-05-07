@@ -290,49 +290,46 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
 
 <style>
   .project-page {
-    width: min(900px, calc(100% - 2rem));
+    width: min(780px, calc(100% - 2rem));
     position: relative;
   }
 
   .hero-media {
-    margin: 0 calc(50% - 50vw) 1.4rem;
-    max-height: min(60vh, 680px);
+    margin: 0 0 1rem;
     position: relative;
     overflow: hidden;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
   }
 
   .hero-media::after {
-    content: '';
-    position: absolute;
-    inset: auto 0 0;
-    height: clamp(44px, 8vh, 88px);
-    background: linear-gradient(to top, var(--bg-deep), transparent);
-    pointer-events: none;
+    content: none;
   }
 
   .hero-media img {
     width: 100%;
-    height: 100%;
-    max-height: min(60vh, 680px);
-    object-fit: cover;
+    max-height: 360px;
+    object-fit: contain;
   }
 
   .article-head {
     display: grid;
-    gap: 0.72rem;
-    margin-bottom: 1.35rem;
+    gap: 0.5rem;
+    margin-bottom: 1.4rem;
   }
 
   .source,
   .meta {
     margin: 0;
     color: var(--text-muted);
+    font-family: var(--font-ui);
     font-size: 0.84rem;
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-size: clamp(2rem, 4.5vw, 2.65rem);
   }
 
   .tags {
@@ -346,10 +343,9 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
 
   .tags li {
     margin: 0;
+    font-family: var(--font-ui);
     font-size: var(--tag-font-size);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--text-primary);
+    color: var(--text-muted);
     border: 1px solid var(--tag-border);
     border-radius: var(--tag-radius);
     padding: var(--tag-padding);
@@ -386,24 +382,22 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
 
   .project-progress {
     position: fixed;
-    top: 7.2rem;
-    left: calc(50% + 470px);
+    top: 5.5rem;
+    left: calc(50% + 410px);
     width: 220px;
-    background: rgba(255, 248, 237, 0.86);
+    background: var(--bg-deep);
     border: 1px solid var(--border-subtle);
-    border-radius: 10px;
-    box-shadow: var(--shadow-soft);
+    border-radius: 4px;
     padding: 0.72rem 0.72rem 0.76rem;
     z-index: 2;
-    backdrop-filter: blur(2px);
   }
 
   .project-progress-title {
     margin: 0 0 0.45rem;
     color: var(--text-muted);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 600;
   }
 
   .project-progress-list {
@@ -422,7 +416,7 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
     top: 0.45rem;
     bottom: 0.45rem;
     width: 1px;
-    background: rgba(126, 104, 79, 0.36);
+    background: var(--border-subtle);
   }
 
   :global(.project-progress-list li) {
@@ -434,6 +428,7 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
     position: relative;
     display: block;
     color: var(--text-secondary);
+    font-family: var(--font-ui);
     font-size: 0.74rem;
     line-height: 1.28;
     text-decoration: none;
@@ -452,7 +447,7 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
     height: 0.34rem;
     border-radius: 999px;
     background: var(--bg-deep);
-    border: 1px solid rgba(126, 104, 79, 0.5);
+    border: 1px solid var(--border-subtle);
   }
 
   :global(.project-progress-list a.is-subsection) {
@@ -475,7 +470,7 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
     top: 0.77rem;
     width: 0.53rem;
     height: 1px;
-    background: rgba(126, 104, 79, 0.42);
+    background: var(--border-subtle);
   }
 
   :global(.project-progress-list a:hover) {
@@ -484,7 +479,7 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
 
   :global(.project-progress-list a.is-active) {
     color: var(--text-primary);
-    background: rgba(47, 132, 136, 0.13);
+    background: var(--bg-surface-hover);
   }
 
   :global(.project-progress-list a.is-active::before) {
@@ -494,7 +489,7 @@ const pubDate = project.data.pubDate.toLocaleDateString('en-US', {
 
   @media (max-width: 760px) {
     .project-page {
-      width: min(900px, calc(100% - 1.4rem));
+      width: min(780px, calc(100% - 1.4rem));
     }
 
     :global(.prose h1),
