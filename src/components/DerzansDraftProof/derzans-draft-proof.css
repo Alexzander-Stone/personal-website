@@ -1,0 +1,264 @@
+.dd-proof-viewer {
+  display: grid;
+  gap: 1.35rem;
+  margin: 1.4rem 0 0;
+  font-family: var(--font-ui);
+}
+
+.dd-proof-viewer h2,
+.dd-proof-viewer h3,
+.dd-proof-viewer p,
+.dd-proof-viewer dl,
+.dd-proof-viewer dd,
+.dd-proof-viewer ul {
+  margin: 0;
+}
+
+.dd-proof-viewer h2,
+.dd-proof-viewer h3 {
+  font-family: var(--font-heading);
+}
+
+.dd-proof-summary,
+.dd-finding,
+.dd-comp-block,
+.dd-branch-detail,
+.dd-glossary,
+.dd-omissions {
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  background: var(--bg-surface);
+}
+
+.dd-proof-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem;
+}
+
+.dd-proof-summary h2 {
+  font-size: 1.35rem;
+}
+
+.dd-proof-summary p,
+.dd-finding p,
+.dd-why p,
+.dd-glossary dd,
+.dd-omissions li {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.dd-kicker,
+.dd-status,
+.dd-team-head,
+.dd-picks dt,
+.dd-bans span,
+.dd-metric-row span,
+.dd-why span,
+.dd-glossary dt {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.dd-metric-row span {
+  color: var(--text-secondary);
+}
+
+.dd-status {
+  align-self: flex-start;
+  flex-shrink: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 0.22rem 0.55rem;
+  color: var(--accent-primary);
+  background: var(--bg-elevated);
+}
+
+.dd-finding,
+.dd-glossary,
+.dd-omissions {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.1rem;
+}
+
+.dd-boundary {
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 0.8rem;
+}
+
+.dd-comp-block {
+  overflow: hidden;
+}
+
+.dd-comp-heading {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+}
+
+.dd-comp-heading h3 {
+  font-size: 1rem;
+}
+
+.dd-comp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dd-team {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+}
+
+.dd-team + .dd-team {
+  border-left: 1px solid var(--border-subtle);
+}
+
+.dd-team-head span {
+  color: var(--text-primary);
+}
+
+.dd-picks {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.dd-picks div {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: baseline;
+  padding-bottom: 0.42rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dd-picks div:last-child {
+  border-bottom: 0;
+}
+
+.dd-picks dd {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.dd-bans {
+  display: grid;
+  gap: 0.2rem;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.dd-branches {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.dd-branch-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.5rem;
+}
+
+.dd-branch-list button {
+  appearance: none;
+  display: grid;
+  gap: 0.2rem;
+  min-height: 4.1rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.dd-branch-list button:hover,
+.dd-branch-list button:focus-visible,
+.dd-branch-list button.is-active {
+  border-color: var(--accent-primary);
+}
+
+.dd-branch-list span {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.dd-branch-list strong {
+  font-size: 0.98rem;
+}
+
+.dd-branch-detail {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.dd-metric-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.dd-metric-row div {
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.72rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  background: var(--bg-elevated);
+}
+
+.dd-metric-row strong {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.dd-why {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.dd-glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1rem;
+}
+
+.dd-glossary-grid div {
+  display: grid;
+  gap: 0.16rem;
+}
+
+.dd-omissions ul {
+  display: grid;
+  gap: 0.35rem;
+  padding-left: 1.1rem;
+}
+
+@media (max-width: 720px) {
+  .dd-proof-summary,
+  .dd-comp-grid,
+  .dd-metric-row,
+  .dd-glossary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dd-proof-summary {
+    display: grid;
+  }
+
+  .dd-team + .dd-team {
+    border-left: 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+}

@@ -1,0 +1,234 @@
+---
+import DerzansDraftProof from '../../components/DerzansDraftProof/DerzansDraftProof';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Derzan's Draft | Alexzander Stone"
+  description="An analyst-facing League of Legends draft proof viewer for inspecting legal branch alternatives under explicit assumptions."
+  tags={['league of legends', 'draft', 'game theory', 'mcts', 'esports analytics']}
+>
+  <Header />
+
+  <main class="derzan-page">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Derzan's Draft</p>
+        <h1>Draft prep that remembers every branch.</h1>
+        <p>
+          Derzan's Draft turns analyst-reviewed champion values, matchup notes, flex rules,
+          comfort picks, and series constraints into a searchable League of Legends draft model.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-link" href="mailto:alexwrstone@gmail.com?subject=Derzan%27s%20Draft%20private%20pilot">
+            Run a private draft audit
+          </a>
+          <a href="#proof">View the public proof</a>
+        </div>
+      </div>
+
+      <figure class="hero-media">
+        <img
+          src="/projects/draft-ai/draft_complete.PNG"
+          alt="Derzan's Draft command-line draft output"
+          width="766"
+          height="431"
+          loading="eager"
+          decoding="async"
+        />
+      </figure>
+    </section>
+
+    <section class="explain">
+      <h2>Built for analyst-authored draft intelligence.</h2>
+      <p>
+        The useful output is not a black-box answer. It is a branch you can inspect:
+        what action was recommended, how the rest of the draft continued, which assumptions
+        mattered, what simple baselines it beat, and where the caveats are.
+      </p>
+    </section>
+
+    <section id="proof" class="proof-section">
+      <div class="section-head">
+        <h2>Inspect a solved-under-model draft proof.</h2>
+        <a href="/derzans-draft/proof/">Open focused proof view</a>
+      </div>
+      <DerzansDraftProof client:load />
+    </section>
+
+    <section class="philosophy">
+      <h2>The difference is branch consequence.</h2>
+      <p>
+        Most draft prep tools help answer one-turn questions: which champion is strong,
+        which matchup is favored, or which pick is comfortable. Derzan asks what happens
+        after that action is forced and both teams continue legally.
+      </p>
+      <ol>
+        <li>State the assumptions.</li>
+        <li>Search legal branches.</li>
+        <li>Review full-draft consequences.</li>
+      </ol>
+    </section>
+
+    <section class="pilot">
+      <h2>Run one private draft audit.</h2>
+      <p>
+        Bring one historical draft, one narrow prep scenario, or one disputed branch.
+        We will model the assumptions you are comfortable sharing, generate a reproducible
+        proof export, and review the results in a read-only viewer.
+      </p>
+      <a class="primary-link" href="mailto:alexwrstone@gmail.com?subject=Derzan%27s%20Draft%20private%20pilot">
+        Ask about a private pilot
+      </a>
+    </section>
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .derzan-page {
+    width: min(1080px, calc(100% - 2rem));
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(19rem, 1.05fr);
+    gap: 2rem;
+    align-items: center;
+    padding: 1.4rem 0 2rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .hero-copy {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: var(--accent-primary);
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .hero h1 {
+    max-width: 10ch;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+  }
+
+  .hero p,
+  .explain p,
+  .philosophy p,
+  .pilot p {
+    margin: 0;
+    max-width: 66ch;
+    color: var(--text-secondary);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 0.35rem;
+    font-family: var(--font-ui);
+  }
+
+  .primary-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.4rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--accent-primary);
+    border-radius: 4px;
+    background: var(--accent-primary);
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .primary-link:hover,
+  .primary-link:focus-visible {
+    color: #fff;
+    background: #174a78;
+  }
+
+  .hero-media {
+    margin: 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg-elevated);
+  }
+
+  .hero-media img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .explain,
+  .proof-section,
+  .philosophy,
+  .pilot {
+    display: grid;
+    gap: 0.75rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .section-head a {
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+  }
+
+  .philosophy ol {
+    margin: 0.4rem 0 0;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .philosophy li {
+    color: var(--text-secondary);
+  }
+
+  .pilot {
+    border-bottom: 0;
+  }
+
+  .pilot .primary-link {
+    width: fit-content;
+  }
+
+  @media (max-width: 820px) {
+    .derzan-page {
+      width: min(920px, calc(100% - 1.4rem));
+    }
+
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .hero h1 {
+      max-width: 12ch;
+    }
+  }
+</style>
