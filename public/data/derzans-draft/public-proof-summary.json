@@ -1,0 +1,742 @@
+{
+  "artifact_type": "derzan_public_proof_summary",
+  "redaction_level": "public",
+  "release_note": "Sanitized from internal proof exports. Exact seeds, search effort values, raw EVs, visit counts, local paths, config paths, and trace trees are omitted.",
+  "claim_boundary": [
+    "Derzan benchmark outputs are model-bound.",
+    "Solved wording is allowed only when the underlying proof artifact passes its claim gate.",
+    "Manual external comparators are sourced comparison rows, not authority labels.",
+    "Solved this game draft under this explicit analyst-authored model and search effort.",
+    "Public summary is model-bound and does not claim guaranteed match outcome, global champion strength, or coaching error."
+  ],
+  "benchmark_suite": {
+    "suite_id": "derzan-v1",
+    "title": "Derzan Benchmark Spine V1",
+    "entries": [
+      {
+        "id": "flex-mini-branch-trace",
+        "type": "trace_branches",
+        "claim_label": "Synthetic flex and hidden-role branch search",
+        "artifact_status": "sanitized_summary_only",
+        "summary": {
+          "case_id": "flex-mini",
+          "claim_status": "valid",
+          "claim_language": "Branch trace demonstrates search mechanics, not draft truth.",
+          "result_headline": "Top traced action: red pick jinx (bot).",
+          "manual_comparator_bucket": "none"
+        }
+      },
+      {
+        "id": "t1-drx-analyst-solved-draft",
+        "type": "solve_draft",
+        "claim_label": "T1/DRX Game 5 solved under analyst-authored model",
+        "artifact_status": "sanitized_summary_only",
+        "summary": {
+          "case_id": "worlds-2022-final-g5-analyst",
+          "claim_status": "pass",
+          "claim_language": "Solved this game draft under this explicit analyst-authored model and search effort.",
+          "result_headline": "Solved-under-model branch claim passed.",
+          "manual_comparator_bucket": "multiple sourced comparators"
+        }
+      }
+    ],
+    "claim_boundary": [
+      "Derzan benchmark outputs are model-bound.",
+      "Solved wording is allowed only when the underlying proof artifact passes its claim gate.",
+      "Manual external comparators are sourced comparison rows, not authority labels."
+    ]
+  },
+  "case_study": {
+    "case_id": "worlds-2022-final-g5-analyst",
+    "title": "Analyst-Authored Solved-Draft Benchmark: T1 vs DRX Worlds 2022 Final Game 5",
+    "model_class": "analyst-authored public case study",
+    "focus_team": 1,
+    "teams": {
+      "1": "T1",
+      "-1": "DRX"
+    },
+    "source_links": [
+      {
+        "label": "Analyst config rationale",
+        "note": "Documents public facts versus analyst judgment.",
+        "url_status": "omitted_internal_or_local_reference"
+      },
+      {
+        "label": "Games of Legends Game 1",
+        "note": "Pre-Game-5 draft source.",
+        "url": "https://gol.gg/game/stats/44417/page-game/"
+      },
+      {
+        "label": "Games of Legends Game 2",
+        "note": "Pre-Game-5 draft source.",
+        "url": "https://gol.gg/game/stats/44418/page-game/"
+      },
+      {
+        "label": "Games of Legends Game 3",
+        "note": "Pre-Game-5 draft source.",
+        "url": "https://gol.gg/game/stats/44419/page-game/"
+      },
+      {
+        "label": "Games of Legends Game 4",
+        "note": "Pre-Game-5 draft source.",
+        "url": "https://gol.gg/game/stats/44420/page-game/"
+      },
+      {
+        "label": "Games of Legends Game 5",
+        "note": "Actual Game 5 draft sequence for comparison.",
+        "url": "https://gol.gg/game/stats/44421/page-game/"
+      },
+      {
+        "label": "Leaguepedia Finals picks and bans",
+        "note": "Cross-check for Worlds final pick/ban table.",
+        "url": "https://lol.fandom.com/wiki/2022_Season_World_Championship/Main_Event/Picks_and_Bans/Bracket_Stage#Finals"
+      },
+      {
+        "label": "Dot Esports pre-final champion priority article",
+        "note": "Pre-final public context for contested champions.",
+        "url": "https://dotesports.com/league-of-legends/news/6-champions-that-will-dictate-final-series-worlds-2022-t1-drx"
+      }
+    ],
+    "search_summary": {
+      "mode": "iterations",
+      "seed_coverage": "multi-seed check",
+      "branch_seed_coverage": "many",
+      "search_effort_coverage": "many"
+    },
+    "claim_status": {
+      "status": "pass",
+      "minimum_claim": "The solved-draft claim is branch-gated. Point-level wins are supporting context only.",
+      "full_branch_claim_status": {
+        "status": "pass",
+        "branch_points_pass": true,
+        "seed_coverage": "many",
+        "search_effort_coverage": "many",
+        "minimum_claim": "Solved under this explicit model is allowed only when branch points pass with at least sufficient seed coverage and configured production search-effort sweep."
+      },
+      "point_matrix_status": {
+        "status": "needs_more_evidence",
+        "passed_point_count": 3,
+        "failed_point_count": 1,
+        "passed_points": [
+          {
+            "id": "t1-b1-after-lux-ban",
+            "delta_bucket": "large_positive",
+            "baseline_result": "beats_multiple_baselines",
+            "stability_bucket": "stable"
+          },
+          {
+            "id": "t1-b3-before-viktor",
+            "delta_bucket": "large_positive",
+            "baseline_result": "beats_multiple_baselines",
+            "stability_bucket": "stable"
+          },
+          {
+            "id": "t1-second-phase-before-viego",
+            "delta_bucket": "moderate_positive",
+            "baseline_result": "beats_multiple_baselines",
+            "stability_bucket": "stable"
+          }
+        ],
+        "failed_points": [
+          {
+            "id": "t1-second-ban-after-aatrox",
+            "delta_bucket": "moderate_positive",
+            "baseline_result": "beats_multiple_baselines",
+            "stability_bucket": "unstable_or_mixed"
+          }
+        ],
+        "minimum_claim": "The export supports inspectable MCTS alternatives; strong solve wording requires each claimed point to beat actual plus two baselines across seeds."
+      }
+    },
+    "result_summary": {
+      "status": "pass",
+      "headline": "Solved-under-model branch claim passed.",
+      "failed_condition_count": 0
+    },
+    "claim_language": "Solved this game draft under this explicit analyst-authored model and search effort.",
+    "caveats": [
+      "This does not prove T1 would win the game.",
+      "This does not prove the coach was wrong.",
+      "The result depends on the frozen model, manual matchup modifiers, seeds, and search effort."
+    ],
+    "decision_summaries": [
+      {
+        "id": "t1-b1-after-lux-ban",
+        "label": "T1 B1 After The Surprise Lux Ban",
+        "description": "DRX's Lux ban left Caitlyn open for the first time in the series. This decision point asks what blue side should first pick before seeing DRX's first two selections.",
+        "actual_action": {
+          "negated": false,
+          "player": 1,
+          "position": "support",
+          "champion": "karma"
+        },
+        "derzan_recommendation": {
+          "negated": false,
+          "player": 1,
+          "position": "top",
+          "champion": "aatrox"
+        },
+        "delta_bucket": "large_positive",
+        "aatrox_available_before_decision": true,
+        "aatrox_seen_in_derzan_branch": true,
+        "candidate_rows": [
+          {
+            "source_labels": [
+              "derzan_mcts",
+              "deny_opponent_comfort"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "top",
+              "champion": "aatrox"
+            },
+            "relative_to_actual_bucket": "large_positive",
+            "explanation_factors": [
+              "Top action from Derzan MCTS at this decision point.",
+              "Greedy baseline denying DRX comfort from Games 1-4."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "comfort"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "bot",
+              "champion": "varus"
+            },
+            "relative_to_actual_bucket": "moderate_positive",
+            "explanation_factors": [
+              "Greedy baseline using T1 comfort from Games 1-4."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "highest_presence"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "jungle",
+              "champion": "viego"
+            },
+            "relative_to_actual_bucket": "small_positive",
+            "explanation_factors": [
+              "Greedy baseline using highest public pick/ban presence."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "actual"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "support",
+              "champion": "karma"
+            },
+            "relative_to_actual_bucket": "not_positive",
+            "explanation_factors": [
+              "Actual T1 action from the public Game 5 draft."
+            ],
+            "projected_branch_available": true
+          }
+        ]
+      },
+      {
+        "id": "t1-b3-before-viktor",
+        "label": "T1 B3 Before Locking Viktor",
+        "description": "T1 had already selected Karma and Varus while DRX had Azir and Caitlyn. This point tests whether the analyst model makes Aatrox denial a full-branch priority.",
+        "actual_action": {
+          "negated": false,
+          "player": 1,
+          "position": "mid",
+          "champion": "viktor"
+        },
+        "derzan_recommendation": {
+          "negated": false,
+          "player": 1,
+          "position": "top",
+          "champion": "aatrox"
+        },
+        "delta_bucket": "large_positive",
+        "aatrox_available_before_decision": true,
+        "aatrox_seen_in_derzan_branch": true,
+        "candidate_rows": [
+          {
+            "source_labels": [
+              "derzan_mcts",
+              "comfort",
+              "deny_opponent_comfort"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "top",
+              "champion": "aatrox"
+            },
+            "relative_to_actual_bucket": "large_positive",
+            "explanation_factors": [
+              "Top action from Derzan MCTS at this decision point.",
+              "Greedy baseline using T1 comfort from Games 1-4.",
+              "Greedy baseline denying DRX comfort from Games 1-4."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "highest_presence"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "jungle",
+              "champion": "viego"
+            },
+            "relative_to_actual_bucket": "moderate_positive",
+            "explanation_factors": [
+              "Greedy baseline using highest public pick/ban presence."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "actual"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "mid",
+              "champion": "viktor"
+            },
+            "relative_to_actual_bucket": "not_positive",
+            "explanation_factors": [
+              "Actual T1 action from the public Game 5 draft."
+            ],
+            "projected_branch_available": true
+          }
+        ]
+      },
+      {
+        "id": "t1-second-ban-after-aatrox",
+        "label": "T1 Second Ban After DRX Took Aatrox",
+        "description": "Actual-state checkpoint retained as supporting context.",
+        "actual_action": {
+          "negated": true,
+          "player": 1,
+          "position": "jungle",
+          "champion": "sejuani"
+        },
+        "derzan_recommendation": {
+          "negated": true,
+          "player": 1,
+          "position": "bot",
+          "champion": "kalista"
+        },
+        "delta_bucket": "moderate_positive",
+        "aatrox_available_before_decision": false,
+        "aatrox_seen_in_derzan_branch": false,
+        "candidate_rows": [
+          {
+            "source_labels": [
+              "derzan_mcts"
+            ],
+            "action": {
+              "negated": true,
+              "player": 1,
+              "position": "bot",
+              "champion": "kalista"
+            },
+            "relative_to_actual_bucket": "moderate_positive",
+            "explanation_factors": [
+              "Top action from Derzan MCTS at this decision point."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "comfort"
+            ],
+            "action": {
+              "negated": true,
+              "player": 1,
+              "position": "jungle",
+              "champion": "graves"
+            },
+            "relative_to_actual_bucket": "moderate_positive",
+            "explanation_factors": [
+              "Greedy baseline using T1 comfort from Games 1-4."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "highest_presence"
+            ],
+            "action": {
+              "negated": true,
+              "player": 1,
+              "position": "jungle",
+              "champion": "viego"
+            },
+            "relative_to_actual_bucket": "moderate_positive",
+            "explanation_factors": [
+              "Greedy baseline using highest public pick/ban presence."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "deny_opponent_comfort"
+            ],
+            "action": {
+              "negated": true,
+              "player": 1,
+              "position": "mid",
+              "champion": "sylas"
+            },
+            "relative_to_actual_bucket": "small_positive",
+            "explanation_factors": [
+              "Greedy baseline denying DRX comfort from Games 1-4."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "actual"
+            ],
+            "action": {
+              "negated": true,
+              "player": 1,
+              "position": "jungle",
+              "champion": "sejuani"
+            },
+            "relative_to_actual_bucket": "not_positive",
+            "explanation_factors": [
+              "Actual T1 action from the public Game 5 draft."
+            ],
+            "projected_branch_available": true
+          }
+        ]
+      },
+      {
+        "id": "t1-second-phase-before-viego",
+        "label": "T1 Second Phase Before Viego",
+        "description": "Actual-state checkpoint retained as supporting context.",
+        "actual_action": {
+          "negated": false,
+          "player": 1,
+          "position": "jungle",
+          "champion": "viego"
+        },
+        "derzan_recommendation": {
+          "negated": false,
+          "player": 1,
+          "position": "jungle",
+          "champion": "graves"
+        },
+        "delta_bucket": "moderate_positive",
+        "aatrox_available_before_decision": false,
+        "aatrox_seen_in_derzan_branch": false,
+        "candidate_rows": [
+          {
+            "source_labels": [
+              "derzan_mcts",
+              "comfort"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "jungle",
+              "champion": "graves"
+            },
+            "relative_to_actual_bucket": "moderate_positive",
+            "explanation_factors": [
+              "Top action from Derzan MCTS at this decision point.",
+              "Greedy baseline using T1 comfort from Games 1-4."
+            ],
+            "projected_branch_available": true
+          },
+          {
+            "source_labels": [
+              "actual",
+              "highest_presence",
+              "deny_opponent_comfort"
+            ],
+            "action": {
+              "negated": false,
+              "player": 1,
+              "position": "jungle",
+              "champion": "viego"
+            },
+            "relative_to_actual_bucket": "not_positive",
+            "explanation_factors": [
+              "Actual T1 action from the public Game 5 draft.",
+              "Greedy baseline using highest public pick/ban presence.",
+              "Greedy baseline denying DRX comfort from Games 1-4."
+            ],
+            "projected_branch_available": true
+          }
+        ]
+      }
+    ],
+    "full_branch_summary": {
+      "enabled": true,
+      "status": "pass",
+      "claim_status": {
+        "status": "pass",
+        "branch_points_pass": true,
+        "seed_coverage": "many",
+        "search_effort_coverage": "many",
+        "minimum_claim": "Solved under this explicit model is allowed only when branch points pass with at least sufficient seed coverage and configured production search-effort sweep."
+      },
+      "pass_criteria": [
+        "Derzan terminal branch EV beats actual full branch.",
+        "At least 80% of seeds beat actual at every reported search effort.",
+        "The lower 95% confidence bound for EV delta stays above zero.",
+        "Derzan beats at least two simple baseline branches.",
+        "The Derzan branch is legal and terminal and does not give Aatrox to DRX."
+      ],
+      "benchmark_count": 2,
+      "benchmarks": [
+        {
+          "decision_point": "t1-b1-after-lux-ban",
+          "label": "T1 B1 After The Surprise Lux Ban",
+          "actual_action_at_point": {
+            "negated": false,
+            "player": 1,
+            "position": "support",
+            "champion": "karma"
+          },
+          "derzan_root_action": {
+            "negated": false,
+            "player": 1,
+            "position": "top",
+            "champion": "aatrox"
+          },
+          "status": "pass",
+          "root_action_stability": "moderate",
+          "search_effort_summaries": [
+            {
+              "delta_bucket": "very_large_positive",
+              "confidence_bucket": "high_positive",
+              "baseline_result": "beats_multiple_baselines",
+              "prevents_drx_aatrox": true,
+              "passes": true
+            },
+            {
+              "delta_bucket": "very_large_positive",
+              "confidence_bucket": "high_positive",
+              "baseline_result": "beats_multiple_baselines",
+              "prevents_drx_aatrox": true,
+              "passes": true
+            },
+            {
+              "delta_bucket": "very_large_positive",
+              "confidence_bucket": "high_positive",
+              "baseline_result": "beats_multiple_baselines",
+              "prevents_drx_aatrox": true,
+              "passes": true
+            },
+            {
+              "delta_bucket": "very_large_positive",
+              "confidence_bucket": "high_positive",
+              "baseline_result": "beats_multiple_baselines",
+              "prevents_drx_aatrox": true,
+              "passes": true
+            }
+          ],
+          "candidate_rows": [
+            {
+              "source_labels": [
+                "derzan_mcts",
+                "deny_opponent_comfort",
+                "public_consensus_priority"
+              ],
+              "root_action": {
+                "negated": false,
+                "player": 1,
+                "position": "top",
+                "champion": "aatrox"
+              },
+              "continuation_policy": "mcts",
+              "delta_bucket": "very_large_positive",
+              "explanation_factors": [
+                "Top action from Derzan MCTS at this decision point.",
+                "Greedy baseline denying DRX comfort from Games 1-4.",
+                "Public-priority baseline preferring Aatrox, Caitlyn, then Varus when legal."
+              ]
+            },
+            {
+              "source_labels": [
+                "highest_presence"
+              ],
+              "root_action": {
+                "negated": false,
+                "player": 1,
+                "position": "jungle",
+                "champion": "viego"
+              },
+              "continuation_policy": "mcts",
+              "delta_bucket": "very_large_positive",
+              "explanation_factors": [
+                "Greedy baseline using highest public pick/ban presence."
+              ]
+            },
+            {
+              "source_labels": [
+                "comfort",
+                "one_ply_heuristic"
+              ],
+              "root_action": {
+                "negated": false,
+                "player": 1,
+                "position": "bot",
+                "champion": "varus"
+              },
+              "continuation_policy": "mcts",
+              "delta_bucket": "very_large_positive",
+              "explanation_factors": [
+                "Greedy baseline using T1 comfort from Games 1-4.",
+                "Single-step heuristic baseline using presence, T1 comfort, and DRX denial."
+              ]
+            },
+            {
+              "source_labels": [
+                "random_legal_rollout"
+              ],
+              "root_action": {
+                "negated": false,
+                "player": 1,
+                "position": "jungle",
+                "champion": "hecarim"
+              },
+              "continuation_policy": "random",
+              "delta_bucket": "very_large_positive",
+              "explanation_factors": [
+                "Seeded random legal baseline from the same draft state."
+              ]
+            }
+          ]
+        },
+        {
+          "decision_point": "t1-b3-before-viktor",
+          "label": "T1 B3 Before Locking Viktor",
+          "actual_action_at_point": {
+            "negated": false,
+            "player": 1,
+            "position": "mid",
+            "champion": "viktor"
+          },
+          "derzan_root_action": {
+            "negated": false,
+            "player": 1,
+            "position": "top",
+            "champion": "aatrox"
+          },
+          "status": "pass",
+          "root_action_stability": "high",
+          "search_effort_summaries": [
+            {
+              "delta_bucket": "very_large_positive",
+              "confidence_bucket": "high_positive",
+              "baseline_result": "beats_multiple_baselines",
+              "prevents_drx_aatrox": true,
+              "passes": true
+            },
+            {
+              "delta_bucket": "very_large_positive",
+              "confidence_bucket": "high_positive",
+              "baseline_result": "beats_multiple_baselines",
+              "prevents_drx_aatrox": true,
+              "passes": true
+            },
+            {
+              "delta_bucket": "very_large_positive",
+              "confidence_bucket": "high_positive",
+              "baseline_result": "beats_multiple_baselines",
+              "prevents_drx_aatrox": true,
+              "passes": true
+            },
+            {
+              "delta_bucket": "very_large_positive",
+              "confidence_bucket": "high_positive",
+              "baseline_result": "beats_multiple_baselines",
+              "prevents_drx_aatrox": true,
+              "passes": true
+            }
+          ],
+          "candidate_rows": [
+            {
+              "source_labels": [
+                "derzan_mcts",
+                "comfort",
+                "deny_opponent_comfort",
+                "one_ply_heuristic",
+                "public_consensus_priority"
+              ],
+              "root_action": {
+                "negated": false,
+                "player": 1,
+                "position": "top",
+                "champion": "aatrox"
+              },
+              "continuation_policy": "mcts",
+              "delta_bucket": "very_large_positive",
+              "explanation_factors": [
+                "Top action from Derzan MCTS at this decision point.",
+                "Greedy baseline using T1 comfort from Games 1-4.",
+                "Greedy baseline denying DRX comfort from Games 1-4.",
+                "Single-step heuristic baseline using presence, T1 comfort, and DRX denial.",
+                "Public-priority baseline preferring Aatrox, Caitlyn, then Varus when legal."
+              ]
+            },
+            {
+              "source_labels": [
+                "highest_presence"
+              ],
+              "root_action": {
+                "negated": false,
+                "player": 1,
+                "position": "jungle",
+                "champion": "viego"
+              },
+              "continuation_policy": "mcts",
+              "delta_bucket": "large_positive",
+              "explanation_factors": [
+                "Greedy baseline using highest public pick/ban presence."
+              ]
+            },
+            {
+              "source_labels": [
+                "random_legal_rollout"
+              ],
+              "root_action": {
+                "negated": false,
+                "player": 1,
+                "position": "top",
+                "champion": "gwen"
+              },
+              "continuation_policy": "random",
+              "delta_bucket": "very_large_positive",
+              "explanation_factors": [
+                "Seeded random legal baseline from the same draft state."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "coherent_alternative_plan": {
+      "status": null,
+      "note": "This branch is from the full-branch benchmark and passed the configured claim gate.",
+      "branch_available": false,
+      "team_comps_available": false
+    }
+  }
+}

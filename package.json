@@ -8,6 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "derzan:proof": "node scripts/update-derzans-proof.mjs",
+    "derzan:safety": "node scripts/check-derzans-public-safety.mjs",
     "oc:regression": "node scripts/opportunity-cost-regression-check.mjs",
     "oc:regression:update": "node scripts/opportunity-cost-regression-check.mjs --update",
     "a11y:check": "node scripts/a11y-check.mjs",

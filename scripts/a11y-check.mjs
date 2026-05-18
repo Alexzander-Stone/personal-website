@@ -11,7 +11,14 @@ const host = '127.0.0.1';
 const port = 4173;
 const baseUrl = `http://${host}:${port}`;
 
-const pathsToCheck = ['/', '/projects', '/projects/draft-ai', '/bear'];
+const pathsToCheck = [
+  '/',
+  '/projects',
+  '/projects/draft-ai',
+  '/derzans-draft',
+  '/derzans-draft/proof',
+  '/bear',
+];
 
 const mimeTypes = {
   '.html': 'text/html; charset=utf-8',
@@ -102,7 +109,11 @@ await startServer();
 let browser;
 
 try {
-  browser = await chromium.launch({ headless: true });
+  const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
+  browser = await chromium.launch({
+    headless: true,
+    ...(executablePath ? { executablePath } : {}),
+  });
   const context = await browser.newContext();
 
   for (const pagePath of pathsToCheck) {
@@ -142,7 +153,10 @@ try {
         details: ['No focusable elements found for keyboard navigation check.'],
       });
     } else {
-      await page.locator('body').click();
+      await page.evaluate(() => {
+        document.body.setAttribute('tabindex', '-1');
+        document.body.focus();
+      });
       await page.keyboard.press('Tab');
 
       const focusCheck = await page.evaluate(() => {

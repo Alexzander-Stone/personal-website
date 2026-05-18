@@ -1,0 +1,60 @@
+---
+import DerzansDraftProof from '../../components/DerzansDraftProof/DerzansDraftProof';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Derzan's Draft Public Proof | Alexzander Stone"
+  description="A sanitized proof viewer for a model-bound League of Legends draft benchmark."
+  tags={['league of legends', 'draft proof', 'esports analytics', 'mcts']}
+>
+  <Header />
+
+  <main class="proof-page">
+    <section class="heading">
+      <a href="/derzans-draft/">Back to Derzan's Draft</a>
+      <h1>Public Proof Viewer</h1>
+      <p>
+        This is the public-safe view of the benchmark. Exact weights, raw search traces,
+        and private assumptions are intentionally omitted.
+      </p>
+    </section>
+
+    <DerzansDraftProof client:load />
+
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  .proof-page {
+    width: min(1040px, calc(100% - 2rem));
+  }
+
+  .heading {
+    display: grid;
+    gap: 0.5rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .heading a {
+    width: fit-content;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+  }
+
+  .heading p {
+    margin: 0;
+    max-width: 68ch;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 760px) {
+    .proof-page {
+      width: min(920px, calc(100% - 1.4rem));
+    }
+  }
+</style>

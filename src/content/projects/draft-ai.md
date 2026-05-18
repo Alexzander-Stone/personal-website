@@ -18,6 +18,8 @@ image:
 tags: ["game theory", "python"]
 ---
 
+> Update: the public-facing demo now lives at [Derzan's Draft](/derzans-draft/). It uses a sanitized proof viewer rather than a live backend call, so it can show the idea without exposing raw model internals.
+
 ### The why
 
 League of Legends, one of the most popular competitive [MOBA's](https://en.wikipedia.org/wiki/Multiplayer_online_battle_arena), has spawned an entire industry dedicated to perfecting every aspect of the game. Teams of analysts and coaches worldwide tirelessly study and refine every facet of gameplay.

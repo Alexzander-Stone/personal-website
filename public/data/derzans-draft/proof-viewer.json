@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "sanitized-proof-viewer.v1",
+  "title": "T1 vs DRX Worlds 2022 Game 5",
+  "subtitle": "A public-safe view of a branch benchmark under an analyst-authored model.",
+  "statusLabel": "Solved under model",
+  "claimBoundary": "This does not claim T1 would have won, that a coach was wrong, or that League draft is solved globally. It shows what Derzan found under a declared analyst-authored model, with exact weights and raw traces omitted.",
+  "primaryFinding": "In the sanitized flagship case, the strongest Derzan branches take Aatrox for T1 at the key divergence points and keep DRX from receiving it in the shown terminal examples.",
+  "actual": {
+    "label": "Actual Game 5 branch",
+    "blue": {
+      "team": "T1",
+      "picks": {
+        "top": "gwen",
+        "jungle": "viego",
+        "mid": "viktor",
+        "bot": "varus",
+        "support": "karma"
+      },
+      "bans": [
+        "akali",
+        "heimerdinger",
+        "renata glasc",
+        "sejuani",
+        "kindred"
+      ]
+    },
+    "red": {
+      "team": "DRX",
+      "picks": {
+        "top": "aatrox",
+        "jungle": "hecarim",
+        "mid": "azir",
+        "bot": "caitlyn",
+        "support": "bard"
+      },
+      "bans": [
+        "yuumi",
+        "lucian",
+        "lux",
+        "yone",
+        "lee sin"
+      ]
+    }
+  },
+  "derzanBranches": [
+    {
+      "label": "B1 after Lux ban",
+      "rootAction": "T1 takes Aatrox",
+      "deltaBucket": "very large positive",
+      "confidenceBucket": "stable across tested seeds",
+      "aatroxResult": "DRX denied Aatrox",
+      "factorGroups": [
+        "MCTS branch search",
+        "opponent comfort denial",
+        "public priority agreement"
+      ],
+      "explanation": "Top action from Derzan MCTS at this decision point. Greedy baseline denying DRX comfort from Games 1-4. Public-priority baseline preferring Aatrox, Caitlyn, then Varus when legal.",
+      "blue": {
+        "team": "T1",
+        "picks": {
+          "top": "aatrox",
+          "jungle": "lee sin",
+          "mid": "ryze",
+          "bot": "varus",
+          "support": "nautilus"
+        },
+        "bans": [
+          "akali",
+          "heimerdinger",
+          "renata glasc",
+          "kalista",
+          "graves"
+        ]
+      },
+      "red": {
+        "team": "DRX",
+        "picks": {
+          "top": "ornn",
+          "jungle": "kindred",
+          "mid": "azir",
+          "bot": "caitlyn",
+          "support": "bard"
+        },
+        "bans": [
+          "yuumi",
+          "lucian",
+          "lux",
+          "maokai",
+          "viego"
+        ]
+      }
+    },
+    {
+      "label": "B3 before Viktor",
+      "rootAction": "T1 takes Aatrox",
+      "deltaBucket": "very large positive",
+      "confidenceBucket": "stable across tested seeds",
+      "aatroxResult": "DRX denied Aatrox",
+      "factorGroups": [
+        "MCTS branch search",
+        "T1 comfort",
+        "opponent comfort denial",
+        "one-ply baseline agreement",
+        "public priority agreement"
+      ],
+      "explanation": "Top action from Derzan MCTS at this decision point. Greedy baseline using T1 comfort from Games 1-4. Greedy baseline denying DRX comfort from Games 1-4.",
+      "blue": {
+        "team": "T1",
+        "picks": {
+          "top": "aatrox",
+          "jungle": "graves",
+          "mid": "ryze",
+          "bot": "varus",
+          "support": "karma"
+        },
+        "bans": [
+          "akali",
+          "heimerdinger",
+          "renata glasc",
+          "lee sin",
+          "yone"
+        ]
+      },
+      "red": {
+        "team": "DRX",
+        "picks": {
+          "top": "camille",
+          "jungle": "kindred",
+          "mid": "azir",
+          "bot": "caitlyn",
+          "support": "bard"
+        },
+        "bans": [
+          "yuumi",
+          "lucian",
+          "lux",
+          "viego",
+          "ornn"
+        ]
+      }
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Solved under model",
+      "meaning": "The result passed the private benchmark gate for this explicit value model and search setup, not for every possible model."
+    },
+    {
+      "term": "Delta bucket",
+      "meaning": "A redacted direction and magnitude label comparing the branch to the actual draft branch."
+    },
+    {
+      "term": "Confidence bucket",
+      "meaning": "A plain-language stability label derived from repeated runs, with raw seeds and search effort values withheld."
+    },
+    {
+      "term": "Baselines",
+      "meaning": "Simple policies used to test whether sorting a spreadsheet would have been enough."
+    }
+  ],
+  "omissions": [
+    "Exact champion values and weights",
+    "Raw expected values, seeds, search effort values, and visit counts",
+    "Private config files and local source paths",
+    "Full search traces and implementation internals",
+    "Any claim that the branch guarantees a match win"
+  ]
+}

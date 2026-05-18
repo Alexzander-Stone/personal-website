@@ -19,7 +19,6 @@ image:
         normal: 431.16
 tags: ["game theory", "python"]
 ---
-import DraftAgainstAI from '../../components/DraftAgainstAI/DraftAgainstAI.tsx';
 
 ## The why
 
@@ -47,13 +46,11 @@ With a staggering 164 unique Champions available at the time of writing, plannin
 
 Even when a team is confident in predicting their opponent's choices, there's always the potential for an unexpected, non-meta pick—throwing a curveball into the mix. This can force the on-stage team to improvise a new draft strategy on the spot, potentially overlooking pitfalls in banning or selecting specific champions.
 
-## Try It Out
+## Public proof
 
-Play a full 20-turn draft against the AI. Choose your side and experience the drafting phase firsthand.
+The live draft toy that used to sit here depended on a local backend, so I replaced it with a public-safe proof page. The updated demo shows a sanitized benchmark viewer instead of exposing raw model internals or pretending the public site is a live competitive draft assistant.
 
-<DraftAgainstAI client:idle/>
-
-> The AI analyzes the draft state and responds within seconds.
+[View the Derzan's Draft public proof](/derzans-draft/)
 
 ## My solution
 
